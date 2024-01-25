@@ -12,7 +12,7 @@ class TestConstant:
     def test_constant_produce(self):
         const_value = 5
         constant = Constant(5)
-        result = constant.produce(None)  # Timestamp is irrelevant for Constant
+        result = constant.produce(None, sync=True)  # Timestamp is irrelevant for Constant
         assert result == Decimal(const_value)
 
     def test_singleton_instance(self):
