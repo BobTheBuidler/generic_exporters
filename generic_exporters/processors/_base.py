@@ -6,9 +6,7 @@ from typing import AsyncGenerator, Dict, Generic, TypeVar
 
 import a_sync
 
-from generic_exporters import _types
-from generic_exporters.metric import Metric
-from generic_exporters.timeseries import _TimeSeriesBase, TimeSeries
+from generic_exporters.plan import QueryPlan
 
 
 _T = TypeVar('_T')
@@ -27,16 +25,16 @@ class _ProcessorBase(a_sync.ASyncGenericBase, Generic[_T]):
 
 class _TimeSeriesProcessorBase(_ProcessorBase):
     interval: timedelta
-    def __init__(self, timeseries: _types.Processable, *, sync: bool = True) -> None:
+    def __init__(
+        self, 
+        query: QueryPlan, 
+        *,
+        sync: bool = True,
+    ) -> None:
         super().__init__(sync=sync)
-        if isinstance(timeseries, Metric):
-            timeseries = TimeSeries(timeseries)
-        if not isinstance(timeseries, _TimeSeriesBase):
-            raise TypeError(f'`timeseries` must be `Metric`, `TimeSeries`, or `WideTimeSeries`. You passed {timeseries}')
-        self.timeseries = timeseries
-    @abstractproperty
-    def interval(self) -> timedelta:
-        """Returns the interval for processing data"""
+        if not isinstance(query, QueryPlan):
+            raise TypeError(f'`query` must be `QueryPlan`. You passed {query}')
+        self.query = query
     @abstractmethod
     async def start_timestamp(self) -> datetime:
         """Returns the start of the historical range for this processor."""
@@ -51,10 +49,5 @@ class _TimeSeriesProcessorBase(_ProcessorBase):
 
 class _GatheringTimeSeriesProcessorBase(_TimeSeriesProcessorBase):
     """Inherit from this class when you need to collect all the data before processing"""
-    def __init__(self, timeseries: "TimeSeries", *, interval: timedelta = timedelta(days=1), buffer: timedelta = timedelta(minutes=5), sync: bool = True) -> None:
-        super().__init__(timeseries, sync=sync)
-        self.interval = interval
-        self.buffer = buffer
-
     async def _gather(self) -> Dict[datetime, Decimal]:
         return await a_sync.gather({ts: self.timeseries.metric.produce(ts, sync=False) async for ts in self._timestamps()})

@@ -1,5 +1,5 @@
 
-from generic_exporters import Constant, Metric
+from generic_exporters import Constant, Metric, TimeSeries, WideTimeSeries
 
 from evm_contract_exporter.contract import GenericContractExporter, ContractExporterBase
 from evm_contract_exporter.exporter import ContractMetricExporter
@@ -13,4 +13,6 @@ __all__ = [
     Constant,
     Scale,
     SmartScale,
+    TimeSeries,
+    WideTimeSeries,
 ]

@@ -1,5 +1,6 @@
 
 from abc import abstractmethod, abstractproperty
+from datetime import timedelta
 from typing import TYPE_CHECKING, Optional, TypeVar
 
 from generic_exporters.processors._base import _ProcessorBase, _TimeSeriesProcessorBase
@@ -7,7 +8,7 @@ from generic_exporters.processors.exporters.datastores.timeseries._base import T
 from generic_exporters.processors.exporters.datastores.timeseries.sql import SQLTimeSeriesKeyValueStore
 
 if TYPE_CHECKING:
-    from generic_exporters import TimeSeries
+    from generic_exporters import QueryPlan
 
 
 _T = TypeVar('_T')
@@ -20,8 +21,8 @@ class _ExporterBase(_ProcessorBase[None]):
 
 class _TimeSeriesExporterBase(_TimeSeriesProcessorBase, _ExporterBase):
     """I dont remember why I made this base class. Maybe I will"""
-    def __init__(self, timeseries: "TimeSeries", datastore: Optional[TimeSeriesDataStoreBase], sync: bool = True) -> None:
-        super().__init__(timeseries, sync=sync)
+    def __init__(self, query_plan: "QueryPlan", datastore: Optional[TimeSeriesDataStoreBase], sync: bool = True) -> None:
+        super().__init__(query_plan, sync=sync)
         if isinstance(datastore, TimeSeriesDataStoreBase):
             self.datastore = datastore
         elif datastore is None:
@@ -29,6 +30,8 @@ class _TimeSeriesExporterBase(_TimeSeriesProcessorBase, _ExporterBase):
         else:
             raise TypeError(datastore)
         self.datastore = datastore
+    @abstractproperty
+    def interval(self) -> timedelta:...
 
 
 class _PropertyExporterBase(_TimeSeriesExporterBase):

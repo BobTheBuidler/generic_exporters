@@ -58,7 +58,7 @@ class _ContractCallMetricBase(Metric):
         elif self._scale is True:
             return Decimal(await ERC20(self.address, asynchronous=True).scale)
         elif isinstance(self._scale, scale.Scale):
-            raise NotImplementedError("I'll do this later")
+            return self._scale.produce(None)
         return Decimal(self._scale)
     @abstractproperty
     def address(self) -> int:

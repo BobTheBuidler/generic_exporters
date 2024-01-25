@@ -16,9 +16,13 @@ class TimeSeriesExporter(_TimeSeriesExporterBase):
     """
     def __init__(self, metric: Metric, datastore: TimeSeriesDataStoreBase, interval: timedelta = timedelta(days=1), buffer: timedelta = timedelta(minutes=5), sync: bool = True) -> None:
         super().__init__(metric, datastore)
-        self.interval = interval
+        self._interval = interval
         self.buffer = buffer
 
+    @property
+    def interval(self) -> timedelta:
+        return self._interval
+    
     @abstractmethod
     async def data_exists(self, timestamp: datetime) -> bool:
         """Returns True if data exists at `timestamp`, False if it does not and must be exported."""
