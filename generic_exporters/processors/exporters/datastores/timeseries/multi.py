@@ -4,7 +4,7 @@ from datetime import datetime
 from decimal import Decimal
 from typing import Any
 
-from generic_exporters.datastores.timeseries._base import TimeSeriesDataStoreBase
+from generic_exporters.processors.exporters.datastores.timeseries._base import TimeSeriesDataStoreBase
 
 
 class TimeSeriesMultiDataStore(TimeSeriesDataStoreBase):

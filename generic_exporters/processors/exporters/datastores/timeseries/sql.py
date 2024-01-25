@@ -8,7 +8,7 @@ from msgspec.json import encode
 from pony.orm import Database, Json, PrimaryKey, Required, db_session, select
 from pony.orm.core import Query
 
-from generic_exporters.datastores.timeseries._base import TimeSeriesDataStoreBase
+from generic_exporters.processors.exporters.datastores.timeseries._base import TimeSeriesDataStoreBase
 
 
 Jsonable = Any
@@ -18,7 +18,7 @@ db = Database()
 class SQLTimeSeriesKeyValueStore(TimeSeriesDataStoreBase):
     def __init__(self, **connection_params: Optional[Dict[str, Any]]) -> None:
         if not connection_params:
-            from generic_exporters.datastores.default import sqlite_settings as connection_params
+            from generic_exporters.processors.exporters.datastores.default import sqlite_settings as connection_params
         db.bind(**connection_params)
         db.generate_mapping(create_tables=True)
     async def data_exists(self, key: Jsonable, ts: datetime) -> bool:

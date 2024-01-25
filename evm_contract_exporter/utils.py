@@ -1,19 +1,12 @@
 
-import logging
 from datetime import datetime
 
-from a_sync.primitives.locks.prio_semaphore import PrioritySemaphore
-from async_lru import alru_cache
-from y.time import closest_block_after_timestamp_async
+import a_sync
+import y
 
-logger = logging.getLogger(__name__)
 
-block_timestamp_semaphore = PrioritySemaphore(500, "block for timestamp semaphore")
+block_timestamp_semaphore = a_sync.PrioritySemaphore(500, name="block for timestamp semaphore")
 
-@alru_cache(maxsize=None)
-async def get_block_by_timestamp(timestamp: datetime) -> int:
-    async with block_timestamp_semaphore[0 - timestamp.timestamp()]:  # NOTE: We invert the priority to go high-to-low
-        logger.debug("getting block at %s", timestamp)
-        block = await closest_block_after_timestamp_async(timestamp) - 1
-        logger.debug("block at %s is %s", timestamp, block)
-        return block
+async def get_block_at_timestamp(timestamp: datetime) -> int:
+    async with block_timestamp_semaphore[0 - timestamp.timestamp()]:  # NOTE: We invert the priority to go high-to-low so we can get more recent data more quickly
+        return await y.get_block_at_timestamp(timestamp)

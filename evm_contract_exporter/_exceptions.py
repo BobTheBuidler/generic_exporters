@@ -9,3 +9,6 @@ def _is_revert(e: Exception) -> bool:
         return True
     return isinstance(e, ValueError) and str(e) in _value_err_reverts
     
+class FixMe(Exception):
+    """A base class for known bugs that must be fixed"""
+    ...

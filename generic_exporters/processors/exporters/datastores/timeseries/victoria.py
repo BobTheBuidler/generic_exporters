@@ -4,7 +4,7 @@ from decimal import Decimal
 from typing import Any, Dict, NewType
 
 from aiohttp import ClientSession
-from generic_exporters.datastores.timeseries._base import TimeSeriesDataStoreBase
+from generic_exporters.processors.exporters.datastores.timeseries._base import TimeSeriesDataStoreBase
 
 LabelName = NewType('LabelName', str)
 LabelValue = NewType('LabelValue', Any)

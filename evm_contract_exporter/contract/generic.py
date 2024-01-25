@@ -3,19 +3,19 @@
 import asyncio
 import logging
 from datetime import timedelta
+from functools import cached_property
 from typing import List
 
 from async_property import async_cached_property
+from brownie import chain
 from brownie.exceptions import ContractNotFound
 from brownie.network.contract import ContractCall, ContractTx, OverloadedMethod
-from multicall.utils import raise_if_exception_in
 from y import Contract, ContractNotVerified
 from y.datatypes import Address
 
 from evm_contract_exporter.contract import ContractExporterBase
-from evm_contract_exporter.examples.price import PriceExporter
-from evm_contract_exporter.method import MethodMetricExporter
-from evm_contract_exporter.types import EXPORTABLE_TYPES, UNEXPORTABLE_TYPES
+from evm_contract_exporter.method import ViewMethodExporter
+from evm_contract_exporter.types import EXPORTABLE_TYPES, UNEXPORTABLE_TYPES, address
 
 
 logger = logging.getLogger(__name__)
@@ -28,44 +28,67 @@ class GenericContractExporter(ContractExporterBase):
     def __init__(
         self, 
         contract: Address, 
-        chainid: int, 
         *, 
         interval: timedelta = timedelta(days=1), 
         buffer: timedelta = timedelta(minutes=5),
     ) -> None:
-        super().__init__(contract, chainid, interval=interval, buffer=buffer)
-        self.price_exporter = PriceExporter(contract, interval=interval, buffer=self.buffer, datastore=self.datastore)
+        super().__init__(contract, chain.id, interval=interval, buffer=buffer)
+    def __repr__(self) -> str:
+        return f"<{self.__class__.__name__} contract={self.address} interval={self.interval}>"
+    @cached_property
+    def task(self) -> asyncio.Task:
+        return asyncio.Task(self._await())
     @async_cached_property
-    async def contract(self) -> Contract:
+    async def dank_contract(self) -> Contract:
         return await Contract.coroutine(self.address)
     @async_cached_property
-    async def method_exporters(self) -> List[MethodMetricExporter]:
-        contract = await self.contract
-        return [
-            MethodMetricExporter(
+    async def method_exporters(self) -> List[ViewMethodExporter]:
+        contract = await self.dank_contract
+        exporters = []
+        for view_method in _safe_views(contract):
+            exporter = ViewMethodExporter(
                 method=view_method,
                 interval=self.interval, 
                 scale=True, 
                 datastore=self.datastore,
             )
-            for view_method in _safe_views(contract)
-        ]
+            if exporter.metric._returns_tuple_type:
+                derived_metrics = [exporter.metric[i] for i in range(len(exporter.metric._outputs))]
+                exporters.extend([ViewMethodExporter(method=metric, interval=self.interval, scale=False, datastore=self.datastore) for metric in derived_metrics])
+            elif exporter.metric._returns_struct_type:
+                outputs = exporter.metric._outputs
+                if len(outputs) == 1:
+                    outputs = outputs[0]['components']
+                assert all(abi['name'] for abi in outputs), outputs
+                for abi in outputs:
+                    struct_key = abi['name']
+                    derived_metric = exporter.metric[struct_key]
+                    exporters.append(ViewMethodExporter(method=derived_metric, interval=self.interval, scale=False, datastore=self.datastore))
+            else:
+                exporters.append(exporter)
+
+        return exporters
     async def _await(self) -> None:
         try:
-            raise_if_exception_in(
-                await asyncio.gather(*await self.method_exporters) #, return_exceptions=True) #, self.price_exporter) #, return_exceptions=True))
-            )
-        #except AttributeError as e:
-        #    if "'NoneType' object has no attribute 'abi'" not in str(e):
-        #        raise e
-        #    logger.info("%s %s", e.__class__.__name__, e)
+            for output in await asyncio.gather(*await self.method_exporters, return_exceptions=True):
+                if isinstance(output, Exception):
+                    raise output
         except ContractNotFound:
-            logger.debug("%s is not a contract", self)
+            logger.error("%s is not a contract, skipping", self)
         except ContractNotVerified:
-            logger.debug("%s is not verified", self)
-            raise
-        except TypeError as e:
-            logger.info("%s %s", e.__class__.__name__, e)
+            logger.error("%s is not verified, skipping", self)
+        except Exception as e:
+            logger.exception("%s %s for %s, skipping", e.__class__.__name__, e, self)
+    
+    @classmethod
+    def create_export_task(
+        cls, 
+        contract: address,
+        *, 
+        interval: timedelta = timedelta(days=1), 
+        buffer: timedelta = timedelta(minutes=5),
+    ) -> asyncio.Task:
+        return cls(contract, interval=interval, buffer=buffer).task
 
 def _list_functions(contract: Contract) -> List[ContractCall]:
     fns = []
@@ -106,6 +129,8 @@ def _has_no_args(function: ContractCall) -> bool:
 
 SKIP_METHODS = {
     "decimals",
+    "eip712Domain",
+    "metadata",
 }
 
 def _exportable_return_value_type(function: ContractCall) -> bool:
@@ -116,19 +141,29 @@ def _exportable_return_value_type(function: ContractCall) -> bool:
     if not outputs:
         return False
     if len(outputs) == 1:
-        if (output_type := outputs[0]["type"]) in EXPORTABLE_TYPES:
+        output = outputs[0]
+        if 'components' in output and output['internalType'].startswith('struct ') and all(c['name'] for c in output['components']):
+            # if we are here the fn returns a single struct
+            return True
+        if (output_type := output["type"]) in EXPORTABLE_TYPES:
             return True
         if output_type in UNEXPORTABLE_TYPES or output_type.endswith(']'):
             return False
     elif len(outputs) > 1:
         if all(o["type"] in UNEXPORTABLE_TYPES for o in outputs):
             return False
-        elif all(o["name"] and o["type"] in EXPORTABLE_TYPES for o in outputs):
-            logger.info('TODO: export struct types like %s %s', function, outputs)
-            return False
+        elif is_tuple_type(outputs) and all(o["type"] in EXPORTABLE_TYPES for o in outputs):
+            return True
+        elif is_struct_type(outputs) and all(o["type"] in EXPORTABLE_TYPES for o in outputs):
+            #logger.info("TODO: support multi-return value methods with named return values")
+            return True
     logger.info("cant export %s with outputs %s", function, outputs)
     return False
 
 def _safe_views(contract: Contract) -> List[ContractCall]:
     """Returns a list of the view methods on `contract` that are suitable for exporting"""
     return [function for function in _list_view_methods(contract) if _has_no_args(function) and _exportable_return_value_type(function)]
+
+
+is_tuple_type = lambda outputs: all(not o["name"] for o in outputs)
+is_struct_type = lambda outputs: all(o['name'] for o in outputs)

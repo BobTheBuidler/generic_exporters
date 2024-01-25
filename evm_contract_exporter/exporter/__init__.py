@@ -1,3 +1,3 @@
-from evm_contract_exporter.exporter import ContractMetricTimeSeriesExporterBase
+from evm_contract_exporter.exporter.base import ContractMetricExporter
 
-__all__ = [ContractMetricTimeSeriesExporterBase]
+__all__ = [ContractMetricExporter]
