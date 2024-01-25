@@ -1,11 +1,10 @@
 
-from datetime import datetime, timedelta
+from datetime import datetime
 from typing import Optional
 
 from bqplot import Axis, Figure, LinearScale, Lines
 
-from generic_exporters.metric import Metric
-from generic_exporters.processors.exporters._base import _GatheringTimeSeriesProcessorBase
+from generic_exporters.processors._base import _GatheringTimeSeriesProcessorBase
 
 
 class Plotter(_GatheringTimeSeriesProcessorBase):

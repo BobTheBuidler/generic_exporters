@@ -2,7 +2,7 @@
 from async_lru import alru_cache
 from pandas import DataFrame
 
-from generic_exporters.processors.exporters._base import _GatheringTimeSeriesProcessorBase
+from generic_exporters.processors._base import _GatheringTimeSeriesProcessorBase
 
 
 class DataFramer(_GatheringTimeSeriesProcessorBase):
