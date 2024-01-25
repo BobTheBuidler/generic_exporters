@@ -1,6 +1,6 @@
 
 from datetime import datetime, timedelta
-from typing import TYPE_CHECKING, List, Optional, TypeVar, Union, final
+from typing import TYPE_CHECKING, Iterable, List, Optional, Union, final
 
 from generic_exporters._time import _TimeDataBase
 
@@ -97,7 +97,8 @@ class WideTimeSeries(_TimeSeriesBase):
     def key(self) -> str:
         raise NotImplementedError("Preventing this object from being used incorrectly, will refactor out eventually maybe")
 
-def _convert_metrics(items: List[Union[TimeSeries, "Metric"]]) -> List[TimeSeries]:
+def _convert_metrics(items: Iterable[Union[TimeSeries, "Metric"]]) -> List[TimeSeries]:
+    items = list(items)
     for i in range(len(items)):
         if not isinstance(items[i], TimeSeries):
             items[i] = TimeSeries(items[i])

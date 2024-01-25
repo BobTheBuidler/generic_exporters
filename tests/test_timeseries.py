@@ -1,21 +1,27 @@
 import pytest
 from datetime import datetime, timedelta
-from decimal import Decimal
-from generic_exporters.timeseries import TimeSeries
-from generic_exporters.metric import Metric
 
-class DummyMetric(Metric):
-    async def produce(self, timestamp: datetime) -> Decimal:
-        return Decimal(10)
-    @property
-    def key(self) -> str:
-        return "dummy_metric"
+from fixtures import *
 
-def test_timeseries_initialization():
-    metric = DummyMetric()
-    start_timestamp = datetime.utcnow()
+def test_time_series_initialization(time_series, dummy_metric):
+    assert time_series.metric == dummy_metric
+
+@pytest.mark.asyncio
+async def test_time_series_getitem(time_series):
+    start = datetime.utcnow() - timedelta(days=1)
+    end = datetime.utcnow()
     interval = timedelta(minutes=1)
-    timeseries = TimeSeries(metric, start_timestamp, None, interval)
-    assert timeseries.metric == metric
-    assert timeseries.start_timestamp == start_timestamp
-    assert timeseries.interval == interval
+    query_plan = time_series[start:end:interval]
+    assert query_plan.start_timestamp == start
+    assert query_plan.end_timestamp == end
+    assert query_plan.interval == interval
+
+@pytest.mark.asyncio
+async def test_wide_time_series_getitem(wide_time_series):
+    start = datetime.utcnow() - timedelta(days=1)
+    end = datetime.utcnow()
+    interval = timedelta(minutes=1)
+    query_plan = wide_time_series[start:end:interval]
+    assert query_plan.start_timestamp == start
+    assert query_plan.end_timestamp == end
+    assert query_plan.interval == interval

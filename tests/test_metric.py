@@ -1,15 +1,10 @@
 import pytest
 from decimal import Decimal
-from datetime import datetime, timedelta
+from datetime import datetime
 from generic_exporters.metric import Metric, Constant, _AdditionMetric, _SubtractionMetric, _MultiplicationMetric, _TrueDivisionMetric, _FloorDivisionMetric, _PowerMetric
 
-class DummyMetric(Metric):
-    async def produce(self, timestamp: datetime) -> Decimal:
-        return Decimal(10)
+from fixtures import DummyMetric
 
-    @property
-    def key(self) -> str:
-        return "dummy_metric"
 
 @pytest.mark.asyncio
 async def test_metric_not_implemented():
