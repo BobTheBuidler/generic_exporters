@@ -1,7 +1,8 @@
 
 from datetime import datetime, timedelta
-from typing import TYPE_CHECKING, Iterable, List, Optional, Union, final
+from typing import TYPE_CHECKING, Iterable, List, Optional, final
 
+from generic_exporters import _types
 from generic_exporters._time import _TimeDataBase
 
 if TYPE_CHECKING:
@@ -54,25 +55,25 @@ class TimeSeries(_TimeSeriesBase):
         return self.metric.key
     def __repr__(self) -> str:
         return f"<{self.__class__.__name__} for metric={self.metric} start={self.start_timestamp} end={self.end_timestamp} interval={self.interval}>"
-    def __add__(self, other: Union["TimeSeries", "Metric"]) -> "TimeSeries":
+    def __add__(self, other: _types.SingleProcessable) -> "TimeSeries":
         self.__validate_other(other)
         return TimeSeries(self.metric + other.metric)
-    def __sub__(self, other: Union["TimeSeries", "Metric"]) -> "TimeSeries":
+    def __sub__(self, other: _types.SingleProcessable) -> "TimeSeries":
         self.__validate_other(other)
         return TimeSeries(self.metric - other.metric)
-    def __mul__(self, other: Union["TimeSeries", "Metric"]) -> "TimeSeries":
+    def __mul__(self, other: _types.SingleProcessable) -> "TimeSeries":
         self.__validate_other(other)
         return TimeSeries(self.metric * other.metric)
-    def __truediv__(self, other: Union["TimeSeries", "Metric"]) -> "TimeSeries":
+    def __truediv__(self, other: _types.SingleProcessable) -> "TimeSeries":
         self.__validate_other(other)
         return TimeSeries(self.metric / other.metric)
-    def __floordiv__(self, other: Union["TimeSeries", "Metric"]) -> "TimeSeries":
+    def __floordiv__(self, other: _types.SingleProcessable) -> "TimeSeries":
         self.__validate_other(other)
         return TimeSeries(self.metric // other.metric)
-    def __power__(self, other: Union["TimeSeries", "Metric"]) -> "TimeSeries":
+    def __power__(self, other: _types.SingleProcessable) -> "TimeSeries":
         self.__validate_other(other)
         return TimeSeries(self.metric ** other.metric)
-    def __validate_other(self, other: Union["TimeSeries", "Metric"]) -> None:
+    def __validate_other(self, other: _types.SingleProcessable) -> None:
         from generic_exporters import Metric
         if not isinstance(other, (TimeSeries, Metric)):
             raise TypeError(f"`other` must be `TimeSeries` or `Metric`. You passed {other}.")
@@ -84,7 +85,7 @@ class WideTimeSeries(_TimeSeriesBase):
     A collection of `TimeSeries` objects
     NOTE: Imagine a line chart with multiple lines that have yet to be drawn
     """
-    def __init__(self, *timeserieses: Union[TimeSeries, "Metric"], sync: bool = True) -> None:
+    def __init__(self, *timeserieses: _types.SingleProcessable, sync: bool = True) -> None:
         if not timeserieses or len(timeserieses) == 1:
             raise ValueError("You must provide 2 or more `TimeSeries` or `Metric` objects")
         timeserieses = _convert_metrics(timeserieses)
@@ -97,7 +98,7 @@ class WideTimeSeries(_TimeSeriesBase):
     def key(self) -> str:
         raise NotImplementedError("Preventing this object from being used incorrectly, will refactor out eventually maybe")
 
-def _convert_metrics(items: Iterable[Union[TimeSeries, "Metric"]]) -> List[TimeSeries]:
+def _convert_metrics(items: Iterable[_types.SingleProcessable]) -> List[TimeSeries]:
     items = list(items)
     for i in range(len(items)):
         if not isinstance(items[i], TimeSeries):

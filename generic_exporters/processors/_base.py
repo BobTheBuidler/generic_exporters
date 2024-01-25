@@ -2,10 +2,11 @@
 from abc import abstractmethod
 from datetime import datetime, timedelta, timezone
 from decimal import Decimal
-from typing import AsyncGenerator, Dict, Generic, TypeVar, Union
+from typing import AsyncGenerator, Dict, Generic, TypeVar
 
 import a_sync
 
+from generic_exporters import _types
 from generic_exporters.metric import Metric
 from generic_exporters.timeseries import _TimeSeriesBase, TimeSeries
 
@@ -24,11 +25,9 @@ class _ProcessorBase(a_sync.ASyncGenericBase, Generic[_T]):
         """Runs the processor"""
 
 
-Processable = Union[Metric, _TimeSeriesBase]
-
 class _TimeSeriesProcessorBase(_ProcessorBase):
     interval: timedelta
-    def __init__(self, timeseries: Processable, *, sync: bool = True) -> None:
+    def __init__(self, timeseries: _types.Processable, *, sync: bool = True) -> None:
         super().__init__(sync=sync)
         if isinstance(timeseries, Metric):
             timeseries = TimeSeries(timeseries)

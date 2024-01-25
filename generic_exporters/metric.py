@@ -4,11 +4,11 @@ from abc import abstractmethod, abstractproperty
 from datetime import datetime
 from decimal import Decimal
 from functools import cached_property
-from typing import Any, Union
+from typing import Any
 
 import inflection
 
-from generic_exporters import _constant, _mathable
+from generic_exporters import _constant, _mathable, _types
 
 class Metric(_mathable._MathableBase):
     sync=False
@@ -42,7 +42,7 @@ class Constant(Metric, metaclass=_constant.ConstantSingletonMeta):  # TODO: make
     A `Constant` is a `Metric` object that produces the same result at any given timestamp. 
     These are used to perform math operations between a `Metric` object and a constant value to create a new `Metric` object that represents the result of the operation.
     """
-    def __init__(self, value: Union[int, Decimal]) -> None:
+    def __init__(self, value: _types.Numeric) -> None:
         if not isinstance(value, (int, Decimal)):
             raise TypeError(value)
         self.value = Decimal(value)

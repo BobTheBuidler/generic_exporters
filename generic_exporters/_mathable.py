@@ -1,29 +1,29 @@
 
 from abc import abstractmethod
-from decimal import Decimal
 from functools import cached_property
-from typing import TYPE_CHECKING, Generic, Tuple, Type, TypeVar, Union
+from typing import TYPE_CHECKING, Generic, Tuple, Type, TypeVar
 
 import a_sync
 
+from generic_exporters import _types
+
 if TYPE_CHECKING:
-    from generic_exporters import Metric
     from generic_exporters.metric import _AdditionMetric, _SubtractionMetric, _MultiplicationMetric, _TrueDivisionMetric, _FloorDivisionMetric, _PowerMetric
 
 _T = TypeVar('_T')
 
 class _MathableBase(a_sync.ASyncGenericBase, Generic[_T]):
-    def __add__(self, other: Union[int, float, Decimal, "Metric"]) -> "_AdditionMetric":
+    def __add__(self, other: _types.Numericish) -> "_AdditionMetric":
         return self.__math_classes__[0](self, self._validate_other(other))
-    def __sub__(self, other: Union[int, float, Decimal, "Metric"]) -> "_SubtractionMetric":
+    def __sub__(self, other: _types.Numericish) -> "_SubtractionMetric":
         return self.__math_classes__[1](self, self._validate_other(other))
-    def __mul__(self, other: Union[int, float, Decimal, "Metric"]) -> "_MultiplicationMetric":
+    def __mul__(self, other: _types.Numericish) -> "_MultiplicationMetric":
         return self.__math_classes__[2](self, self._validate_other(other))
-    def __truediv__(self, other: Union[int, float, Decimal, "Metric"]) -> "_TrueDivisionMetric":
+    def __truediv__(self, other: _types.Numericish) -> "_TrueDivisionMetric":
         return self.__math_classes__[3](self, self._validate_other(other))
-    def __floordiv__(self, other: Union[int, float, Decimal, "Metric"]) -> "_FloorDivisionMetric":
+    def __floordiv__(self, other: _types.Numericish) -> "_FloorDivisionMetric":
         return self.__math_classes__[4](self, self._validate_other(other))
-    def __pow__(self, other: Union[int, float, Decimal, "Metric"]) -> "_PowerMetric":
+    def __pow__(self, other: _types.Numericish) -> "_PowerMetric":
         return self.__math_classes__[5](self, self._validate_other(other))
     @abstractmethod
     def _validate_other(self, other) -> _T:...

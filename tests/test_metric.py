@@ -1,25 +1,17 @@
 import pytest
 from decimal import Decimal
 from datetime import datetime
-from generic_exporters.metric import Metric, Constant, _AdditionMetric, _SubtractionMetric, _MultiplicationMetric, _TrueDivisionMetric, _FloorDivisionMetric, _PowerMetric
+from generic_exporters.metric import Constant, _AdditionMetric, _SubtractionMetric, _MultiplicationMetric, _TrueDivisionMetric, _FloorDivisionMetric, _PowerMetric
 
-from fixtures import DummyMetric
+from fixtures import *
 
-
-@pytest.mark.asyncio
-async def test_metric_not_implemented():
-    metric = Metric()
-    with pytest.raises(NotImplementedError):
-        await metric.produce(datetime.utcnow())
-    with pytest.raises(NotImplementedError):
-        _ = metric.key
 
 @pytest.mark.asyncio
 async def test_constant_metric():
-    value = Decimal(10)
+    value = 10
     constant = Constant(value)
     assert constant.key == "constant"
-    assert await constant.produce(datetime.utcnow()) == value
+    assert await constant.produce(datetime.utcnow()) == Decimal(value)
 
 @pytest.mark.asyncio
 async def test_addition_metric():
