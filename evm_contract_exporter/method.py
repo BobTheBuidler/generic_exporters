@@ -1,5 +1,4 @@
 
-import decimal
 import logging
 from datetime import datetime, timedelta
 from typing import Union
@@ -21,7 +20,6 @@ logger = logging.getLogger(__name__)
 
 class ViewMethodExporter(ContractMetricExporter):
     """Used to export all view methods on a contract that return a numeric or boolean value"""
-    metric: Union[ContractCallMetric, ContractCallDerivedMetric] 
     _semaphore_value = 500_000 # effectively doesnt exist at this level # TODO: dev something so we can make this None
     def __init__(
         self, 
@@ -49,6 +47,9 @@ class ViewMethodExporter(ContractMetricExporter):
             self._scale = False
     def __repr__(self) -> str:
         return f"<{self.__class__.__name__} contract={self.address} method={self.metric._name}>"
+    @property
+    def metric(self) -> Union[ContractCallMetric, ContractCallDerivedMetric]:
+        return self.timeseries.metric
     async def ensure_data(self, ts: datetime) -> None:
         try:
             if not await self.data_exists(ts, sync=False):

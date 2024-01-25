@@ -11,26 +11,29 @@ from pandas import DataFrame
 
 from generic_exporters._time import _TimeDataBase
 from generic_exporters.dataset import Dataset
+from generic_exporters.timeseries import _TimeSeriesBase, TimeSeries, WideTimeSeries
 
 if TYPE_CHECKING:
-    from generic_exporters import Metric, TimeSeries, WideTimeSeries
-    _T = TypeVar('_T', TimeSeries, WideTimeSeries)
-else:
-    _T = TypeVar('_T')
+    from generic_exporters import Metric
+
+_T = TypeVar('_T', TimeSeries, WideTimeSeries)
 
 @final
 class QueryPlan(_TimeDataBase, a_sync.ASyncIterable["TimeDataRow"], Generic[_T]):
     def __init__(
         self, 
-        timeseries: "Union[TimeSeries, WideTimeSeries]", 
+        dataset: "Union[TimeSeries, WideTimeSeries]", 
         start_timestamp: datetime, 
         end_timestamp: datetime, 
         interval: timedelta,
         *,
         sync: bool = True,
     ) -> None:
-        super().__init__(timeseries.fields, sync=sync)
-        self.timeseries = timeseries
+        if not isinstance(dataset, _TimeSeriesBase):
+            raise TypeError(f'`dataset` must be `TimeSeries` or `WideTimeSeries`. You passed {dataset}')
+        super().__init__(dataset.fields, sync=sync)
+        self.dataset = dataset
+        _validate_time_params(start_timestamp, end_timestamp, interval)
         self.start_timestamp = start_timestamp
         self.end_timestamp = end_timestamp
         self.interval = interval
@@ -60,15 +63,15 @@ class QueryPlan(_TimeDataBase, a_sync.ASyncIterable["TimeDataRow"], Generic[_T])
     
     @cached_property
     def _tasks(self) -> List[asyncio.Task]:
-        return {field.key: asyncio.create_task(coro) for coro, field in zip(self._coros, self.timeseries.fields)}
+        return {field.key: asyncio.create_task(coro) for coro, field in zip(self._coros, self.dataset.fields)}
     
     async def plot(self) -> Figure:
         from generic_exporters.processors import Plotter  # prevent circular import
-        return await Plotter(self.timeseries, interval=self.interval)
+        return await Plotter(self.dataset, interval=self.interval)
     
     async def dataframe(self) -> DataFrame:
         from generic_exporters.processors import DataFramer  # prevent circular import
-        return await DataFramer(self.timeseries, interval=self.interval)
+        return await DataFramer(self.dataset, interval=self.interval)
     
     async def to_csv(self, *args):
         # TODO: this should probably go to the Exporter class
@@ -78,6 +81,15 @@ class QueryPlan(_TimeDataBase, a_sync.ASyncIterable["TimeDataRow"], Generic[_T])
     async def _materialize(self) -> None:
         await asyncio.gather(*self._tasks)
         return Dataset(self)
+
+
+def _validate_time_params(start_timestamp: datetime, end_timestamp: datetime, interval: timedelta):
+    if not isinstance(start_timestamp, datetime):
+        raise TypeError(f"`start_timestamp` must be `datetime`. You passed {start_timestamp}")
+    if end_timestamp and not isinstance(end_timestamp, datetime):
+        raise TypeError(f"`end_timestamp` must be `datetime`. You passed {end_timestamp}")
+    if not isinstance(interval, timedelta):
+        raise TypeError(f"`interval` must be `timedelta`. You passed {interval}")
 
 
 @final

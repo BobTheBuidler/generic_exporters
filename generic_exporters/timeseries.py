@@ -3,17 +3,14 @@ from datetime import datetime, timedelta
 from typing import TYPE_CHECKING, List, Optional, TypeVar, Union, final
 
 from generic_exporters._time import _TimeDataBase
-from generic_exporters.plan import QueryPlan
 
 if TYPE_CHECKING:
     from generic_exporters import Metric
-
-    
-_T = TypeVar('_T')
+    from generic_exporters.plan import QueryPlan
 
 
 class _TimeSeriesBase(_TimeDataBase):
-    def __getitem__(self, key: "slice[datetime, Optional[datetime], timedelta]") -> QueryPlan:
+    def __getitem__(self, key: "slice[datetime, Optional[datetime], timedelta]") -> "QueryPlan":
         """Slice time and return a `Query` object representing the not-yet-fetched series of Metric values for all timestamps in the slice"""
         if not isinstance(key, slice):
             raise KeyError(f"key should be a slice object with a datetime start value, an Optional[datetime] stop, and an Optional[timedelta] step. You passed {key}")
@@ -28,6 +25,8 @@ class _TimeSeriesBase(_TimeDataBase):
                 raise ValueError(f"The stop index must be <= the current time, {datetime.utcnow()}. You passed {key.stop}")
         if key.step and not isinstance(key.step, timedelta):
             raise TypeError(f"The slice step must be a timedelta. You passed {key.step}.")
+        # prevent circular import
+        from generic_exporters.plan import QueryPlan
         return QueryPlan(self, key.start, key.stop, key.step or timedelta(seconds=((key.stop or datetime.utcnow()) - key.start).total_seconds() / 1_000))
 
 
@@ -40,23 +39,16 @@ class TimeSeries(_TimeSeriesBase):
     You can slice a `TimeSeries` object to create a `Dataset` which can be used for exporting, plotting, and other fun things #NOTE: not yet implemented
 
     tcollection of asyncio.Tasks that each will return one datapoint for a specific timestamp for a `Metric` object."""
-    def __init__(self, metric: "Metric", start_timestamp: datetime, end_timestamp: Optional[datetime], interval: timedelta, *, sync: bool = True) -> None:
+    def __init__(self, metric: "Metric", *, sync: bool = True) -> None:
         """
         metric: the Metric that the TimeSeries will measure
-        # TODO: move timestamp stuff to Exporter class
         """
+        # prevent circular import
+        from generic_exporters import Metric
+        if not isinstance(metric, Metric):
+            raise TypeError(f'`metric` must be a `Metric` object. You passed {metric}')
         self.metric = metric
         super().__init__([metric], sync=sync)
-        # TODO: move timestamp stuff to Processor base class or maybe Window class
-        if not isinstance(start_timestamp, datetime):
-            raise TypeError(f"`start_timestamp` must be `datetime`. You passed {start_timestamp}")
-        if end_timestamp and not isinstance(end_timestamp, datetime):
-            raise TypeError(f"`end_timestamp` must be `datetime`. You passed {end_timestamp}")
-        if not isinstance(interval, timedelta):
-            raise TypeError(f"`interval` must be `timedelta`. You passed {interval}")
-        self.start_timestamp = start_timestamp
-        self.end_timestamp = end_timestamp
-        self.interval = interval
     @property
     def key(self) -> str:
         return self.metric.key
