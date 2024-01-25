@@ -1,6 +1,7 @@
 
-from abc import abstractmethod, abstractproperty
+from abc import abstractmethod
 from decimal import Decimal
+from functools import cached_property
 from typing import TYPE_CHECKING, Generic, Tuple, Type, TypeVar, Union
 
 import a_sync
@@ -26,6 +27,8 @@ class _MathableBase(a_sync.ASyncGenericBase, Generic[_T]):
         return self.__math_classes__[5](self, self._validate_other(other))
     @abstractmethod
     def _validate_other(self, other) -> _T:...
-    @abstractproperty
+    @cached_property
     def __math_classes__(self) -> Tuple[Type[_T], Type[_T], Type[_T], Type[_T], Type[_T], Type[_T]]:
-        """This just lets you sub in your own classes if you subclass Metric to do custom thingies"""
+        """This just lets you subclass to do custom thingies"""
+        from generic_exporters.metric import _AdditionMetric, _SubtractionMetric, _MultiplicationMetric, _TrueDivisionMetric, _FloorDivisionMetric, _PowerMetric
+        return _AdditionMetric, _SubtractionMetric, _MultiplicationMetric, _TrueDivisionMetric, _FloorDivisionMetric, _PowerMetric

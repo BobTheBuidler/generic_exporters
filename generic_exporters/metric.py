@@ -4,7 +4,7 @@ from abc import abstractmethod, abstractproperty
 from datetime import datetime
 from decimal import Decimal
 from functools import cached_property
-from typing import Any, Type, Union
+from typing import Any, Union
 
 import inflection
 
@@ -35,9 +35,6 @@ class Metric(_mathable._MathableBase):
         if not isinstance(other, Metric):
             raise TypeError(other)
         return other
-    @cached_property
-    def __math_classes__(self) -> Type["_AdditionMetric"]:
-        return _AdditionMetric, _SubtractionMetric, _MultiplicationMetric, _TrueDivisionMetric, _FloorDivisionMetric, _PowerMetric
 
 
 class Constant(Metric, metaclass=_constant.ConstantSingletonMeta):  # TODO: make this a singleton
