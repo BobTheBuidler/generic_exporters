@@ -7,7 +7,6 @@ from generic_exporters.metric import Metric
 class DummyMetric(Metric):
     async def produce(self, timestamp: datetime) -> Decimal:
         return Decimal(10)
-
     @property
     def key(self) -> str:
         return "dummy_metric"

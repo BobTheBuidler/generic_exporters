@@ -14,11 +14,6 @@ class Plotter(_GatheringTimeSeriesProcessorBase):
 
     You must define a start_timestamp method that will determine the start of the historical range, and a data_exists method that determines whether or not the datastore already contains data for the `Metric` at a particular timestamp. This class will handle the rest.
     """
-    def __init__(self, metric: Metric, interval: timedelta = timedelta(days=1), buffer: timedelta = timedelta(minutes=5), sync: bool = True) -> None:
-        super().__init__(metric)
-        self.interval = interval
-        self.buffer = buffer
-
     async def run(self, filename: str = "") -> None:
         """Exports the full history for this exporter's `Metric` to the datastore"""
         figure = await self.plot()

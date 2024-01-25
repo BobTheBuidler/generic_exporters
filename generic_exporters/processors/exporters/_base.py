@@ -1,6 +1,6 @@
 
 from abc import abstractmethod, abstractproperty
-from datetime import datetime
+from datetime import datetime, timedelta
 from decimal import Decimal
 from typing import Dict, Optional, TypeVar
 
@@ -20,9 +20,9 @@ class _ExporterBase(_ProcessorBase[None]):
 
 
 class _TimeSeriesExporterBase(_TimeSeriesProcessorBase, _ExporterBase):
+    """I dont remember why I made this base class. Maybe I will"""
     def __init__(self, metric: Metric, datastore: Optional[TimeSeriesDataStoreBase], sync: bool = True) -> None:
-        super().__init__(sync=sync)
-        self.metric = metric   
+        super().__init__(metric, sync=sync)
         if isinstance(datastore, TimeSeriesDataStoreBase):
             self.datastore = datastore
         elif datastore is None:
@@ -32,11 +32,8 @@ class _TimeSeriesExporterBase(_TimeSeriesProcessorBase, _ExporterBase):
         self.datastore = datastore
 
 
-class _GatheringTimeSeriesProcessorBase(_TimeSeriesExporterBase):
-    async def _gather(self) -> Dict[datetime, Decimal]:
-        return await a_sync.gather({ts: self.metric.produce(ts, sync=False) async for ts in self._timestamps()})
-
 class _PropertyExporterBase(_TimeSeriesExporterBase):
+    # TODO: implement
     output_type: _T
     @abstractproperty
     def property_name(self) -> str:

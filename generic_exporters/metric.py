@@ -48,38 +48,38 @@ class Metric(a_sync.ASyncGenericBase):
         if key.step and not isinstance(key.step, timedelta):
             raise TypeError(f"The slice step must be a timedelta. You passed {key.step}.")
         return TimeSeries(self, key.start, key.stop, key.step or timedelta(seconds=((key.stop or datetime.utcnow()) - key.start).total_seconds() / 1_000))
-    def __add__(self, other: Union[int, Decimal, "Metric"]) -> "_AdditionMetric":
-        if isinstance(other, (int, Decimal)):
+    def __add__(self, other: Union[int, float, Decimal, "Metric"]) -> "_AdditionMetric":
+        if isinstance(other, (int, float, Decimal)):
             other = Constant(other)
         if not isinstance(other, Metric):
             raise TypeError(other)
         return _AdditionMetric(self, other)
-    def __sub__(self, other: Union[int, Decimal, "Metric"]) -> "_SubtractionMetric":
-        if isinstance(other, (int, Decimal)):
+    def __sub__(self, other: Union[int, float, Decimal, "Metric"]) -> "_SubtractionMetric":
+        if isinstance(other, (int, float, Decimal)):
             other = Constant(other)
         if not isinstance(other, Metric):
             raise TypeError(other)
         return _SubtractionMetric(self, other)
-    def __mul__(self, other: Union[int, Decimal, "Metric"]) -> "_MultiplicationMetric":
-        if isinstance(other, (int, Decimal)):
+    def __mul__(self, other: Union[int, float, Decimal, "Metric"]) -> "_MultiplicationMetric":
+        if isinstance(other, (int, float, Decimal)):
             other = Constant(other)
         if not isinstance(other, Metric):
             raise TypeError(other)
         return _MultiplicationMetric(self, other)
-    def __truediv__(self, other: Union[int, Decimal, "Metric"]) -> "_TrueDivisionMetric":
-        if isinstance(other, (int, Decimal)):
+    def __truediv__(self, other: Union[int, float, Decimal, "Metric"]) -> "_TrueDivisionMetric":
+        if isinstance(other, (int, float, Decimal)):
             other = Constant(other)
         if not isinstance(other, Metric):
             raise TypeError(other)
         return _TrueDivisionMetric(self, other)
-    def __floordiv__(self, other: Union[int, Decimal, "Metric"]) -> "_FloorDivisionMetric":
-        if isinstance(other, (int, Decimal)):
+    def __floordiv__(self, other: Union[int, float, Decimal, "Metric"]) -> "_FloorDivisionMetric":
+        if isinstance(other, (int, float, Decimal)):
             other = Constant(other)
         if not isinstance(other, Metric):
             raise TypeError(other)
         return _FloorDivisionMetric(self, other)
-    def __pow__(self, other: Union[int, "Metric"]) -> "_PowerMetric":
-        if isinstance(other, (int, Decimal)):
+    def __pow__(self, other: Union[int, float, Decimal, "Metric"]) -> "_PowerMetric":
+        if isinstance(other, (int, float, Decimal)):
             other = Constant(other)
         if not isinstance(other, Metric):
             raise TypeError(other)
@@ -119,11 +119,9 @@ class _MathResultMetricBase(Metric):
     def key(self) -> str:
         return f"({self.metric0.key}{self._symbol}{self.metric1.key})"
     @abstractproperty
-    def _symbol(self) -> str:
-        ...
+    def _symbol(self) -> str:...
     @abstractmethod
-    def _do_math(self, value0: Any, value1: Any) -> Any:
-        ...
+    def _do_math(self, value0: Any, value1: Any) -> Any:...
 
 
 class _AdditionMetric(_MathResultMetricBase):
