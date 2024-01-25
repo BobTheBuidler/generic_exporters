@@ -30,6 +30,6 @@ class VictoriaMetrics(TimeSeriesDataStoreBase):
         return await self._post([labels, value])
     
     async def _post(self, data: bytes) -> Any:
-        async with ClientSession(self.url) as session:
-            async with session.post(data=data) as response:
+        async with ClientSession() as session:
+            async with session.post(self.url, data=data) as response:
                 return await response.json()

@@ -1,5 +1,5 @@
 
-from abc import abstractmethod
+from abc import abstractmethod, abstractproperty
 from datetime import datetime, timedelta, timezone
 from decimal import Decimal
 from typing import AsyncGenerator, Dict, Generic, TypeVar
@@ -34,12 +34,16 @@ class _TimeSeriesProcessorBase(_ProcessorBase):
         if not isinstance(timeseries, _TimeSeriesBase):
             raise TypeError(f'`timeseries` must be `Metric`, `TimeSeries`, or `WideTimeSeries`. You passed {timeseries}')
         self.timeseries = timeseries
+    @abstractproperty
+    def interval(self) -> timedelta:
+        """Returns the interval for processing data"""
     @abstractmethod
     async def start_timestamp(self) -> datetime:
         """Returns the start of the historical range for this processor."""
     async def _timestamps(self) -> AsyncGenerator[datetime, None]:
         """Generates the timestamps to process"""
-        timestamp = await self.start_timestamp(sync=False)
+        timestamp: datetime = await self.start_timestamp(sync=False)
+        timestamp = timestamp.astimezone(tz=timezone.utc)
         while timestamp < datetime.now(tz=timezone.utc) - self.interval:
             yield timestamp
             timestamp += self.interval
