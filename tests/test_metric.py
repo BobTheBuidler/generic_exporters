@@ -71,3 +71,16 @@ async def test_power_metric():
     power_metric = _PowerMetric(metric1, metric2)
     result = await power_metric.produce(datetime.utcnow())
     assert result == Decimal(100)
+
+@pytest.mark.asyncio
+async def test_constant_init():
+    value = 10
+    constant = Constant(value)
+    assert constant.value == Decimal(value)
+
+@pytest.mark.asyncio
+async def test_constant_produce():
+    value = 10
+    constant = Constant(value)
+    result = await constant.produce(None)  # Timestamp is irrelevant for Constant
+    assert result == Decimal(value)
