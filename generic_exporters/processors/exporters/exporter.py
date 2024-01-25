@@ -29,5 +29,5 @@ class TimeSeriesExporter(_TimeSeriesExporterBase):
 
     async def ensure_data(self, ts: datetime) -> None:
         if not await self.data_exists(ts, sync=False):
-            data = await self.metric.produce(ts, sync=False)
-            await self.datastore.push(self.metric.key, ts, data)
+            data = await self.timeseries.metric.produce(ts, sync=False)
+            await self.datastore.push(self.timeseries.metric.key, ts, data)

@@ -39,13 +39,13 @@ class ContractMetricExporter(TimeSeriesExporter):
         self.address = contract
         datastore = datastore or GenericContractTimeSeriesKeyValueStore(self.chainid, self.address)
         super().__init__(metric, datastore, interval=interval, buffer=buffer, sync=sync)
-        self.semaphore = a_sync.Semaphore(self._semaphore_value, name=self.metric.key)
+        self.semaphore = a_sync.Semaphore(self._semaphore_value, name=self.timeseries.metric.key)
     
     def __repr__(self) -> str:
         return f"<{self.__class__.__name__} address={self.address} contracts={self.address}>"
     
     async def data_exists(self, ts) -> bool:
-        return await self.datastore.data_exists(self.metric.key, ts)
+        return await self.datastore.data_exists(self.timeseries.metric.key, ts)
     
     @eth_retry.auto_retry
     async def start_timestamp(self) -> datetime:
@@ -62,6 +62,6 @@ class ContractMetricExporter(TimeSeriesExporter):
         block = await utils.get_block_at_timestamp(timestamp)
         async with self.semaphore:
             logger.debug("%s producing %s block %s", self, timestamp, block)
-            retval = await self.metric.produce(timestamp, sync=False)
+            retval = await self.timeseries.metric.produce(timestamp, sync=False)
             logger.debug("%s produced %s at %s block %s", self, retval, timestamp, block)
             return retval

@@ -9,6 +9,7 @@ if TYPE_CHECKING:
 _DT = TypeVar("_DT", "TimeSeries", "WideTimeSeries", "TimeDataRow")
 
 class Dataset(Dict[datetime, _DT]):
+    """A Dataset is a not-yet-materialized"""
     def __init__(self, data: _DT) -> None:
         self._data = data
     # TODO: implement

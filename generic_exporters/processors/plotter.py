@@ -18,7 +18,7 @@ class Plotter(_GatheringTimeSeriesProcessorBase):
         figure = await self.plot()
         now = datetime.utcnow()
         if not filename:
-            filename = f"~/.generic_exporters/plots/{self.metric.key}_{self.interval}_exported_at_{now.year}_{now.month}_{now.day}.png"
+            filename = f"~/.generic_exporters/plots/{self.timeseries.metric.key}_{self.interval}_exported_at_{now.year}_{now.month}_{now.day}.png"
         figure.save_png(filename)
     
     async def plot(self) -> Figure:
@@ -27,7 +27,7 @@ class Plotter(_GatheringTimeSeriesProcessorBase):
         return Figure(
             marks=[await self._get_line(xscale, yscale)], 
             axes=[Axis(scale=xscale, label='timestamp'), Axis(scale=yscale)], 
-            title=self.metric.key,
+            title=self.timeseries.metric.key,
         )
     
     async def _get_line(self, xscale: Optional[LinearScale] = None, yscale: Optional[LinearScale] = None) -> Lines:
@@ -36,4 +36,9 @@ class Plotter(_GatheringTimeSeriesProcessorBase):
         if yscale is None: 
             yscale = LinearScale()
         data = await self._gather()
-        return Lines(x=data.keys(), y=data.values(), scales={'x': xscale, 'y': yscale}, labels=[self.metric.key])
+        return Lines(
+            x=data.keys(), 
+            y=data.values(), 
+            scales={'x': xscale, 'y': yscale}, 
+            labels=[field.key for field in self.timeseries.fields],
+        )

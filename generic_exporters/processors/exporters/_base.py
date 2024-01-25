@@ -1,14 +1,13 @@
 
 from abc import abstractmethod, abstractproperty
-from datetime import datetime, timedelta
-from decimal import Decimal
-from typing import Dict, Optional, TypeVar
+from typing import TYPE_CHECKING, Optional, TypeVar
 
-import a_sync
-from generic_exporters.metric import Metric
 from generic_exporters.processors._base import _ProcessorBase, _TimeSeriesProcessorBase
 from generic_exporters.processors.exporters.datastores.timeseries._base import TimeSeriesDataStoreBase
 from generic_exporters.processors.exporters.datastores.timeseries.sql import SQLTimeSeriesKeyValueStore
+
+if TYPE_CHECKING:
+    from generic_exporters import TimeSeries
 
 
 _T = TypeVar('_T')
@@ -21,8 +20,8 @@ class _ExporterBase(_ProcessorBase[None]):
 
 class _TimeSeriesExporterBase(_TimeSeriesProcessorBase, _ExporterBase):
     """I dont remember why I made this base class. Maybe I will"""
-    def __init__(self, metric: Metric, datastore: Optional[TimeSeriesDataStoreBase], sync: bool = True) -> None:
-        super().__init__(metric, sync=sync)
+    def __init__(self, timeseries: "TimeSeries", datastore: Optional[TimeSeriesDataStoreBase], sync: bool = True) -> None:
+        super().__init__(timeseries, sync=sync)
         if isinstance(datastore, TimeSeriesDataStoreBase):
             self.datastore = datastore
         elif datastore is None:
