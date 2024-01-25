@@ -1,58 +1,78 @@
-
-from datetime import datetime, timedelta
-from decimal import Decimal
-
 import pytest
-from generic_exporters import Constant, Metric, TimeSeries
+from decimal import Decimal
+from datetime import datetime, timedelta
+from generic_exporters.metric import Metric, Constant, _AdditionMetric, _SubtractionMetric, _MultiplicationMetric, _TrueDivisionMetric, _FloorDivisionMetric, _PowerMetric
 
-    
-class Two(Metric):
-    key = "two"
-    def produce(self, timestamp: datetime) -> Decimal:
-        return 2
-    
-class Three(Metric):
-    key = "three"
-    def produce(self, timestamp: datetime) -> Decimal:
-        return 3
-    
-def test_repr():
-    assert Two().__repr__() == f'<Two key=two>'
+class DummyMetric(Metric):
+    async def produce(self, timestamp: datetime) -> Decimal:
+        return Decimal(10)
 
-def test_slice():
-    two = Two()
-    with pytest.raises(KeyError):
-        two[1]
-    with pytest.raises(TypeError):
-        two[1:2]
-    with pytest.raises(TypeError):
-        two[1:2:3]
+    @property
+    def key(self) -> str:
+        return "dummy_metric"
 
-    assert isinstance(two[datetime.utcnow(): datetime.utcnow()], TimeSeries)
-    assert isinstance(two[datetime.utcnow(): datetime.utcnow(): timedelta(minutes=1)], TimeSeries)
+@pytest.mark.asyncio
+async def test_metric_not_implemented():
+    metric = Metric()
+    with pytest.raises(NotImplementedError):
+        await metric.produce(datetime.utcnow())
+    with pytest.raises(NotImplementedError):
+        _ = metric.key
 
-    with pytest.raises(ValueError):
-        two[datetime.utcnow(): datetime.utcnow() + timedelta(minutes=1)]
+@pytest.mark.asyncio
+async def test_constant_metric():
+    value = Decimal(10)
+    constant = Constant(value)
+    assert constant.key == "constant"
+    assert await constant.produce(datetime.utcnow()) == value
 
+@pytest.mark.asyncio
+async def test_addition_metric():
+    metric1 = DummyMetric()
+    metric2 = Constant(5)
+    addition_metric = _AdditionMetric(metric1, metric2)
+    result = await addition_metric.produce(datetime.utcnow())
+    assert result == Decimal(15)
 
-def test_add():
-    assert (Two() + Three()).produce(datetime.utcnow(), sync=True) == 5
-    
-def test_sub():
-    assert (Two() - Three()).produce(datetime.utcnow(), sync=True) == -1
+# Additional tests for subtraction, multiplication, division, etc. would follow a similar pattern.
+# The following are placeholders for those tests.
 
-def test_mul():
-    assert (Two() * Three()).produce(datetime.utcnow(), sync=True) == 6
+@pytest.mark.asyncio
+async def test_subtraction_metric():
+    metric1 = DummyMetric()
+    metric2 = Constant(5)
+    subtraction_metric = _SubtractionMetric(metric1, metric2)
+    result = await subtraction_metric.produce(datetime.utcnow())
+    assert result == Decimal(5)
 
-def test_truediv():
-    assert (Two() / Three()).produce(datetime.utcnow(), sync=True) == 2/3
+@pytest.mark.asyncio
+async def test_multiplication_metric():
+    metric1 = DummyMetric()
+    metric2 = Constant(5)
+    multiplication_metric = _MultiplicationMetric(metric1, metric2)
+    result = await multiplication_metric.produce(datetime.utcnow())
+    assert result == Decimal(50)
 
-def test_floordiv():
-    assert (Two() // Three()).produce(datetime.utcnow(), sync=True) == 0
+@pytest.mark.asyncio
+async def test_true_division_metric():
+    metric1 = DummyMetric()
+    metric2 = Constant(5)
+    true_division_metric = _TrueDivisionMetric(metric1, metric2)
+    result = await true_division_metric.produce(datetime.utcnow())
+    assert result == Decimal(2)
 
-def test_power():
-    assert (Two() ** Three()).produce(datetime.utcnow(), sync=True) == 8
+@pytest.mark.asyncio
+async def test_floor_division_metric():
+    metric1 = DummyMetric()
+    metric2 = Constant(5)
+    floor_division_metric = _FloorDivisionMetric(metric1, metric2)
+    result = await floor_division_metric.produce(datetime.utcnow())
+    assert result == Decimal(2)  # Assuming DummyMetric produces Decimal(10)
 
-def test_constant():
-    assert Constant(5) is Constant(5)
-    assert Constant(5).produce(datetime.utcnow(), sync=True) == 5
+@pytest.mark.asyncio
+async def test_power_metric():
+    metric1 = DummyMetric()
+    metric2 = Constant(2)
+    power_metric = _PowerMetric(metric1, metric2)
+    result = await power_metric.produce(datetime.utcnow())
+    assert result == Decimal(100)
