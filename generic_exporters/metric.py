@@ -1,19 +1,16 @@
 
 import asyncio
 from abc import abstractmethod, abstractproperty
-from datetime import datetime, timedelta
+from datetime import datetime
 from decimal import Decimal
 from functools import cached_property
-from typing import Any, Optional, Union
+from typing import Any, Type, Union
 
-import a_sync
 import inflection
 
-from generic_exporters import _constant
-from generic_exporters.timeseries import TimeSeries
+from generic_exporters import _constant, _mathable
 
-
-class Metric(a_sync.ASyncGenericBase):
+class Metric(_mathable._MathableBase):
     sync=False
     """
     A `Metric` represents a numeric measurement taken periodically over time. It contains the logic for taking that measurement at a specific timestamp and generating a unique key for the result.
@@ -32,59 +29,15 @@ class Metric(a_sync.ASyncGenericBase):
         """Computes and returns the measurement at `timestamp` for this particular `Metric`"""
     def __repr__(self) -> str:
         return f'<{type(self).__name__} key={self.key}>'
-    def __getitem__(self, key: "slice[datetime, Optional[datetime], timedelta]") -> TimeSeries:
-        """Slice the Metric and return a `TimeSeries` object representing the infinite series of Metric values across the time axis"""
-        if not isinstance(key, slice):
-            raise KeyError(f"key should be a slice object with a datetime start value, an Optional[datetime] stop, and an Optional[timedelta] step. You passed {key}")
-        if not isinstance(key.start, datetime):
-            raise TypeError(f"The start index must be a datetime. You passed {key.start}.")
-        if key.start > datetime.utcnow():
-            ValueError(f"The start index must be < the current time, {datetime.utcnow()}. You passed {key.stop}")
-        if key.stop:
-            if not isinstance(key.stop, datetime):
-                raise TypeError(f"The stop index must be a datetime. You passed {key.stop}.")
-            if key.stop > datetime.utcnow():
-                raise ValueError(f"The stop index must be <= the current time, {datetime.utcnow()}. You passed {key.stop}")
-        if key.step and not isinstance(key.step, timedelta):
-            raise TypeError(f"The slice step must be a timedelta. You passed {key.step}.")
-        return TimeSeries(self, key.start, key.stop, key.step or timedelta(seconds=((key.stop or datetime.utcnow()) - key.start).total_seconds() / 1_000))
-    def __add__(self, other: Union[int, float, Decimal, "Metric"]) -> "_AdditionMetric":
+    def _validate_other(self, other) -> "Metric":
         if isinstance(other, (int, float, Decimal)):
             other = Constant(other)
         if not isinstance(other, Metric):
             raise TypeError(other)
-        return _AdditionMetric(self, other)
-    def __sub__(self, other: Union[int, float, Decimal, "Metric"]) -> "_SubtractionMetric":
-        if isinstance(other, (int, float, Decimal)):
-            other = Constant(other)
-        if not isinstance(other, Metric):
-            raise TypeError(other)
-        return _SubtractionMetric(self, other)
-    def __mul__(self, other: Union[int, float, Decimal, "Metric"]) -> "_MultiplicationMetric":
-        if isinstance(other, (int, float, Decimal)):
-            other = Constant(other)
-        if not isinstance(other, Metric):
-            raise TypeError(other)
-        return _MultiplicationMetric(self, other)
-    def __truediv__(self, other: Union[int, float, Decimal, "Metric"]) -> "_TrueDivisionMetric":
-        if isinstance(other, (int, float, Decimal)):
-            other = Constant(other)
-        if not isinstance(other, Metric):
-            raise TypeError(other)
-        return _TrueDivisionMetric(self, other)
-    def __floordiv__(self, other: Union[int, float, Decimal, "Metric"]) -> "_FloorDivisionMetric":
-        if isinstance(other, (int, float, Decimal)):
-            other = Constant(other)
-        if not isinstance(other, Metric):
-            raise TypeError(other)
-        return _FloorDivisionMetric(self, other)
-    def __pow__(self, other: Union[int, float, Decimal, "Metric"]) -> "_PowerMetric":
-        if isinstance(other, (int, float, Decimal)):
-            other = Constant(other)
-        if not isinstance(other, Metric):
-            raise TypeError(other)
-        return _PowerMetric(self, other)
-
+        return other
+    @cached_property
+    def __math_classes__(self) -> Type["_AdditionMetric"]:
+        return _AdditionMetric, _SubtractionMetric, _MultiplicationMetric, _TrueDivisionMetric, _FloorDivisionMetric, _PowerMetric
 
 
 class Constant(Metric, metaclass=_constant.ConstantSingletonMeta):  # TODO: make this a singleton
@@ -119,9 +72,11 @@ class _MathResultMetricBase(Metric):
     def key(self) -> str:
         return f"({self.metric0.key}{self._symbol}{self.metric1.key})"
     @abstractproperty
-    def _symbol(self) -> str:...
+    def _symbol(self) -> str:
+        """The symbol of the math operation being performed"""
     @abstractmethod
-    def _do_math(self, value0: Any, value1: Any) -> Any:...
+    def _do_math(self, value0: Any, value1: Any) -> Any:
+        """Performs the math operation"""
 
 
 class _AdditionMetric(_MathResultMetricBase):

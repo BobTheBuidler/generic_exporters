@@ -21,11 +21,6 @@ from evm_contract_exporter import math, utils, types, scale
 
 logger = logging.getLogger(__name__)
 
-
-
-
-
-
 class _AddressKeyedMetric(Metric):
     # NOTE: is this needed? 
     def __init__(self, address: types.address) -> None:
@@ -35,6 +30,7 @@ class _AddressKeyedMetric(Metric):
 
 class _ContractCallMetricBase(Metric):
     """A base class for any `Metric` that returns the response from a contract call, or one of its values if multiple are returned"""
+    __math_classes__ = math.classes
     @cached_property
     def _can_scale(self) -> bool:
         """Returns True if the output type is numeric and can be scaled down, False otherwise."""
@@ -72,43 +68,7 @@ class _ContractCallMetricBase(Metric):
         """Returns your subclass implementation's scaling specification for this `_ScaledContractMetricBase`"""
     @abstractproperty
     def _output_type(self) -> Type:
-        """Returns the output type"""
-    def __add__(self, other: Union[int, Decimal, "Metric"]) -> "math._ContractCallAdditionMetric":
-        if isinstance(other, (int, Decimal)):
-            other = Constant(other)
-        if not isinstance(other, Metric):
-            raise TypeError(other)
-        return math._ContractCallAdditionMetric(self, other)
-    def __sub__(self, other: Union[int, Decimal, "Metric"]) -> "math._ContractCallSubtractionMetric":
-        if isinstance(other, (int, Decimal)):
-            other = Constant(other)
-        if not isinstance(other, Metric):
-            raise TypeError(other)
-        return math._ContractCallSubtractionMetric(self, other)
-    def __mul__(self, other: Union[int, Decimal, "Metric"]) -> "math._ContractCallMultiplicationMetric":
-        if isinstance(other, (int, Decimal)):
-            other = Constant(other)
-        if not isinstance(other, Metric):
-            raise TypeError(other)
-        return math._ContractCallMultiplicationMetric(self, other)
-    def __truediv__(self, other: Union[int, Decimal, "Metric"]) -> "math._ContractCallTrueDivisionMetric":
-        if isinstance(other, (int, Decimal)):
-            other = Constant(other)
-        if not isinstance(other, Metric):
-            raise TypeError(other)
-        return math._ContractCallTrueDivisionMetric(self, other)
-    def __floordiv__(self, other: Union[int, Decimal, "Metric"]) -> "math._ContractCallFloorDivisionMetric":
-        if isinstance(other, (int, Decimal)):
-            other = Constant(other)
-        if not isinstance(other, Metric):
-            raise TypeError(other)
-        return math._ContractCallFloorDivisionMetric(self, other)
-    def __pow__(self, other: Union[int, "Metric"]) -> "math._ContractCallPowerMetric":
-        if isinstance(other, (int, Decimal)):
-            other = Constant(other)
-        if not isinstance(other, Metric):
-            raise TypeError(other)
-        return math._ContractCallPowerMetric(self, other)
+        """Returns the output type returned by the ContractCall"""
 
 
 class ContractCallMetric(ContractCall, _ContractCallMetricBase):
@@ -295,19 +255,3 @@ class StructDerivedMetric(ContractCallDerivedMetric):
         return types.lookup(self._abi['type'])
     def _extract(self, response_data: ReturnValue) -> Any:
         return response_data.dict()[self._struct_key]
-
-
-
-class _MathResultMetricBase(Metric):
-    """These are created by the library when you perform math operations on `Metric` objects. You should not need to interact with this class directly"""
-    def __init__(self, metric0: Metric, metric1: Metric) -> None:
-        self.metric0 = metric0
-        self.metric1 = metric1
-    def __repr__(self) -> str:
-        return f"<{self.__class__.__name__} for {self.metric0} {self._symbol} {self.metric1}>"
-    @abstractproperty
-    def _symbol(self) -> str:
-        ...
-    @abstractmethod
-    def _do_math(self, value0: Any, value1: Any) -> Any:
-        ...

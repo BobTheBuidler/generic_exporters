@@ -102,3 +102,12 @@ class _ContractCallPowerMetric(_ContractCallMathResultMetricBase, _PowerMetric):
     
     They are created by the library when you exponentiate two `ContractCallMetric` objects. You should not need to interact with this class directly.
     """
+
+classes = (
+    _ContractCallAdditionMetric, 
+    _ContractCallSubtractionMetric, 
+    _ContractCallMultiplicationMetric,
+    _ContractCallTrueDivisionMetric,
+    _ContractCallFloorDivisionMetric,
+    _ContractCallPowerMetric,
+)
