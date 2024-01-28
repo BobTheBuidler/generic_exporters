@@ -13,4 +13,4 @@ def weth():
 
 @pytest.fixture
 def weth_smart_scale(weth):
-    return SmartScale(weth)
+    return SmartScale(weth.address)

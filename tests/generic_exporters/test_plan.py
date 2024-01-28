@@ -8,15 +8,14 @@ from fixtures import *
 
 
 @pytest.mark.asyncio
-async def test_query_plan_initialization():
-    metric = DummyMetric()
-    timeseries = TimeSeries(metric)
+async def test_query_plan_initialization(time_series):
     start_timestamp = datetime.utcnow() - timedelta(days=1)
     end_timestamp = datetime.utcnow()
     interval = timedelta(minutes=1)
-    query_plan = QueryPlan(timeseries, start_timestamp, end_timestamp, interval)
-    assert query_plan.dataset == timeseries
-    assert query_plan.start_timestamp == start_timestamp
+    query_plan = QueryPlan(time_series, start_timestamp, end_timestamp, interval, sync=False)
+    assert query_plan.dataset == time_series
+    assert query_plan._start_timestamp == start_timestamp
+    assert await query_plan.start_timestamp() == start_timestamp
     assert query_plan.end_timestamp == end_timestamp
     assert query_plan.interval == interval
 

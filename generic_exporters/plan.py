@@ -1,14 +1,17 @@
 
 import asyncio
-from datetime import datetime, timedelta
+import logging
+from datetime import datetime, timedelta, timezone
 from decimal import Decimal
 from functools import cached_property
-from typing import TYPE_CHECKING, Any, AsyncGenerator, Coroutine, Iterable, Generic, List, TypeVar, Union, final
+from inspect import isawaitable
+from typing import TYPE_CHECKING, Any, AsyncGenerator, Awaitable, Coroutine, Dict, Iterable, List, Optional, TypeVar, Union, final
 
 import a_sync
 from bqplot import Figure
 from pandas import DataFrame
 
+from generic_exporters._awaitable import _AwaitableMixin
 from generic_exporters._time import _TimeDataBase
 from generic_exporters.dataset import Dataset
 from generic_exporters.timeseries import _TimeSeriesBase, TimeSeries, WideTimeSeries
@@ -18,12 +21,16 @@ if TYPE_CHECKING:
 
 _T = TypeVar('_T', TimeSeries, WideTimeSeries)
 
+LooseDatetime = Union[datetime, Awaitable[datetime]]
+
+logger = logging.getLogger(__name__)
+
 @final
-class QueryPlan(_TimeDataBase, a_sync.ASyncIterable["TimeDataRow"], Generic[_T]):
+class QueryPlan(_TimeDataBase, a_sync.ASyncIterable["TimeDataRow"], _AwaitableMixin[_T]):
     def __init__(
         self, 
         dataset: "Union[TimeSeries, WideTimeSeries]", 
-        start_timestamp: datetime, 
+        start_timestamp: LooseDatetime, 
         end_timestamp: datetime, 
         interval: timedelta,
         *,
@@ -34,13 +41,10 @@ class QueryPlan(_TimeDataBase, a_sync.ASyncIterable["TimeDataRow"], Generic[_T])
         super().__init__(dataset.fields, sync=sync)
         self.dataset = dataset
         _validate_time_params(start_timestamp, end_timestamp, interval)
-        self.start_timestamp = start_timestamp
         self.end_timestamp = end_timestamp
         self.interval = interval
-        
-    def __await__(self) -> _T:
-        # NOTE: maybe put this in _Awaitable helper
-        return self._task.__await__()
+        self._start_timestamp = start_timestamp
+        self._rows: Dict[datetime, TimeDataRow] = {}
     
     def __getitem__(self, timestamp: datetime) -> "TimeDataRow":
         # TODO: check that timestamp is in the data lol. maybe just populate _rows on init?
@@ -50,16 +54,14 @@ class QueryPlan(_TimeDataBase, a_sync.ASyncIterable["TimeDataRow"], Generic[_T])
     
     async def __aiter__(self) -> AsyncGenerator["Dataset[TimeDataRow]", None]:
         # NOTE: THESE DO NOT YIELD IN ORDER. QUESTION: SHOULD THEY YIELD IN ORDER? MAYBE YEAH
-        for timestamp in self.timestamps:
-            if timestamp not in self._rows:
-                self._rows[timestamp] = TimeDataRow(timestamp, self.fields, sync=self.sync)
+        async for timestamp in self._aiter_timestamps():
+            self[timestamp]
         async for row in a_sync.as_completed(self._rows, aiter=True):
             yield row
     
     @cached_property
-    def _task(self) -> "asyncio.Task[Dataset[_T]]":
-        """The task that is run to materialize the `Dataset`"""
-        return asyncio.create_task(self._materialize())  # TODO: name the task with some hueristic
+    def keys(self) -> List[str]:
+        return [field.key for field in self.fields]
     
     @cached_property
     def _tasks(self) -> List[asyncio.Task]:
@@ -82,10 +84,24 @@ class QueryPlan(_TimeDataBase, a_sync.ASyncIterable["TimeDataRow"], Generic[_T])
         await asyncio.gather(*self._tasks)
         return Dataset(self)
 
+    async def start_timestamp(self) -> datetime:
+        """
+        Returns the start of the historical range for this processor.
+        Override this if the start_timestamp needs to be dynamically computed.
+        """
+        return await self._start_timestamp if isawaitable(self._start_timestamp) else self._start_timestamp
 
-def _validate_time_params(start_timestamp: datetime, end_timestamp: datetime, interval: timedelta):
-    if not isinstance(start_timestamp, datetime):
-        raise TypeError(f"`start_timestamp` must be `datetime`. You passed {start_timestamp}")
+    async def _aiter_timestamps(self) -> AsyncGenerator[datetime, None]:
+        """Generates the timestamps to process"""
+        timestamp: datetime = await self.start_timestamp(sync=False)
+        timestamp = timestamp.astimezone(tz=timezone.utc)
+        while timestamp < datetime.now(tz=timezone.utc) - self.interval:
+            yield timestamp
+            timestamp += self.interval
+
+def _validate_time_params(start_timestamp: datetime, end_timestamp: Optional[datetime], interval: timedelta):
+    if not isinstance(start_timestamp, datetime) and not isawaitable(start_timestamp):
+        raise TypeError(f"`start_timestamp` must be `datetime` or `Awaitable[datetime]`. You passed {start_timestamp}")
     if end_timestamp and not isinstance(end_timestamp, datetime):
         raise TypeError(f"`end_timestamp` must be `datetime`. You passed {end_timestamp}")
     if not isinstance(interval, timedelta):
@@ -93,15 +109,14 @@ def _validate_time_params(start_timestamp: datetime, end_timestamp: datetime, in
 
 
 @final
-class TimeDataRow(_TimeDataBase):
+class TimeDataRow(_TimeDataBase, _AwaitableMixin[_T]):
     # TODO: support time-based (and non time based tbh) attrs like metrics
     # TODO: give this more functionality waaaay later
     """A future-like class that can be awaited to materialize results"""
-    __slots__ = 'timestamp', 'fields', 'sync'
+    __slots__ = 'timestamp', 
     def __init__(self, timestamp: datetime, fields: Iterable["Metric"], sync: bool = True) -> None:
+        super().__init__(fields, sync=sync)
         self.timestamp = timestamp
-        self.fields = tuple(fields)
-        self.sync = sync
     def __repr__(self) -> str:
         beg = f"<{type(self).__name__}(timestamp={self.timestamp}"
         mid = "".join(f",field{i}={self.fields[i]}" for i in range(len(self.fields)))
@@ -117,7 +132,12 @@ class TimeDataRow(_TimeDataBase):
         return self.timestamp
     @property
     def _coros(self) -> List[Coroutine[Decimal, None, None]]:
-        return [metric.produce(self.timestamp, sync=False) for metric in self.fields]
+        try:
+            return [metric.produce(self.timestamp, sync=False) for metric in self.fields]
+        except AttributeError as e:
+            raise AttributeError(str(e), self.fields)
     @cached_property
     def _tasks(self) -> List["asyncio.Task[Decimal]"]:
         return [asyncio.create_task(coro, name=f"{field.key} at {self.timestamp}") for coro, field in zip(self._coros, self.fields)]
+    async def _materialize(self) -> Dict["Metric", Decimal]:
+        return {field: result for field, result in zip(self.fields, await asyncio.gather(*self._tasks))}

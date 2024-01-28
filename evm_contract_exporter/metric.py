@@ -12,25 +12,17 @@ from async_lru import alru_cache
 from brownie.convert.datatypes import ReturnValue
 from brownie.network.contract import ContractCall
 from datetime import timedelta
-from generic_exporters import Constant, Metric
-from y import ERC20
+from generic_exporters import Metric, TimeSeries
+from y import ERC20, contract_creation_block_async
 
-from generic_exporters.timeseries import TimeSeries
-from evm_contract_exporter import math, utils, types, scale
+from evm_contract_exporter import _math, scale, types, utils
 
 
 logger = logging.getLogger(__name__)
 
-class _AddressKeyedMetric(Metric):
-    # NOTE: is this needed? 
-    def __init__(self, address: types.address) -> None:
-        super().__init__()
-        self.address = address
-
-
 class _ContractCallMetricBase(Metric):
     """A base class for any `Metric` that returns the response from a contract call, or one of its values if multiple are returned"""
-    __math_classes__ = math.classes
+    __math_classes__ = _math.classes
     @cached_property
     def _can_scale(self) -> bool:
         """Returns True if the output type is numeric and can be scaled down, False otherwise."""

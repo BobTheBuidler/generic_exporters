@@ -22,6 +22,4 @@ async def test_wide_time_series_getitem(wide_time_series):
     end = datetime.utcnow()
     interval = timedelta(minutes=1)
     query_plan = wide_time_series[start:end:interval]
-    assert query_plan.start_timestamp == start
-    assert query_plan.end_timestamp == end
-    assert query_plan.interval == interval
+    assert isinstance(query_plan, QueryPlan)

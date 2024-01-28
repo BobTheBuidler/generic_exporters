@@ -4,17 +4,17 @@ import asyncio
 import logging
 from datetime import timedelta
 from functools import cached_property
-from typing import List
+from typing import List, Optional
 
 from async_property import async_cached_property
-from brownie import chain
+from brownie import chain, convert
 from brownie.exceptions import ContractNotFound
 from brownie.network.contract import ContractCall, ContractTx, OverloadedMethod
 from y import Contract, ContractNotVerified
 from y.datatypes import Address
 
 from evm_contract_exporter.contract import ContractExporterBase
-from evm_contract_exporter.method import ViewMethodExporter
+from evm_contract_exporter.exporters.method import ViewMethodExporter
 from evm_contract_exporter.types import EXPORTABLE_TYPES, UNEXPORTABLE_TYPES, address
 
 
@@ -31,48 +31,42 @@ class GenericContractExporter(ContractExporterBase):
         *, 
         interval: timedelta = timedelta(days=1), 
         buffer: timedelta = timedelta(minutes=5),
+        sync: bool = True
     ) -> None:
-        super().__init__(contract, chain.id, interval=interval, buffer=buffer)
+        super().__init__(chain.id, interval=interval, buffer=buffer, sync=sync)
+        self.address = convert.to_address(contract)
     def __repr__(self) -> str:
         return f"<{self.__class__.__name__} contract={self.address} interval={self.interval}>"
     @cached_property
     def task(self) -> asyncio.Task:
         return asyncio.Task(self._await())
     @async_cached_property
-    async def dank_contract(self) -> Contract:
-        return await Contract.coroutine(self.address)
-    @async_cached_property
-    async def method_exporters(self) -> List[ViewMethodExporter]:
-        contract = await self.dank_contract
-        exporters = []
+    async def method_exporter(self) -> Optional[ViewMethodExporter]:
+        from evm_contract_exporter.exporters.method import _wrap_method
+        contract = await Contract.coroutine(self.address)
+        data = []
         for view_method in _safe_views(contract):
-            exporter = ViewMethodExporter(
-                method=view_method,
-                interval=self.interval, 
-                scale=True, 
-                datastore=self.datastore,
-            )
-            if exporter.metric._returns_tuple_type:
-                derived_metrics = [exporter.metric[i] for i in range(len(exporter.metric._outputs))]
-                exporters.extend([ViewMethodExporter(method=metric, interval=self.interval, scale=False, datastore=self.datastore) for metric in derived_metrics])
-            elif exporter.metric._returns_struct_type:
-                outputs = exporter.metric._outputs
+            timeseries = _wrap_method(view_method, True)
+            if timeseries.metric._returns_tuple_type:
+                derived_metrics = [timeseries.metric[i] for i in range(len(timeseries.metric._outputs))]
+                data.extend(derived_metrics)
+            elif timeseries.metric._returns_struct_type:
+                outputs = timeseries.metric._outputs
                 if len(outputs) == 1:
                     outputs = outputs[0]['components']
                 assert all(abi['name'] for abi in outputs), outputs
                 for abi in outputs:
                     struct_key = abi['name']
-                    derived_metric = exporter.metric[struct_key]
-                    exporters.append(ViewMethodExporter(method=derived_metric, interval=self.interval, scale=False, datastore=self.datastore))
+                    derived_metric = timeseries.metric[struct_key]
+                    data.append(derived_metric)
             else:
-                exporters.append(exporter)
-
-        return exporters
+                data.append(timeseries)
+        if data:
+            return ViewMethodExporter(*data, interval=self.interval, buffer=self.buffer, datastore=self.datastore, sync=self.sync)
     async def _await(self) -> None:
         try:
-            for output in await asyncio.gather(*await self.method_exporters, return_exceptions=True):
-                if isinstance(output, Exception):
-                    raise output
+            if method_exporter := await self.method_exporter:
+                await method_exporter
         except ContractNotFound:
             logger.error("%s is not a contract, skipping", self)
         except ContractNotVerified:

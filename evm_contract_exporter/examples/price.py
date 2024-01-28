@@ -6,7 +6,7 @@ from generic_exporters import Metric
 from y import get_price
 
 from evm_contract_exporter import utils
-from evm_contract_exporter.exporter import ContractMetricExporter
+from evm_contract_exporter.exporters.metric import ContractMetricExporter
 from evm_contract_exporter.types import address
 
 

@@ -1,30 +1,32 @@
 
-from abc import abstractmethod, abstractproperty
-from datetime import datetime, timedelta, timezone
+from abc import abstractmethod
+from asyncio import Task, create_task
+from datetime import datetime
 from decimal import Decimal
-from typing import AsyncGenerator, Dict, Generic, TypeVar
+from functools import cached_property
+from typing import Dict, TypeVar
 
 import a_sync
 
+from generic_exporters._awaitable import _AwaitableMixin
 from generic_exporters.plan import QueryPlan
-
 
 _T = TypeVar('_T')
 
-class _ProcessorBase(a_sync.ASyncGenericBase, Generic[_T]):
+
+class _ProcessorBase(_AwaitableMixin[_T], a_sync.ASyncGenericBase):
     def __init__(self, *, sync: bool = True):
         if not isinstance(sync, bool):
             raise TypeError(f'`sync` must be boolean. You passed {sync}')
         self.sync = sync
-    def __await__(self) -> _T:
-        return self.run(sync=False).__await__()
     @abstractmethod
     async def run(self) -> _T:
         """Runs the processor"""
+    async def _materialize(self) -> "Task[_T]":
+        return await self.run(sync=False)
 
 
 class _TimeSeriesProcessorBase(_ProcessorBase):
-    interval: timedelta
     def __init__(
         self, 
         query: QueryPlan, 
@@ -35,19 +37,9 @@ class _TimeSeriesProcessorBase(_ProcessorBase):
         if not isinstance(query, QueryPlan):
             raise TypeError(f'`query` must be `QueryPlan`. You passed {query}')
         self.query = query
-    @abstractmethod
-    async def start_timestamp(self) -> datetime:
-        """Returns the start of the historical range for this processor."""
-    async def _timestamps(self) -> AsyncGenerator[datetime, None]:
-        """Generates the timestamps to process"""
-        timestamp: datetime = await self.start_timestamp(sync=False)
-        timestamp = timestamp.astimezone(tz=timezone.utc)
-        while timestamp < datetime.now(tz=timezone.utc) - self.interval:
-            yield timestamp
-            timestamp += self.interval
 
 
 class _GatheringTimeSeriesProcessorBase(_TimeSeriesProcessorBase):
     """Inherit from this class when you need to collect all the data before processing"""
     async def _gather(self) -> Dict[datetime, Decimal]:
-        return await a_sync.gather({ts: self.timeseries.metric.produce(ts, sync=False) async for ts in self._timestamps()})
+        return await a_sync.gather({ts: self.query[ts] async for ts in self.query._aiter_timestamps()})

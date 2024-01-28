@@ -1,6 +1,5 @@
 
 from abc import abstractmethod, abstractproperty
-from datetime import timedelta
 from typing import TYPE_CHECKING, Optional, TypeVar
 
 from generic_exporters.processors._base import _ProcessorBase, _TimeSeriesProcessorBase
@@ -30,8 +29,6 @@ class _TimeSeriesExporterBase(_TimeSeriesProcessorBase, _ExporterBase):
         else:
             raise TypeError(datastore)
         self.datastore = datastore
-    @abstractproperty
-    def interval(self) -> timedelta:...
 
 
 class _PropertyExporterBase(_TimeSeriesExporterBase):
