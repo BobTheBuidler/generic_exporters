@@ -54,8 +54,6 @@ class TimeSeries(_TimeSeriesBase):
     @property
     def key(self) -> str:
         return self.metric.key
-    def __repr__(self) -> str:
-        return f"<{self.__class__.__name__} for {self.metric}>"
     def __add__(self, other: _types.SingleProcessable) -> "TimeSeries":
         self.__validate_other(other)
         return TimeSeries(self.metric + other.metric)
@@ -107,4 +105,3 @@ def _convert_metrics(items: Iterable[_types.SingleProcessable]) -> List[TimeSeri
         if not isinstance(items[i], TimeSeries):
             items[i] = TimeSeries(items[i])
     return items
-

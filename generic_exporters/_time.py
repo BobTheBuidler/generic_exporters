@@ -1,3 +1,5 @@
+
+from functools import cached_property
 from typing import TYPE_CHECKING, Iterable, List
 
 import a_sync
@@ -24,7 +26,7 @@ class _TimeDataBase(a_sync.ASyncGenericBase):
         sync (bool, optional): Specifies if operations should be executed synchronously. Defaults to True.
     """
     metrics: List["Metric"]
-    __slots__ = 'fields', 'sync'
+    __slots__ = 'metrics', 'sync'
     def __init__(self, fields: Iterable[_types.SingleProcessable], *, sync: bool = True) -> None:
         """Initializes a new instance of the _TimeDataBase class.
 
@@ -33,5 +35,20 @@ class _TimeDataBase(a_sync.ASyncGenericBase):
                                                          or metrics within the time series.
             sync (bool, optional): Specifies if operations should be executed synchronously. Defaults to True.
         """
-        self.metrics = list(fields)
+        # dodge a circular import
+        from generic_exporters import Metric, TimeSeries
+        self.metrics = []
+        for f in fields:
+            if isinstance(f, TimeSeries):
+                self.metrics.append(f.metric)
+            elif isinstance(f, Metric): #, Attribute): TODO
+                self.metrics.append(f)
+            else:
+                raise TypeError(f"each item in `fields` must be either `Metric` or `TimeSeries`. You passed {f}")
         self.sync = sync
+    def __repr__(self) -> str:
+        return f"<{self.__class__.__name__} for {self.keys}>"
+    @cached_property
+    def keys(self) -> List[str]:
+        """Returns a list of keys representing the fields in the dataset."""
+        return [field.key for field in self.metrics]
