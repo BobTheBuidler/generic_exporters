@@ -1,15 +1,16 @@
 
 from abc import abstractmethod
-from asyncio import Task, create_task
 from datetime import datetime
 from decimal import Decimal
-from functools import cached_property
-from typing import Dict, TypeVar
+from typing import TYPE_CHECKING, Dict, TypeVar
 
 import a_sync
 
 from generic_exporters._awaitable import _AwaitableMixin
 from generic_exporters.plan import QueryPlan
+
+if TYPE_CHECKING:
+    from generic_exporters import Metric
 
 _T = TypeVar('_T')
 
@@ -26,7 +27,7 @@ class _ProcessorBase(_AwaitableMixin[_T], a_sync.ASyncGenericBase):
         return await self.run(sync=False)
 
 
-class _TimeSeriesProcessorBase(_ProcessorBase):
+class _TimeSeriesProcessorBase(_ProcessorBase[_T]):
     def __init__(
         self, 
         query: QueryPlan, 
@@ -39,7 +40,7 @@ class _TimeSeriesProcessorBase(_ProcessorBase):
         self.query = query
 
 
-class _GatheringTimeSeriesProcessorBase(_TimeSeriesProcessorBase):
+class _GatheringTimeSeriesProcessorBase(_TimeSeriesProcessorBase[_T]):
     """Inherit from this class when you need to collect all the data before processing"""
-    async def _gather(self) -> Dict[datetime, Decimal]:
+    async def _gather(self) -> Dict[datetime, Dict["Metric", Decimal]]:
         return await a_sync.gather({ts: self.query[ts] async for ts in self.query._aiter_timestamps()})
