@@ -87,7 +87,7 @@ class _WideTimeSeries(_TimeSeriesBase, Generic[_T]):
     def __init__(self, *timeserieses: _T, sync: bool = True) -> None:
         if len(timeserieses) < 2:
             raise ValueError("You must provide 2 or more `TimeSeries` or `Metric` objects")
-        self.fields = _convert_metrics(timeserieses)
+        self.metrics = _convert_metrics(timeserieses)
         self.sync = sync
         self._rows = {}
     @property

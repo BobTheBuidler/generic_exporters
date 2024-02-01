@@ -11,4 +11,4 @@ class DummyTimeData(_TimeDataBase):
 async def test_time_data_base_init(dummy_metric):
     fields = [dummy_metric]
     time_data = DummyTimeData(fields)
-    assert time_data.fields == fields
+    assert time_data.metrics == fields
