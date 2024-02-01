@@ -22,7 +22,7 @@ class _ProcessorBase(_AwaitableMixin[_T], a_sync.ASyncGenericBase):
     @abstractmethod
     async def run(self) -> _T:
         """Runs the processor"""
-    async def _materialize(self) -> "Task[_T]":
+    async def _materialize(self) -> _T:
         return await self.run(sync=False)
 
 

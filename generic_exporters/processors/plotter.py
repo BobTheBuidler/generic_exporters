@@ -7,7 +7,7 @@ from bqplot import Axis, Figure, LinearScale, Lines
 from generic_exporters.processors._base import _GatheringTimeSeriesProcessorBase
 
 
-class Plotter(_GatheringTimeSeriesProcessorBase):
+class Plotter(_GatheringTimeSeriesProcessorBase[Figure]):
     """
     Inherit from this class to plot any `Metric` on a line chart.
 

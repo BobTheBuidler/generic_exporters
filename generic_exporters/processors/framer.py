@@ -4,7 +4,7 @@ from pandas import DataFrame
 from generic_exporters.processors._base import _GatheringTimeSeriesProcessorBase
 
 
-class DataFramer(_GatheringTimeSeriesProcessorBase):
+class DataFramer(_GatheringTimeSeriesProcessorBase[DataFrame]):
     """
     Inherit from this class to turn any `Dataset` into a pandas DataFrame.
 
