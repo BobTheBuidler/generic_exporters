@@ -35,17 +35,102 @@
 <section id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">¶</a></h2>
 </section>
-<section id="generic-exporters-processors-exporters-datastores-timeseries-multi-module">
-<h2>generic_exporters.processors.exporters.datastores.timeseries.multi module<a class="headerlink" href="#generic-exporters-processors-exporters-datastores-timeseries-multi-module" title="Link to this heading">¶</a></h2>
+<section id="module-generic_exporters.processors.exporters.datastores.timeseries.multi">
+<span id="generic-exporters-processors-exporters-datastores-timeseries-multi-module"></span><h2>generic_exporters.processors.exporters.datastores.timeseries.multi module<a class="headerlink" href="#module-generic_exporters.processors.exporters.datastores.timeseries.multi" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="generic_exporters.processors.exporters.datastores.timeseries.multi.TimeSeriesMultiDataStore">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">generic_exporters.processors.exporters.datastores.timeseries.multi.</span></span><span class="sig-name descname"><span class="pre">TimeSeriesMultiDataStore</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">datastores</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">TimeSeriesDataStoreBase</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#generic_exporters.processors.exporters.datastores.timeseries.multi.TimeSeriesMultiDataStore" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TimeSeriesDataStoreBase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="generic_exporters.processors.exporters.datastores.timeseries.multi.TimeSeriesMultiDataStore.data_exists">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">data_exists</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#generic_exporters.processors.exporters.datastores.timeseries.multi.TimeSeriesMultiDataStore.data_exists" title="Link to this definition">¶</a></dt>
+<dd><p>Returns True if the datapoint exists in all datastores, False if not.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="generic_exporters.processors.exporters.datastores.timeseries.multi.TimeSeriesMultiDataStore.push">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">push</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Decimal</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#generic_exporters.processors.exporters.datastores.timeseries.multi.TimeSeriesMultiDataStore.push" title="Link to this definition">¶</a></dt>
+<dd><p>Exports one datapoint to all datastores. NOTE: Will swallow any exceptions that may occur. They will not raise.</p>
+</dd></dl>
+
+</dd></dl>
+
 </section>
-<section id="generic-exporters-processors-exporters-datastores-timeseries-sql-module">
-<h2>generic_exporters.processors.exporters.datastores.timeseries.sql module<a class="headerlink" href="#generic-exporters-processors-exporters-datastores-timeseries-sql-module" title="Link to this heading">¶</a></h2>
+<section id="module-generic_exporters.processors.exporters.datastores.timeseries.sql">
+<span id="generic-exporters-processors-exporters-datastores-timeseries-sql-module"></span><h2>generic_exporters.processors.exporters.datastores.timeseries.sql module<a class="headerlink" href="#module-generic_exporters.processors.exporters.datastores.timeseries.sql" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="generic_exporters.processors.exporters.datastores.timeseries.sql.SQLTimeSeriesKeyValueStore">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">generic_exporters.processors.exporters.datastores.timeseries.sql.</span></span><span class="sig-name descname"><span class="pre">SQLTimeSeriesKeyValueStore</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">connection_params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#generic_exporters.processors.exporters.datastores.timeseries.sql.SQLTimeSeriesKeyValueStore" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TimeSeriesDataStoreBase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="generic_exporters.processors.exporters.datastores.timeseries.sql.SQLTimeSeriesKeyValueStore.data_exists">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">data_exists</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#generic_exporters.processors.exporters.datastores.timeseries.sql.SQLTimeSeriesKeyValueStore.data_exists" title="Link to this definition">¶</a></dt>
+<dd><p>Returns True if <cite>key</cite> returns results from your Postgres db at <cite>ts</cite>, False if not.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="generic_exporters.processors.exporters.datastores.timeseries.sql.SQLTimeSeriesKeyValueStore.push">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">push</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#generic_exporters.processors.exporters.datastores.timeseries.sql.SQLTimeSeriesKeyValueStore.push" title="Link to this definition">¶</a></dt>
+<dd><p>Exports <cite>data</cite> to Victoria Metrics using <cite>key</cite> somehow. lol</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="generic_exporters.processors.exporters.datastores.timeseries.sql.TimeSeriesKV">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">generic_exporters.processors.exporters.datastores.timeseries.sql.</span></span><span class="sig-name descname"><span class="pre">TimeSeriesKV</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#generic_exporters.processors.exporters.datastores.timeseries.sql.TimeSeriesKV" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Entity</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="generic_exporters.processors.exporters.datastores.timeseries.sql.TimeSeriesKV.count">
+<em class="property"><span class="pre">async</span><span class="w"> </span><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">count</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timestamp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#generic_exporters.processors.exporters.datastores.timeseries.sql.TimeSeriesKV.count" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="generic_exporters.processors.exporters.datastores.timeseries.sql.TimeSeriesKV.insert">
+<em class="property"><span class="pre">async</span><span class="w"> </span><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">insert</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timestamp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#generic_exporters.processors.exporters.datastores.timeseries.sql.TimeSeriesKV.insert" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="generic_exporters.processors.exporters.datastores.timeseries.sql.TimeSeriesKV.key">
+<span class="sig-name descname"><span class="pre">key</span></span><a class="headerlink" href="#generic_exporters.processors.exporters.datastores.timeseries.sql.TimeSeriesKV.key" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="generic_exporters.processors.exporters.datastores.timeseries.sql.TimeSeriesKV.timestamp">
+<span class="sig-name descname"><span class="pre">timestamp</span></span><a class="headerlink" href="#generic_exporters.processors.exporters.datastores.timeseries.sql.TimeSeriesKV.timestamp" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="generic_exporters.processors.exporters.datastores.timeseries.sql.TimeSeriesKV.value">
+<span class="sig-name descname"><span class="pre">value</span></span><a class="headerlink" href="#generic_exporters.processors.exporters.datastores.timeseries.sql.TimeSeriesKV.value" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
 </section>
-<section id="generic-exporters-processors-exporters-datastores-timeseries-victoria-module">
-<h2>generic_exporters.processors.exporters.datastores.timeseries.victoria module<a class="headerlink" href="#generic-exporters-processors-exporters-datastores-timeseries-victoria-module" title="Link to this heading">¶</a></h2>
+<section id="module-generic_exporters.processors.exporters.datastores.timeseries.victoria">
+<span id="generic-exporters-processors-exporters-datastores-timeseries-victoria-module"></span><h2>generic_exporters.processors.exporters.datastores.timeseries.victoria module<a class="headerlink" href="#module-generic_exporters.processors.exporters.datastores.timeseries.victoria" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="generic_exporters.processors.exporters.datastores.timeseries.victoria.VictoriaMetrics">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">generic_exporters.processors.exporters.datastores.timeseries.victoria.</span></span><span class="sig-name descname"><span class="pre">VictoriaMetrics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key_label_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">LabelName</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extra_labels</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">LabelName</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">LabelValue</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#generic_exporters.processors.exporters.datastores.timeseries.victoria.VictoriaMetrics" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TimeSeriesDataStoreBase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="generic_exporters.processors.exporters.datastores.timeseries.victoria.VictoriaMetrics.data_exists">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">data_exists</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">LabelValue</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#generic_exporters.processors.exporters.datastores.timeseries.victoria.VictoriaMetrics.data_exists" title="Link to this definition">¶</a></dt>
+<dd><p>Returns True if <cite>data_query</cite> returns results from your Victoria Metrics db, False if not.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="generic_exporters.processors.exporters.datastores.timeseries.victoria.VictoriaMetrics.push">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">push</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">LabelValue</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Decimal</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#generic_exporters.processors.exporters.datastores.timeseries.victoria.VictoriaMetrics.push" title="Link to this definition">¶</a></dt>
+<dd><p>Exports <cite>data</cite> to Victoria Metrics using <cite>key</cite> somehow. lol</p>
+</dd></dl>
+
+</dd></dl>
+
 </section>
-<section id="module-contents">
-<h2>Module contents<a class="headerlink" href="#module-contents" title="Link to this heading">¶</a></h2>
+<section id="module-generic_exporters.processors.exporters.datastores.timeseries">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-generic_exporters.processors.exporters.datastores.timeseries" title="Link to this heading">¶</a></h2>
 </section>
 </section>
 

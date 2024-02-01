@@ -41,16 +41,29 @@
 <li class="toctree-l3"><a class="reference internal" href="generic_exporters.processors.exporters.html">generic_exporters.processors.exporters package</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="generic_exporters.processors.exporters.html#subpackages">Subpackages</a></li>
 <li class="toctree-l4"><a class="reference internal" href="generic_exporters.processors.exporters.html#submodules">Submodules</a></li>
-<li class="toctree-l4"><a class="reference internal" href="generic_exporters.processors.exporters.html#generic-exporters-processors-exporters-exporter-module">generic_exporters.processors.exporters.exporter module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="generic_exporters.processors.exporters.html#module-contents">Module contents</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generic_exporters.processors.exporters.html#module-generic_exporters.processors.exporters.exporter">generic_exporters.processors.exporters.exporter module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generic_exporters.processors.exporters.html#module-generic_exporters.processors.exporters">Module contents</a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="generic_exporters.processors.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="generic_exporters.processors.html#generic-exporters-processors-framer-module">generic_exporters.processors.framer module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="generic_exporters.processors.html#generic-exporters-processors-plotter-module">generic_exporters.processors.plotter module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="generic_exporters.processors.html#module-contents">Module contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generic_exporters.processors.html#module-generic_exporters.processors.framer">generic_exporters.processors.framer module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generic_exporters.processors.html#generic_exporters.processors.framer.DataFramer"><code class="docutils literal notranslate"><span class="pre">DataFramer</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generic_exporters.processors.html#generic_exporters.processors.framer.DataFramer.run"><code class="docutils literal notranslate"><span class="pre">DataFramer.run()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="generic_exporters.processors.html#module-generic_exporters.processors.plotter">generic_exporters.processors.plotter module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generic_exporters.processors.html#generic_exporters.processors.plotter.Plotter"><code class="docutils literal notranslate"><span class="pre">Plotter</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generic_exporters.processors.html#generic_exporters.processors.plotter.Plotter.plot"><code class="docutils literal notranslate"><span class="pre">Plotter.plot()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="generic_exporters.processors.html#generic_exporters.processors.plotter.Plotter.run"><code class="docutils literal notranslate"><span class="pre">Plotter.run()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="generic_exporters.processors.html#module-generic_exporters.processors">Module contents</a></li>
 </ul>
 </li>
 </ul>
@@ -59,20 +72,307 @@
 <section id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">¶</a></h2>
 </section>
-<section id="generic-exporters-dataset-module">
-<h2>generic_exporters.dataset module<a class="headerlink" href="#generic-exporters-dataset-module" title="Link to this heading">¶</a></h2>
+<section id="module-generic_exporters.dataset">
+<span id="generic-exporters-dataset-module"></span><h2>generic_exporters.dataset module<a class="headerlink" href="#module-generic_exporters.dataset" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="generic_exporters.dataset.Dataset">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">generic_exporters.dataset.</span></span><span class="sig-name descname"><span class="pre">Dataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">_DT</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#generic_exporters.dataset.Dataset" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ASyncGenericBase</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">datetime</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">_DT</span></code>]</p>
+<p>A container for time series data, supporting various operations.</p>
+<p>This class extends the standard Python dictionary to create a specialized
+container for time series data. It is keyed by datetime objects and can
+hold TimeSeries, WideTimeSeries, or TimeDataRow instances as values. The
+Dataset class provides methods for plotting, exporting to CSV, and other
+operations useful in handling time series data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Dict</strong><strong>[</strong><strong>datetime</strong> – Inherits from the standard dictionary with datetime
+keys and values of type TimeSeries, WideTimeSeries,
+or TimeDataRow.</p></li>
+<li><p><strong>_DT</strong><strong>]</strong> – Inherits from the standard dictionary with datetime
+keys and values of type TimeSeries, WideTimeSeries,
+or TimeDataRow.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="generic_exporters.dataset.Dataset.export">
+<span class="sig-name descname"><span class="pre">export</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">datastore</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#generic_exporters.dataset.Dataset.export" title="Link to this definition">¶</a></dt>
+<dd><p>Exports the dataset to a specified datastore.</p>
+<p>This method is intended to provide a way to export the time series data
+contained within the Dataset to an external datastore.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>datastore</strong> – The target datastore to which the Dataset should be exported.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="generic_exporters.dataset.Dataset.plot">
+<span class="sig-name descname"><span class="pre">plot</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Figure</span></span></span><a class="headerlink" href="#generic_exporters.dataset.Dataset.plot" title="Link to this definition">¶</a></dt>
+<dd><p>Generates a plot for the dataset.</p>
+<p>This method is intended to provide a quick visualization of the time series
+data contained within the Dataset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>an object containing the plotted data.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Figure</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="generic_exporters.dataset.Dataset.to_csv">
+<span class="sig-name descname"><span class="pre">to_csv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">to_csv_args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">to_csv_kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#generic_exporters.dataset.Dataset.to_csv" title="Link to this definition">¶</a></dt>
+<dd><p>Exports the dataset to a CSV file.</p>
+<p>This method is intended to provide a way to export the time series data
+contained within the Dataset to a CSV file.</p>
+</dd></dl>
+
+</dd></dl>
+
 </section>
-<section id="generic-exporters-metric-module">
-<h2>generic_exporters.metric module<a class="headerlink" href="#generic-exporters-metric-module" title="Link to this heading">¶</a></h2>
+<section id="module-generic_exporters.metric">
+<span id="generic-exporters-metric-module"></span><h2>generic_exporters.metric module<a class="headerlink" href="#module-generic_exporters.metric" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="generic_exporters.metric.Constant">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">generic_exporters.metric.</span></span><span class="sig-name descname"><span class="pre">Constant</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">_T</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#generic_exporters.metric.Constant" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#generic_exporters.metric.Metric" title="generic_exporters.metric.Metric"><code class="xref py py-class docutils literal notranslate"><span class="pre">Metric</span></code></a></p>
+<p>A <cite>Constant</cite> is a <cite>Metric</cite> object that produces the same result at any given timestamp.
+These are used to perform math operations between a <cite>Metric</cite> object and a constant value to create a new <cite>Metric</cite> object that represents the result of the operation.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="generic_exporters.metric.Constant.key">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">key</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#generic_exporters.metric.Constant.key" title="Link to this definition">¶</a></dt>
+<dd><p>A human-readable label for the metric being exported that will also be used as a unique key to identify this <cite>Metric</cite> in the datastore</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="generic_exporters.metric.Constant.produce">
+<span class="sig-name descname"><span class="pre">produce</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timestamp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Decimal</span></span></span><a class="headerlink" href="#generic_exporters.metric.Constant.produce" title="Link to this definition">¶</a></dt>
+<dd><p>Computes and returns the measurement at <cite>timestamp</cite> for this particular <cite>Metric</cite></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="generic_exporters.metric.Metric">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">generic_exporters.metric.</span></span><span class="sig-name descname"><span class="pre">Metric</span></span><a class="headerlink" href="#generic_exporters.metric.Metric" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_MathableBase</span></code></p>
+<dl class="py property">
+<dt class="sig sig-object py" id="generic_exporters.metric.Metric.key">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">key</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#generic_exporters.metric.Metric.key" title="Link to this definition">¶</a></dt>
+<dd><p>A human-readable label for the metric being exported that will also be used as a unique key to identify this <cite>Metric</cite> in the datastore</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="generic_exporters.metric.Metric.produce">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">produce</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timestamp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Decimal</span></span></span><a class="headerlink" href="#generic_exporters.metric.Metric.produce" title="Link to this definition">¶</a></dt>
+<dd><p>Computes and returns the measurement at <cite>timestamp</cite> for this particular <cite>Metric</cite></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="generic_exporters.metric.Metric.sync">
+<span class="sig-name descname"><span class="pre">sync</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#generic_exporters.metric.Metric.sync" title="Link to this definition">¶</a></dt>
+<dd><p>A <cite>Metric</cite> represents a numeric measurement taken periodically over time. It contains the logic for taking that measurement at a specific timestamp and generating a unique key for the result.</p>
+<p>You can perform math operations on two <cite>Metric</cite> objects, the result will be a new <cite>Metric</cite> that can produce the result of the math operation between the two input <a href="#id1"><span class="problematic" id="id2">`</span></a>Metric`s at any given timestamp.</p>
+<p>You can also slice a <cite>Metric</cite> object to return a <cite>Timeseries</cite> future-like object that can materialize data for a specific time range and perform operations with the outputs.</p>
+</dd></dl>
+
+</dd></dl>
+
 </section>
-<section id="generic-exporters-plan-module">
-<h2>generic_exporters.plan module<a class="headerlink" href="#generic-exporters-plan-module" title="Link to this heading">¶</a></h2>
+<section id="module-generic_exporters.plan">
+<span id="generic-exporters-plan-module"></span><h2>generic_exporters.plan module<a class="headerlink" href="#module-generic_exporters.plan" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="generic_exporters.plan.QueryPlan">
+<em class="property"><span class="pre">final</span><span class="w"> </span><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">generic_exporters.plan.</span></span><span class="sig-name descname"><span class="pre">QueryPlan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#generic_exporters.timeseries.TimeSeries" title="generic_exporters.timeseries.TimeSeries"><span class="pre">TimeSeries</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#generic_exporters.timeseries.WideTimeSeries" title="generic_exporters.timeseries.WideTimeSeries"><span class="pre">WideTimeSeries</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_timestamp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Awaitable</span><span class="p"><span class="pre">[</span></span><span class="pre">datetime</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_timestamp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interval</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">timedelta</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sync</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#generic_exporters.plan.QueryPlan" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_TimeDataBase</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">ASyncIterable</span></code>[TimeDataRow], <code class="xref py py-class docutils literal notranslate"><span class="pre">_AwaitableMixin</span></code>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">_T</span></code>]</p>
+<p>Represents a plan for querying time series data within a specified range.</p>
+<p>This class encapsulates the logic for generating and executing a plan to query
+time series data. It supports asynchronous iteration over the generated data points
+and provides methods for plotting and converting the data to a pandas DataFrame.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="generic_exporters.plan.QueryPlan.dataset">
+<span class="sig-name descname"><span class="pre">dataset</span></span><a class="headerlink" href="#generic_exporters.plan.QueryPlan.dataset" title="Link to this definition">¶</a></dt>
+<dd><p>The dataset to be queried.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Union[<a class="reference internal" href="#generic_exporters.timeseries.TimeSeries" title="generic_exporters.timeseries.TimeSeries">TimeSeries</a>, <a class="reference internal" href="#generic_exporters.timeseries.WideTimeSeries" title="generic_exporters.timeseries.WideTimeSeries">WideTimeSeries</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="generic_exporters.plan.QueryPlan.start_timestamp">
+<span class="sig-name descname"><span class="pre">start_timestamp</span></span><a class="headerlink" href="#generic_exporters.plan.QueryPlan.start_timestamp" title="Link to this definition">¶</a></dt>
+<dd><p>The start of the query range.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>LooseDatetime</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="generic_exporters.plan.QueryPlan.end_timestamp">
+<span class="sig-name descname"><span class="pre">end_timestamp</span></span><a class="headerlink" href="#generic_exporters.plan.QueryPlan.end_timestamp" title="Link to this definition">¶</a></dt>
+<dd><p>The end of the query range.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>datetime</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="generic_exporters.plan.QueryPlan.interval">
+<span class="sig-name descname"><span class="pre">interval</span></span><a class="headerlink" href="#generic_exporters.plan.QueryPlan.interval" title="Link to this definition">¶</a></dt>
+<dd><p>The interval between data points in the query.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>timedelta</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="generic_exporters.plan.QueryPlan.sync">
+<span class="sig-name descname"><span class="pre">sync</span></span><a class="headerlink" href="#generic_exporters.plan.QueryPlan.sync" title="Link to this definition">¶</a></dt>
+<dd><p>A flag indicating whether operations should be performed synchronously or asynchronously.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dataset</strong> (<em>Union</em><em>[</em><a class="reference internal" href="#generic_exporters.timeseries.TimeSeries" title="generic_exporters.timeseries.TimeSeries"><em>TimeSeries</em></a><em>, </em><a class="reference internal" href="#generic_exporters.timeseries.WideTimeSeries" title="generic_exporters.timeseries.WideTimeSeries"><em>WideTimeSeries</em></a><em>]</em>) – The dataset to be queried.</p></li>
+<li><p><strong>start_timestamp</strong> (<em>LooseDatetime</em>) – The start of the query range.</p></li>
+<li><p><strong>end_timestamp</strong> (<em>datetime</em>) – The end of the query range.</p></li>
+<li><p><strong>interval</strong> (<em>timedelta</em>) – The interval between data points in the query.</p></li>
+<li><p><strong>sync</strong> (<em>bool</em><em>, </em><em>optional</em>) – Specifies if operations should be executed synchronously. Defaults to True.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="generic_exporters.plan.QueryPlan.dataframe">
+<span class="sig-name descname"><span class="pre">dataframe</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="headerlink" href="#generic_exporters.plan.QueryPlan.dataframe" title="Link to this definition">¶</a></dt>
+<dd><p>Converts the queried data to a pandas DataFrame.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A pandas DataFrame representing the queried time series data.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="generic_exporters.plan.QueryPlan.metrics">
+<span class="sig-name descname"><span class="pre">metrics</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'Metric'</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#generic_exporters.plan.QueryPlan.metrics" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="generic_exporters.plan.QueryPlan.plot">
+<span class="sig-name descname"><span class="pre">plot</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Figure</span></span></span><a class="headerlink" href="#generic_exporters.plan.QueryPlan.plot" title="Link to this definition">¶</a></dt>
+<dd><p>Generates a plot for the queried data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A plot representing the queried time series data.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Figure</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id0">
+<span class="sig-name descname"><span class="pre">start_timestamp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">datetime</span></span></span><a class="headerlink" href="#id0" title="Link to this definition">¶</a></dt>
+<dd><p>Computes the start timestamp for the query, handling asynchronous resolution if necessary.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id3">
+<span class="sig-name descname"><span class="pre">sync</span></span><a class="headerlink" href="#id3" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="generic_exporters.plan.TimeDataRow">
+<em class="property"><span class="pre">final</span><span class="w"> </span><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">generic_exporters.plan.</span></span><span class="sig-name descname"><span class="pre">TimeDataRow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timestamp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fields</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#generic_exporters.metric.Metric" title="generic_exporters.metric.Metric"><span class="pre">Metric</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#generic_exporters.timeseries.TimeSeries" title="generic_exporters.timeseries.TimeSeries"><span class="pre">TimeSeries</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sync</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#generic_exporters.plan.TimeDataRow" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_TimeDataBase</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">_AwaitableMixin</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Metric</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Decimal</span></code>]]</p>
+<p>A future-like class that can be awaited to materialize results</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="generic_exporters.plan.TimeDataRow.key">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">key</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">datetime</span></em><a class="headerlink" href="#generic_exporters.plan.TimeDataRow.key" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="generic_exporters.plan.TimeDataRow.timestamp">
+<span class="sig-name descname"><span class="pre">timestamp</span></span><a class="headerlink" href="#generic_exporters.plan.TimeDataRow.timestamp" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
 </section>
-<section id="generic-exporters-timeseries-module">
-<h2>generic_exporters.timeseries module<a class="headerlink" href="#generic-exporters-timeseries-module" title="Link to this heading">¶</a></h2>
+<section id="module-generic_exporters.timeseries">
+<span id="generic-exporters-timeseries-module"></span><h2>generic_exporters.timeseries module<a class="headerlink" href="#module-generic_exporters.timeseries" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="generic_exporters.timeseries.TimeSeries">
+<em class="property"><span class="pre">final</span><span class="w"> </span><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">generic_exporters.timeseries.</span></span><span class="sig-name descname"><span class="pre">TimeSeries</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">metric</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#generic_exporters.metric.Metric" title="generic_exporters.metric.Metric"><span class="pre">Metric</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sync</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#generic_exporters.timeseries.TimeSeries" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_TimeSeriesBase</span></code></p>
+<p>An object representing the infinite series of values for a particular <cite>Metric</cite> across the time axis.
+NOTE: Imagine a line chart with a single line that has yet to be drawn.</p>
+<p>You can slice a <cite>TimeSeries</cite> object to create a <cite>Dataset</cite> which can be used for exporting, plotting, and other fun things #NOTE: not yet implemented</p>
+<p>tcollection of asyncio.Tasks that each will return one datapoint for a specific timestamp for a <cite>Metric</cite> object.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="generic_exporters.timeseries.TimeSeries.key">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">key</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#generic_exporters.timeseries.TimeSeries.key" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="generic_exporters.timeseries.TimeSeries.metrics">
+<span class="sig-name descname"><span class="pre">metrics</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'Metric'</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#generic_exporters.timeseries.TimeSeries.metrics" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="generic_exporters.timeseries.TimeSeries.sync">
+<span class="sig-name descname"><span class="pre">sync</span></span><a class="headerlink" href="#generic_exporters.timeseries.TimeSeries.sync" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="generic_exporters.timeseries.WideTimeSeries">
+<em class="property"><span class="pre">final</span><span class="w"> </span><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">generic_exporters.timeseries.</span></span><span class="sig-name descname"><span class="pre">WideTimeSeries</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">timeserieses</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">_T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sync</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#generic_exporters.timeseries.WideTimeSeries" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_WideTimeSeries</span></code>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Metric</span></code>, <a class="reference internal" href="#generic_exporters.timeseries.TimeSeries" title="generic_exporters.timeseries.TimeSeries"><code class="xref py py-class docutils literal notranslate"><span class="pre">TimeSeries</span></code></a>]]</p>
+<p>A collection of <cite>TimeSeries</cite> objects
+NOTE: Imagine a line chart with multiple lines that have yet to be drawn</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="generic_exporters.timeseries.WideTimeSeries.metrics">
+<span class="sig-name descname"><span class="pre">metrics</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'Metric'</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#generic_exporters.timeseries.WideTimeSeries.metrics" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="generic_exporters.timeseries.WideTimeSeries.sync">
+<span class="sig-name descname"><span class="pre">sync</span></span><a class="headerlink" href="#generic_exporters.timeseries.WideTimeSeries.sync" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
 </section>
-<section id="module-contents">
-<h2>Module contents<a class="headerlink" href="#module-contents" title="Link to this heading">¶</a></h2>
+<section id="module-generic_exporters">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-generic_exporters" title="Link to this heading">¶</a></h2>
 </section>
 </section>
 
