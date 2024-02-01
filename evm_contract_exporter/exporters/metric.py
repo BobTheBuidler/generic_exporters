@@ -52,7 +52,7 @@ class ContractMetricExporter(TimeSeriesExporter):
     async def ensure_data(self, ts: datetime) -> None:
         exists = await self.data_exists(ts, sync=False)
         if all(exists):
-            logger.debug('complete data for %s already exists in datastore', self)
+            logger.debug('complete data for %s at %s already exists in datastore', self, ts)
             return
         elif any(exists):
             data = await a_sync.gather(
