@@ -2,6 +2,7 @@
 import asyncio
 from abc import abstractmethod
 from datetime import datetime, timedelta
+from typing import List
 
 from generic_exporters.plan import QueryPlan
 from generic_exporters.processors.exporters._base import _TimeSeriesExporterBase
@@ -22,12 +23,23 @@ class TimeSeriesExporter(_TimeSeriesExporterBase):
     async def data_exists(self, timestamp: datetime) -> bool:
         """Returns True if data exists at `timestamp`, False if it does not and must be exported."""
 
-    async def run(self) -> None:
+    async def run(self, run_forever: bool = False) -> None:
         """Exports the full history for this exporter's `Metric` to the datastore"""
-        await asyncio.gather(*[asyncio.create_task(self.ensure_data(ts, sync=False)) async for ts in self.query._aiter_timestamps()])
+        tasks: List[asyncio.Task] = []
+        async for ts in self.query._aiter_timestamps(run_forever):
+            tasks.append(asyncio.create_task(self.ensure_data(ts, sync=False)))
+            await self._prune_running(tasks)
+        # runs if `run_forever` is False
+        for t in asyncio.as_completed(tasks):
+            await t
 
     async def ensure_data(self, ts: datetime) -> None:
         if not await self.data_exists(ts, sync=False):
-            data = self.query[ts]
-            data = await data
+            data = await self.query[ts]
             await asyncio.gather(*[self.datastore.push(key, ts, value) for key, value in data.items()])
+
+    async def _prune_running(self, running_tasks: List[asyncio.Task]) -> None:
+        for t in running_tasks[:]:
+            if t.done():
+                await t
+                running_tasks.remove(t)
