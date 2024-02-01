@@ -1,4 +1,5 @@
 bqplot
 ez-a-sync>=0.12.8,<1
+inflection>=0.3.0
 pandas
 ypricemagic>=3.1.1,<4
