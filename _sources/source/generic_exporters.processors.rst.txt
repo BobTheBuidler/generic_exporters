@@ -1,0 +1,37 @@
+generic\_exporters.processors package
+=====================================
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   generic_exporters.processors.exporters
+
+Submodules
+----------
+
+generic\_exporters.processors.framer module
+-------------------------------------------
+
+.. automodule:: generic_exporters.processors.framer
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+generic\_exporters.processors.plotter module
+--------------------------------------------
+
+.. automodule:: generic_exporters.processors.plotter
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: generic_exporters.processors
+   :members:
+   :undoc-members:
+   :show-inheritance:
