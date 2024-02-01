@@ -36,7 +36,7 @@ class ContractMetricExporter(TimeSeriesExporter):
         sync: bool = True,
     ) -> None:
         datastore = datastore or GenericContractTimeSeriesKeyValueStore(chainid)
-        if not len({field.address for field in timeseries.fields}) == 1:
+        if not len({field.address for field in timeseries.metrics}) == 1:
             raise ValueError("all metrics must share an address")
         query = timeseries[self.start_timestamp(sync=False):None:interval]
         super().__init__(query, datastore, buffer=buffer, sync=sync)
@@ -47,19 +47,19 @@ class ContractMetricExporter(TimeSeriesExporter):
         return f"<{self.__class__.__name__} for {self.query}>"
     
     async def data_exists(self, ts: datetime) -> List[bool]:
-        return await asyncio.gather(*[self.datastore.data_exists(field.address, field.key, ts) for field in self.query.fields])
+        return await asyncio.gather(*[self.datastore.data_exists(field.address, field.key, ts) for field in self.query.metrics])
 
     async def ensure_data(self, ts: datetime) -> None:
         exists = await self.data_exists(ts, sync=False)
         if all(exists):
-            logger.debug('data for %s already exists in datastore', self)
+            logger.debug('complete data for %s already exists in datastore', self)
             return
         elif any(exists):
             data = await a_sync.gather(
                 {
-                    field: field.metric.produce(ts, sync=False) 
+                    field: field.produce(ts, sync=False) 
                     for field, field_exists
-                    in zip(self.query.fields, exists)
+                    in zip(self.query.metrics, exists)
                     if not field_exists
                 }, 
                 return_exceptions=True,
@@ -71,14 +71,14 @@ class ContractMetricExporter(TimeSeriesExporter):
         if data:
             raise_if_exception_in(
                 await asyncio.gather(
-                    *[self.datastore.push(field.address, field.key, ts, value) for field, value in data.items()], 
+                    *[self.datastore.push(field.address, field.key, ts, value) for field, value in data.items() if value is not None], 
                     return_exceptions=True,
                 )
             )
 
     @eth_retry.auto_retry
     async def start_timestamp(self) -> datetime:
-        earliest_deploy_block = min(await asyncio.gather(*[utils.get_deploy_block(field.address) for field in self.query.fields]))
+        earliest_deploy_block = min(await asyncio.gather(*[utils.get_deploy_block(field.address) for field in self.query.metrics]))
         deploy_timestamp = datetime.fromtimestamp(await get_block_timestamp_async(earliest_deploy_block), tz=timezone.utc)
         iseconds = self.query.interval.total_seconds()
         rounded_down = datetime.fromtimestamp(deploy_timestamp.timestamp() // iseconds * iseconds, tz=timezone.utc)

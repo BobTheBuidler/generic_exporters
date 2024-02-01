@@ -13,9 +13,9 @@ from brownie.convert.datatypes import ReturnValue
 from brownie.network.contract import ContractCall
 from datetime import timedelta
 from generic_exporters import Metric, TimeSeries
-from y import ERC20, contract_creation_block_async
+from y import ERC20, get_block_at_timestamp
 
-from evm_contract_exporter import _math, scale, types, utils
+from evm_contract_exporter import _exceptions, _math, scale, types, utils
 
 
 logger = logging.getLogger(__name__)
@@ -127,7 +127,10 @@ class ContractCallMetric(ContractCall, _ContractCallMetricBase):
         """Maintains the async monkey-patching done by dank_mids on the original ContractCall object"""
         retval = await self._original_call.coroutine(*args, **kwargs)
         return self._output_type(retval) if self._should_wrap_output else retval
-    async def produce(self, timestamp: datetime) -> Decimal:
+    async def produce(self, timestamp: datetime) -> Optional[Decimal]:
+        if await get_block_at_timestamp(timestamp, sync=False) < await utils.get_deploy_block(self.address):
+            logger.debug("%s was not yet deployed at %s", self, timestamp)
+            return None
         if self._dependants:
             if timestamp not in self._cache:
                 self._cache[timestamp] = [self._dependants, asyncio.create_task(self.__produce(timestamp))]
@@ -162,15 +165,11 @@ class ContractCallMetric(ContractCall, _ContractCallMetricBase):
         if len(self._outputs) == 1 and 'components' not in self._outputs[0]:
             try:
                 return types.lookup(self._outputs[0]['type'])
-            except NotImplementedError as e:
-                raise NotImplementedError(e, self, self._outputs) from e
+            except _exceptions.FixMe:
+                raise _exceptions.FixMe("cannot export tuple type", self._outputs)
         if self._returns_tuple_type or self._returns_struct_type:
-            try:
-                return tuple(types.lookup(self._outputs[i]["type"]) for i in range(len(self._outputs)))
-            except NotImplementedError as e:
-                raise NotImplementedError(e, self, self._outputs) from e
+            return tuple(types.lookup(self._outputs[i]["type"]) for i in range(len(self._outputs)))
         raise NotImplementedError(self, self._outputs)
-            
     @cached_property
     def _should_wrap_output(self) -> bool:
         return not isinstance(self._output_type, tuple)
