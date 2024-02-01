@@ -26,6 +26,7 @@ jobs:
 
       - name: Build documentation config
         run: |
+          pip install .
           make docs
 
       - name: Build documentation
