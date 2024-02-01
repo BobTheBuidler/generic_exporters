@@ -19,6 +19,7 @@ jobs:
 
       - name: Install dependencies
         run: |
+          pip install --no-build-isolation "Cython<3" "pyyaml==5.4.1"
           pip install -r requirements.txt
           pip install sphinx
 
