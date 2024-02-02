@@ -40,17 +40,17 @@
 <li class="toctree-l2"><a class="reference internal" href="generic_exporters.processors.exporters.datastores.html#subpackages">Subpackages</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="generic_exporters.processors.exporters.datastores.timeseries.html">generic_exporters.processors.exporters.datastores.timeseries package</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="generic_exporters.processors.exporters.datastores.timeseries.html#submodules">Submodules</a></li>
-<li class="toctree-l4"><a class="reference internal" href="generic_exporters.processors.exporters.datastores.timeseries.html#module-generic_exporters.processors.exporters.datastores.timeseries.multi">generic_exporters.processors.exporters.datastores.timeseries.multi module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="generic_exporters.processors.exporters.datastores.timeseries.html#module-generic_exporters.processors.exporters.datastores.timeseries.sql">generic_exporters.processors.exporters.datastores.timeseries.sql module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="generic_exporters.processors.exporters.datastores.timeseries.html#module-generic_exporters.processors.exporters.datastores.timeseries.victoria">generic_exporters.processors.exporters.datastores.timeseries.victoria module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="generic_exporters.processors.exporters.datastores.timeseries.html#module-generic_exporters.processors.exporters.datastores.timeseries">Module contents</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generic_exporters.processors.exporters.datastores.timeseries.html#generic-exporters-processors-exporters-datastores-timeseries-multi-module">generic_exporters.processors.exporters.datastores.timeseries.multi module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generic_exporters.processors.exporters.datastores.timeseries.html#generic-exporters-processors-exporters-datastores-timeseries-sql-module">generic_exporters.processors.exporters.datastores.timeseries.sql module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generic_exporters.processors.exporters.datastores.timeseries.html#generic-exporters-processors-exporters-datastores-timeseries-victoria-module">generic_exporters.processors.exporters.datastores.timeseries.victoria module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generic_exporters.processors.exporters.datastores.timeseries.html#module-contents">Module contents</a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="generic_exporters.processors.exporters.datastores.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="generic_exporters.processors.exporters.datastores.html#module-generic_exporters.processors.exporters.datastores.default">generic_exporters.processors.exporters.datastores.default module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="generic_exporters.processors.exporters.datastores.html#module-generic_exporters.processors.exporters.datastores">Module contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generic_exporters.processors.exporters.datastores.html#generic-exporters-processors-exporters-datastores-default-module">generic_exporters.processors.exporters.datastores.default module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generic_exporters.processors.exporters.datastores.html#module-contents">Module contents</a></li>
 </ul>
 </li>
 </ul>
@@ -59,61 +59,11 @@
 <section id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">¶</a></h2>
 </section>
-<section id="module-generic_exporters.processors.exporters.exporter">
-<span id="generic-exporters-processors-exporters-exporter-module"></span><h2>generic_exporters.processors.exporters.exporter module<a class="headerlink" href="#module-generic_exporters.processors.exporters.exporter" title="Link to this heading">¶</a></h2>
-<dl class="py class">
-<dt class="sig sig-object py" id="generic_exporters.processors.exporters.exporter.TimeSeriesExporter">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">generic_exporters.processors.exporters.exporter.</span></span><span class="sig-name descname"><span class="pre">TimeSeriesExporter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="generic_exporters.html#generic_exporters.plan.QueryPlan" title="generic_exporters.plan.QueryPlan"><span class="pre">QueryPlan</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">datastore</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">TimeSeriesDataStoreBase</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">buffer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">timedelta</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">datetime.timedelta(seconds=300)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sync</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#generic_exporters.processors.exporters.exporter.TimeSeriesExporter" title="Link to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_TimeSeriesExporterBase</span></code></p>
-<p>Inherit from this class to export the history of any <cite>Metric</cite> to a datastore of your choice.</p>
-<p>You must define a start_timestamp method that will determine the start of the historical range, and a data_exists method that determines whether or not the datastore already contains data for the <cite>Metric</cite> at a particular timestamp. This class will handle the rest.</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="generic_exporters.processors.exporters.exporter.TimeSeriesExporter.data_exists">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">data_exists</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timestamp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#generic_exporters.processors.exporters.exporter.TimeSeriesExporter.data_exists" title="Link to this definition">¶</a></dt>
-<dd><p>Returns True if data exists at <cite>timestamp</cite>, False if it does not and must be exported.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="generic_exporters.processors.exporters.exporter.TimeSeriesExporter.ensure_data">
-<span class="sig-name descname"><span class="pre">ensure_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#generic_exporters.processors.exporters.exporter.TimeSeriesExporter.ensure_data" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="generic_exporters.processors.exporters.exporter.TimeSeriesExporter.run">
-<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">run_forever</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#generic_exporters.processors.exporters.exporter.TimeSeriesExporter.run" title="Link to this definition">¶</a></dt>
-<dd><p>Exports the full history for this exporter’s <cite>Metric</cite> to the datastore</p>
-</dd></dl>
-
-</dd></dl>
-
+<section id="generic-exporters-processors-exporters-exporter-module">
+<h2>generic_exporters.processors.exporters.exporter module<a class="headerlink" href="#generic-exporters-processors-exporters-exporter-module" title="Link to this heading">¶</a></h2>
 </section>
-<section id="module-generic_exporters.processors.exporters">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-generic_exporters.processors.exporters" title="Link to this heading">¶</a></h2>
-<dl class="py class">
-<dt class="sig sig-object py" id="generic_exporters.processors.exporters.TimeSeriesExporter">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">generic_exporters.processors.exporters.</span></span><span class="sig-name descname"><span class="pre">TimeSeriesExporter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="generic_exporters.html#generic_exporters.plan.QueryPlan" title="generic_exporters.plan.QueryPlan"><span class="pre">QueryPlan</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">datastore</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">TimeSeriesDataStoreBase</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">buffer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">timedelta</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">datetime.timedelta(seconds=300)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sync</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#generic_exporters.processors.exporters.TimeSeriesExporter" title="Link to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_TimeSeriesExporterBase</span></code></p>
-<p>Inherit from this class to export the history of any <cite>Metric</cite> to a datastore of your choice.</p>
-<p>You must define a start_timestamp method that will determine the start of the historical range, and a data_exists method that determines whether or not the datastore already contains data for the <cite>Metric</cite> at a particular timestamp. This class will handle the rest.</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="generic_exporters.processors.exporters.TimeSeriesExporter.data_exists">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">data_exists</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timestamp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#generic_exporters.processors.exporters.TimeSeriesExporter.data_exists" title="Link to this definition">¶</a></dt>
-<dd><p>Returns True if data exists at <cite>timestamp</cite>, False if it does not and must be exported.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="generic_exporters.processors.exporters.TimeSeriesExporter.ensure_data">
-<span class="sig-name descname"><span class="pre">ensure_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#generic_exporters.processors.exporters.TimeSeriesExporter.ensure_data" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="generic_exporters.processors.exporters.TimeSeriesExporter.run">
-<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">run_forever</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#generic_exporters.processors.exporters.TimeSeriesExporter.run" title="Link to this definition">¶</a></dt>
-<dd><p>Exports the full history for this exporter’s <cite>Metric</cite> to the datastore</p>
-</dd></dl>
-
-</dd></dl>
-
+<section id="module-contents">
+<h2>Module contents<a class="headerlink" href="#module-contents" title="Link to this heading">¶</a></h2>
 </section>
 </section>
 
