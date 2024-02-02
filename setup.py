@@ -1,5 +1,8 @@
 from setuptools import find_packages, setup
 
+with open("requirements.txt", "r") as f:
+    requirements = list(map(str.strip, f.read().split("\n")))[:-1]
+
 setup(
     name='generic_exporters',
     packages=find_packages(),
@@ -14,6 +17,7 @@ setup(
     author_email='bobthebuidlerdefi@gmail.com',
     url='https://github.com/BobTheBuidler/generic_exporters',
     license='MIT',
+    install_requires=requirements,
     setup_requires=[
         'setuptools_scm',
     ],
