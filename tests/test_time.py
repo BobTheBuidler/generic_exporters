@@ -2,7 +2,7 @@
 import pytest
 from generic_exporters._time import _TimeDataBase
 
-from fixtures import *
+from tests.fixtures import *
 
 class DummyTimeData(_TimeDataBase):
     pass

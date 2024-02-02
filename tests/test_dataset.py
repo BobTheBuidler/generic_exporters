@@ -2,7 +2,7 @@ import pytest
 from generic_exporters.dataset import Dataset
 from generic_exporters.timeseries import TimeSeries
 
-from fixtures import *
+from tests.fixtures import *
 
 @pytest.mark.asyncio
 async def test_dataset_init(time_series):

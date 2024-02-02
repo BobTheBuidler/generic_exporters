@@ -3,7 +3,7 @@ from decimal import Decimal
 from datetime import datetime
 from generic_exporters.metric import Constant, _AdditionMetric, _SubtractionMetric, _MultiplicationMetric, _TrueDivisionMetric, _FloorDivisionMetric, _PowerMetric
 
-from fixtures import *
+from tests.fixtures import *
 
 
 @pytest.mark.asyncio

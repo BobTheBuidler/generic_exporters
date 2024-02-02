@@ -2,7 +2,7 @@ import pytest
 from datetime import datetime, timedelta, timezone
 from generic_exporters.processors._base import _TimeSeriesProcessorBase
 
-from fixtures import *
+from tests.fixtures import *
 
 now = datetime.now()
 
