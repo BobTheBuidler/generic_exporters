@@ -1,7 +1,7 @@
 import pytest
 from generic_exporters.processors.exporters.datastores.timeseries.multi import TimeSeriesMultiDataStore
 
-from fixtures import *
+from tests.fixtures import *
 
 
 def test_time_series_multi_data_store_initialization(dummy_data_store):

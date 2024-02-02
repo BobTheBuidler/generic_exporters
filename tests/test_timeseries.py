@@ -1,7 +1,7 @@
 import pytest
 from datetime import datetime, timedelta
 
-from fixtures import *
+from tests.fixtures import *
 
 def test_time_series_initialization(time_series, dummy_metric):
     assert time_series.metric == dummy_metric
