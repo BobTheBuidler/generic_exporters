@@ -2,7 +2,7 @@
 .PHONY: docs
 
 test:
-	pytest tests --cov generic_exporters --cov evm_contract_exporter --cov-report term-missing -s
+	pytest tests --cov generic_exporters --cov-report term-missing -s
 
 docs:
 	rm -r ./docs/source -f

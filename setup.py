@@ -19,12 +19,6 @@ setup(
     ],
     package_data={
         'generic_exporters': ['py.typed'],
-        'evm_contract_exporter': ['py.typed', '_docker/docker-compose.yaml'],
-    },
-    entry_points={
-        'console_scripts': [
-            'evm_contract_exporter=evm_contract_exporter._scripts.main:main',
-        ],
     },
 )
 
