@@ -5,7 +5,7 @@ with open("requirements.txt", "r") as f:
 
 setup(
     name='generic_exporters',
-    packages=find_packages(),
+    packages=find_packages(exclude=['tests']),
     use_scm_version={
         "root": ".",
         "relative_to": __file__,
