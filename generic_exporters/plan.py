@@ -177,4 +177,4 @@ class TimeDataRow(_TimeDataBase, _AwaitableMixin[Dict["Metric", Decimal]]):
     #    return [asyncio.create_task(coro, name=f"{field.key} at {self.timestamp}") for coro, field in zip(self._coros, self.metrics)]
     @alru_cache(maxsize=None)  # NOTE: we're caching this instead of the tasks because the tasks were wasteful, but do we even need this?
     async def _materialize(self) -> Dict["Metric", Decimal]:
-        return {metric: result for metric, result in zip(self.metrics, await asyncio.gather(*self._coros))}
+        return {metric: result for metric, result in zip(self.metrics, await asyncio.gather(*self._coros, return_exceptions=True))}
