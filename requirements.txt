@@ -4,3 +4,4 @@ ez-a-sync>=0.12.8,<1
 inflection>=0.3.0
 msgspec
 pandas
+pony
