@@ -33,6 +33,10 @@ html_theme = 'alabaster'
 html_static_path = ['_static']
 autodoc_default_options = {
     'private-members': True,
+    # sort these modules by source order, not alphabet
+    'bysource': 'metric',
+    # hide private methods that aren't relevant to us here
+    'exclude-members': ['_abc_impl', '_prune_running'],
 }
 
 sys.path.insert(0, os.path.abspath('./generic_exporters'))
