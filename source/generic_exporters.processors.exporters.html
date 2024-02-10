@@ -70,16 +70,6 @@
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_TimeSeriesExporterBase</span></code></p>
 <p>Inherit from this class to export the history of any <cite>Metric</cite> to a datastore of your choice.</p>
 <p>You must define a start_timestamp method that will determine the start of the historical range, and a data_exists method that determines whether or not the datastore already contains data for the <cite>Metric</cite> at a particular timestamp. This class will handle the rest.</p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="generic_exporters.processors.exporters.exporter.TimeSeriesExporter._abc_impl">
-<span class="sig-name descname"><span class="pre">_abc_impl</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;_abc._abc_data</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#generic_exporters.processors.exporters.exporter.TimeSeriesExporter._abc_impl" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="generic_exporters.processors.exporters.exporter.TimeSeriesExporter._prune_running">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_prune_running</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">running_tasks</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Task</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#generic_exporters.processors.exporters.exporter.TimeSeriesExporter._prune_running" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
 <dl class="py method">
 <dt class="sig sig-object py" id="generic_exporters.processors.exporters.exporter.TimeSeriesExporter.data_exists">
 <em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">data_exists</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timestamp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#generic_exporters.processors.exporters.exporter.TimeSeriesExporter.data_exists" title="Link to this definition">¶</a></dt>
@@ -108,16 +98,6 @@
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_TimeSeriesExporterBase</span></code></p>
 <p>Inherit from this class to export the history of any <cite>Metric</cite> to a datastore of your choice.</p>
 <p>You must define a start_timestamp method that will determine the start of the historical range, and a data_exists method that determines whether or not the datastore already contains data for the <cite>Metric</cite> at a particular timestamp. This class will handle the rest.</p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="generic_exporters.processors.exporters.TimeSeriesExporter._abc_impl">
-<span class="sig-name descname"><span class="pre">_abc_impl</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;_abc._abc_data</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#generic_exporters.processors.exporters.TimeSeriesExporter._abc_impl" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="generic_exporters.processors.exporters.TimeSeriesExporter._prune_running">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_prune_running</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">running_tasks</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Task</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#generic_exporters.processors.exporters.TimeSeriesExporter._prune_running" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
 <dl class="py method">
 <dt class="sig sig-object py" id="generic_exporters.processors.exporters.TimeSeriesExporter.data_exists">
 <em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">data_exists</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timestamp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#generic_exporters.processors.exporters.TimeSeriesExporter.data_exists" title="Link to this definition">¶</a></dt>
