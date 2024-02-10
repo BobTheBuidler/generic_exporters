@@ -50,6 +50,7 @@
 <li class="toctree-l2"><a class="reference internal" href="generic_exporters.processors.html#submodules">Submodules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generic_exporters.processors.html#module-generic_exporters.processors.framer">generic_exporters.processors.framer module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="generic_exporters.processors.html#generic_exporters.processors.framer.DataFramer"><code class="docutils literal notranslate"><span class="pre">DataFramer</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generic_exporters.processors.html#generic_exporters.processors.framer.DataFramer._abc_impl"><code class="docutils literal notranslate"><span class="pre">DataFramer._abc_impl</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="generic_exporters.processors.html#generic_exporters.processors.framer.DataFramer.run"><code class="docutils literal notranslate"><span class="pre">DataFramer.run()</span></code></a></li>
 </ul>
 </li>
@@ -57,6 +58,8 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="generic_exporters.processors.html#module-generic_exporters.processors.plotter">generic_exporters.processors.plotter module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="generic_exporters.processors.html#generic_exporters.processors.plotter.Plotter"><code class="docutils literal notranslate"><span class="pre">Plotter</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generic_exporters.processors.html#generic_exporters.processors.plotter.Plotter._abc_impl"><code class="docutils literal notranslate"><span class="pre">Plotter._abc_impl</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="generic_exporters.processors.html#generic_exporters.processors.plotter.Plotter._get_line"><code class="docutils literal notranslate"><span class="pre">Plotter._get_line()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="generic_exporters.processors.html#generic_exporters.processors.plotter.Plotter.plot"><code class="docutils literal notranslate"><span class="pre">Plotter.plot()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="generic_exporters.processors.html#generic_exporters.processors.plotter.Plotter.run"><code class="docutils literal notranslate"><span class="pre">Plotter.run()</span></code></a></li>
 </ul>
@@ -96,6 +99,11 @@ or TimeDataRow.</p></li>
 </ul>
 </dd>
 </dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="generic_exporters.dataset.Dataset._abc_impl">
+<span class="sig-name descname"><span class="pre">_abc_impl</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;_abc._abc_data</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#generic_exporters.dataset.Dataset._abc_impl" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="generic_exporters.dataset.Dataset.export">
 <span class="sig-name descname"><span class="pre">export</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">datastore</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#generic_exporters.dataset.Dataset.export" title="Link to this definition">¶</a></dt>
@@ -144,6 +152,21 @@ contained within the Dataset to a CSV file.</p>
 <dd><p>Bases: <a class="reference internal" href="#generic_exporters.metric.Metric" title="generic_exporters.metric.Metric"><code class="xref py py-class docutils literal notranslate"><span class="pre">Metric</span></code></a></p>
 <p>A <cite>Constant</cite> is a <cite>Metric</cite> object that produces the same result at any given timestamp.
 These are used to perform math operations between a <cite>Metric</cite> object and a constant value to create a new <cite>Metric</cite> object that represents the result of the operation.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="generic_exporters.metric.Constant._ConstantSingletonMeta__instances">
+<span class="sig-name descname"><span class="pre">_ConstantSingletonMeta__instances</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#generic_exporters.metric.Constant._ConstantSingletonMeta__instances" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="generic_exporters.metric.Constant._ConstantSingletonMeta__lock">
+<span class="sig-name descname"><span class="pre">_ConstantSingletonMeta__lock</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;unlocked</span> <span class="pre">_thread.lock</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#generic_exporters.metric.Constant._ConstantSingletonMeta__lock" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="generic_exporters.metric.Constant._abc_impl">
+<span class="sig-name descname"><span class="pre">_abc_impl</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;_abc._abc_data</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#generic_exporters.metric.Constant._abc_impl" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="py property">
 <dt class="sig sig-object py" id="generic_exporters.metric.Constant.key">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">key</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#generic_exporters.metric.Constant.key" title="Link to this definition">¶</a></dt>
@@ -162,6 +185,29 @@ These are used to perform math operations between a <cite>Metric</cite> object a
 <dt class="sig sig-object py" id="generic_exporters.metric.Metric">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">generic_exporters.metric.</span></span><span class="sig-name descname"><span class="pre">Metric</span></span><a class="headerlink" href="#generic_exporters.metric.Metric" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_MathableBase</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="generic_exporters.metric.Metric._abc_impl">
+<span class="sig-name descname"><span class="pre">_abc_impl</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;_abc._abc_data</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#generic_exporters.metric.Metric._abc_impl" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="generic_exporters.metric.Metric._validate_other">
+<span class="sig-name descname"><span class="pre">_validate_other</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#generic_exporters.metric.Metric" title="generic_exporters.metric.Metric"><span class="pre">Metric</span></a></span></span><a class="headerlink" href="#generic_exporters.metric.Metric._validate_other" title="Link to this definition">¶</a></dt>
+<dd><p>Validates the other operand to ensure it is compatible for arithmetic operations.</p>
+<p>This method must be implemented by subclasses to define how operands are validated.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>other</strong> – The operand to validate.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The validated operand, potentially converted or wrapped to ensure compatibility.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>_T</p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py property">
 <dt class="sig sig-object py" id="generic_exporters.metric.Metric.key">
 <em class="property"><span class="pre">abstract</span><span class="w"> </span><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">key</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#generic_exporters.metric.Metric.key" title="Link to this definition">¶</a></dt>
@@ -181,6 +227,186 @@ These are used to perform math operations between a <cite>Metric</cite> object a
 <p>You can perform math operations on two <cite>Metric</cite> objects, the result will be a new <cite>Metric</cite> that can produce the result of the math operation between the two input <a href="#id1"><span class="problematic" id="id2">`</span></a>Metric`s at any given timestamp.</p>
 <p>You can also slice a <cite>Metric</cite> object to return a <cite>Timeseries</cite> future-like object that can materialize data for a specific time range and perform operations with the outputs.</p>
 </dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="generic_exporters.metric._AdditionMetric">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">generic_exporters.metric.</span></span><span class="sig-name descname"><span class="pre">_AdditionMetric</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">metric0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#generic_exporters.metric.Metric" title="generic_exporters.metric.Metric"><span class="pre">Metric</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">metric1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#generic_exporters.metric.Metric" title="generic_exporters.metric.Metric"><span class="pre">Metric</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#generic_exporters.metric._AdditionMetric" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#generic_exporters.metric._MathResultMetricBase" title="generic_exporters.metric._MathResultMetricBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">_MathResultMetricBase</span></code></a></p>
+<p>An <cite>AdditionMetric</cite> is a <cite>Metric</cite> that queries two input <cite>Metrics</cite> at any given timestamp, adds their outputs, and returns the sum.</p>
+<p>They are created by the library when you add two <cite>Metric</cite> objects. You should not need to interact with this class directly.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="generic_exporters.metric._AdditionMetric._abc_impl">
+<span class="sig-name descname"><span class="pre">_abc_impl</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;_abc._abc_data</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#generic_exporters.metric._AdditionMetric._abc_impl" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="generic_exporters.metric._AdditionMetric._do_math">
+<span class="sig-name descname"><span class="pre">_do_math</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#generic_exporters.metric._AdditionMetric._do_math" title="Link to this definition">¶</a></dt>
+<dd><p>Performs the math operation</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="generic_exporters.metric._AdditionMetric._symbol">
+<span class="sig-name descname"><span class="pre">_symbol</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'+'</span></em><a class="headerlink" href="#generic_exporters.metric._AdditionMetric._symbol" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="generic_exporters.metric._FloorDivisionMetric">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">generic_exporters.metric.</span></span><span class="sig-name descname"><span class="pre">_FloorDivisionMetric</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">metric0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#generic_exporters.metric.Metric" title="generic_exporters.metric.Metric"><span class="pre">Metric</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">metric1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#generic_exporters.metric.Metric" title="generic_exporters.metric.Metric"><span class="pre">Metric</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#generic_exporters.metric._FloorDivisionMetric" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#generic_exporters.metric._MathResultMetricBase" title="generic_exporters.metric._MathResultMetricBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">_MathResultMetricBase</span></code></a></p>
+<p>A <cite>FloorDivisionMetric</cite> is a <cite>Metric</cite> that queries two input <cite>Metrics</cite> at any given timestamp, divides their outputs, and returns the floored quotient.</p>
+<p>They are created by the library when you divide two <cite>Metric</cite> objects. You should not need to interact with this class directly.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="generic_exporters.metric._FloorDivisionMetric._abc_impl">
+<span class="sig-name descname"><span class="pre">_abc_impl</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;_abc._abc_data</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#generic_exporters.metric._FloorDivisionMetric._abc_impl" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="generic_exporters.metric._FloorDivisionMetric._do_math">
+<span class="sig-name descname"><span class="pre">_do_math</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#generic_exporters.metric._FloorDivisionMetric._do_math" title="Link to this definition">¶</a></dt>
+<dd><p>Performs the math operation</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="generic_exporters.metric._FloorDivisionMetric._symbol">
+<span class="sig-name descname"><span class="pre">_symbol</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'//'</span></em><a class="headerlink" href="#generic_exporters.metric._FloorDivisionMetric._symbol" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="generic_exporters.metric._MathResultMetricBase">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">generic_exporters.metric.</span></span><span class="sig-name descname"><span class="pre">_MathResultMetricBase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">metric0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#generic_exporters.metric.Metric" title="generic_exporters.metric.Metric"><span class="pre">Metric</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">metric1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#generic_exporters.metric.Metric" title="generic_exporters.metric.Metric"><span class="pre">Metric</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#generic_exporters.metric._MathResultMetricBase" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#generic_exporters.metric.Metric" title="generic_exporters.metric.Metric"><code class="xref py py-class docutils literal notranslate"><span class="pre">Metric</span></code></a></p>
+<p>These are created by the library when you perform math operations on <cite>Metric</cite> objects. You should not need to interact with this class directly</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="generic_exporters.metric._MathResultMetricBase._abc_impl">
+<span class="sig-name descname"><span class="pre">_abc_impl</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;_abc._abc_data</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#generic_exporters.metric._MathResultMetricBase._abc_impl" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="generic_exporters.metric._MathResultMetricBase._do_math">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_do_math</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#generic_exporters.metric._MathResultMetricBase._do_math" title="Link to this definition">¶</a></dt>
+<dd><p>Performs the math operation</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="generic_exporters.metric._MathResultMetricBase._symbol">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_symbol</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#generic_exporters.metric._MathResultMetricBase._symbol" title="Link to this definition">¶</a></dt>
+<dd><p>The symbol of the math operation being performed</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="generic_exporters.metric._MathResultMetricBase.key">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">key</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#generic_exporters.metric._MathResultMetricBase.key" title="Link to this definition">¶</a></dt>
+<dd><p>A human-readable label for the metric being exported that will also be used as a unique key to identify this <cite>Metric</cite> in the datastore</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="generic_exporters.metric._MathResultMetricBase.produce">
+<span class="sig-name descname"><span class="pre">produce</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timestamp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Decimal</span></span></span><a class="headerlink" href="#generic_exporters.metric._MathResultMetricBase.produce" title="Link to this definition">¶</a></dt>
+<dd><p>Computes and returns the measurement at <cite>timestamp</cite> for this particular <cite>Metric</cite></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="generic_exporters.metric._MultiplicationMetric">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">generic_exporters.metric.</span></span><span class="sig-name descname"><span class="pre">_MultiplicationMetric</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">metric0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#generic_exporters.metric.Metric" title="generic_exporters.metric.Metric"><span class="pre">Metric</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">metric1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#generic_exporters.metric.Metric" title="generic_exporters.metric.Metric"><span class="pre">Metric</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#generic_exporters.metric._MultiplicationMetric" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#generic_exporters.metric._MathResultMetricBase" title="generic_exporters.metric._MathResultMetricBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">_MathResultMetricBase</span></code></a></p>
+<p>A <cite>MultiplicationMetric</cite> is a <cite>Metric</cite> that queries two input <cite>Metrics</cite> at any given timestamp, multiplies their outputs, and returns the product.</p>
+<p>They are created by the library when you multiply two <cite>Metric</cite> objects. You should not need to interact with this class directly.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="generic_exporters.metric._MultiplicationMetric._abc_impl">
+<span class="sig-name descname"><span class="pre">_abc_impl</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;_abc._abc_data</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#generic_exporters.metric._MultiplicationMetric._abc_impl" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="generic_exporters.metric._MultiplicationMetric._do_math">
+<span class="sig-name descname"><span class="pre">_do_math</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#generic_exporters.metric._MultiplicationMetric._do_math" title="Link to this definition">¶</a></dt>
+<dd><p>Performs the math operation</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="generic_exporters.metric._MultiplicationMetric._symbol">
+<span class="sig-name descname"><span class="pre">_symbol</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'*'</span></em><a class="headerlink" href="#generic_exporters.metric._MultiplicationMetric._symbol" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="generic_exporters.metric._PowerMetric">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">generic_exporters.metric.</span></span><span class="sig-name descname"><span class="pre">_PowerMetric</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">metric0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#generic_exporters.metric.Metric" title="generic_exporters.metric.Metric"><span class="pre">Metric</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">metric1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#generic_exporters.metric.Metric" title="generic_exporters.metric.Metric"><span class="pre">Metric</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#generic_exporters.metric._PowerMetric" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#generic_exporters.metric._MathResultMetricBase" title="generic_exporters.metric._MathResultMetricBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">_MathResultMetricBase</span></code></a></p>
+<p>A <cite>PowerMetric</cite> is a <cite>Metric</cite> that queries two input <cite>Metrics</cite> at any given timestamp, raises the output of the first to the power of the output of the second, and returns the exponentiation.</p>
+<p>They are created by the library when you exponentiate two <cite>Metric</cite> objects. You should not need to interact with this class directly.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="generic_exporters.metric._PowerMetric._abc_impl">
+<span class="sig-name descname"><span class="pre">_abc_impl</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;_abc._abc_data</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#generic_exporters.metric._PowerMetric._abc_impl" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="generic_exporters.metric._PowerMetric._do_math">
+<span class="sig-name descname"><span class="pre">_do_math</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#generic_exporters.metric._PowerMetric._do_math" title="Link to this definition">¶</a></dt>
+<dd><p>Performs the math operation</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="generic_exporters.metric._PowerMetric._symbol">
+<span class="sig-name descname"><span class="pre">_symbol</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'**'</span></em><a class="headerlink" href="#generic_exporters.metric._PowerMetric._symbol" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="generic_exporters.metric._SubtractionMetric">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">generic_exporters.metric.</span></span><span class="sig-name descname"><span class="pre">_SubtractionMetric</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">metric0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#generic_exporters.metric.Metric" title="generic_exporters.metric.Metric"><span class="pre">Metric</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">metric1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#generic_exporters.metric.Metric" title="generic_exporters.metric.Metric"><span class="pre">Metric</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#generic_exporters.metric._SubtractionMetric" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#generic_exporters.metric._MathResultMetricBase" title="generic_exporters.metric._MathResultMetricBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">_MathResultMetricBase</span></code></a></p>
+<p>A <cite>SubtractionMethod</cite> is a <cite>Metric</cite> that queries two input <cite>Metrics</cite> at any given timestamp, subtracts their outputs, and returns the difference.</p>
+<p>They are created by the library when you subtract two <cite>Metric</cite> objects. You should not need to interact with this class directly.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="generic_exporters.metric._SubtractionMetric._abc_impl">
+<span class="sig-name descname"><span class="pre">_abc_impl</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;_abc._abc_data</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#generic_exporters.metric._SubtractionMetric._abc_impl" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="generic_exporters.metric._SubtractionMetric._do_math">
+<span class="sig-name descname"><span class="pre">_do_math</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#generic_exporters.metric._SubtractionMetric._do_math" title="Link to this definition">¶</a></dt>
+<dd><p>Performs the math operation</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="generic_exporters.metric._SubtractionMetric._symbol">
+<span class="sig-name descname"><span class="pre">_symbol</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'-'</span></em><a class="headerlink" href="#generic_exporters.metric._SubtractionMetric._symbol" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="generic_exporters.metric._TrueDivisionMetric">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">generic_exporters.metric.</span></span><span class="sig-name descname"><span class="pre">_TrueDivisionMetric</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">metric0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#generic_exporters.metric.Metric" title="generic_exporters.metric.Metric"><span class="pre">Metric</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">metric1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#generic_exporters.metric.Metric" title="generic_exporters.metric.Metric"><span class="pre">Metric</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#generic_exporters.metric._TrueDivisionMetric" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#generic_exporters.metric._MathResultMetricBase" title="generic_exporters.metric._MathResultMetricBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">_MathResultMetricBase</span></code></a></p>
+<p>A <cite>TrueDivisionMetric</cite> is a <cite>Metric</cite> that queries two input <cite>Metrics</cite> at any given timestamp, divides their outputs, and returns the true quotient.</p>
+<p>They are created by the library when you divide two <cite>Metric</cite> objects. You should not need to interact with this class directly.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="generic_exporters.metric._TrueDivisionMetric._abc_impl">
+<span class="sig-name descname"><span class="pre">_abc_impl</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;_abc._abc_data</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#generic_exporters.metric._TrueDivisionMetric._abc_impl" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="generic_exporters.metric._TrueDivisionMetric._do_math">
+<span class="sig-name descname"><span class="pre">_do_math</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#generic_exporters.metric._TrueDivisionMetric._do_math" title="Link to this definition">¶</a></dt>
+<dd><p>Performs the math operation</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="generic_exporters.metric._TrueDivisionMetric._symbol">
+<span class="sig-name descname"><span class="pre">_symbol</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/'</span></em><a class="headerlink" href="#generic_exporters.metric._TrueDivisionMetric._symbol" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
 
 </dd></dl>
 
@@ -261,6 +487,23 @@ and provides methods for plotting and converting the data to a pandas DataFrame.
 </ul>
 </dd>
 </dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="generic_exporters.plan.QueryPlan._abc_impl">
+<span class="sig-name descname"><span class="pre">_abc_impl</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;_abc._abc_data</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#generic_exporters.plan.QueryPlan._abc_impl" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="generic_exporters.plan.QueryPlan._aiter_timestamps">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_aiter_timestamps</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">run_forever</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">AsyncGenerator</span><span class="p"><span class="pre">[</span></span><span class="pre">datetime</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#generic_exporters.plan.QueryPlan._aiter_timestamps" title="Link to this definition">¶</a></dt>
+<dd><p>Generates the timestamps to be queried based on the specified range and interval.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="generic_exporters.plan.QueryPlan._materialize">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_materialize</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#generic_exporters.plan.QueryPlan._materialize" title="Link to this definition">¶</a></dt>
+<dd><p>Materializes the query plan, executing the necessary asynchronous operations and returning the results.</p>
+</dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="generic_exporters.plan.QueryPlan.dataframe">
 <span class="sig-name descname"><span class="pre">dataframe</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="headerlink" href="#generic_exporters.plan.QueryPlan.dataframe" title="Link to this definition">¶</a></dt>
@@ -312,6 +555,21 @@ and provides methods for plotting and converting the data to a pandas DataFrame.
 <em class="property"><span class="pre">final</span><span class="w"> </span><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">generic_exporters.plan.</span></span><span class="sig-name descname"><span class="pre">TimeDataRow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timestamp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fields</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#generic_exporters.metric.Metric" title="generic_exporters.metric.Metric"><span class="pre">Metric</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#generic_exporters.timeseries.TimeSeries" title="generic_exporters.timeseries.TimeSeries"><span class="pre">TimeSeries</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sync</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#generic_exporters.plan.TimeDataRow" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_TimeDataBase</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">_AwaitableMixin</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Metric</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Decimal</span></code>]]</p>
 <p>A future-like class that can be awaited to materialize results</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="generic_exporters.plan.TimeDataRow._abc_impl">
+<span class="sig-name descname"><span class="pre">_abc_impl</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;_abc._abc_data</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#generic_exporters.plan.TimeDataRow._abc_impl" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="generic_exporters.plan.TimeDataRow._coros">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_coros</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Coroutine</span><span class="p"><span class="pre">[</span></span><span class="pre">Decimal</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#generic_exporters.plan.TimeDataRow._coros" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="generic_exporters.plan.TimeDataRow._materialize">
+<span class="sig-name descname"><span class="pre">_materialize</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;async_lru._LRUCacheWrapperInstanceMethod</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#generic_exporters.plan.TimeDataRow._materialize" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="py property">
 <dt class="sig sig-object py" id="generic_exporters.plan.TimeDataRow.key">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">key</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">datetime</span></em><a class="headerlink" href="#generic_exporters.plan.TimeDataRow.key" title="Link to this definition">¶</a></dt>
@@ -324,17 +582,38 @@ and provides methods for plotting and converting the data to a pandas DataFrame.
 
 </dd></dl>
 
+<dl class="py function">
+<dt class="sig sig-object py" id="generic_exporters.plan._ts_is_ready">
+<span class="sig-prename descclassname"><span class="pre">generic_exporters.plan.</span></span><span class="sig-name descname"><span class="pre">_ts_is_ready</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timestamp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interval</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">timedelta</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#generic_exporters.plan._ts_is_ready" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="generic_exporters.plan._validate_time_params">
+<span class="sig-prename descclassname"><span class="pre">generic_exporters.plan.</span></span><span class="sig-name descname"><span class="pre">_validate_time_params</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start_timestamp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_timestamp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interval</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">timedelta</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#generic_exporters.plan._validate_time_params" title="Link to this definition">¶</a></dt>
+<dd><p>Validates the time parameters for the query plan.</p>
+</dd></dl>
+
 </section>
 <section id="module-generic_exporters.timeseries">
 <span id="generic-exporters-timeseries-module"></span><h2>generic_exporters.timeseries module<a class="headerlink" href="#module-generic_exporters.timeseries" title="Link to this heading">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="generic_exporters.timeseries.TimeSeries">
 <em class="property"><span class="pre">final</span><span class="w"> </span><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">generic_exporters.timeseries.</span></span><span class="sig-name descname"><span class="pre">TimeSeries</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">metric</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#generic_exporters.metric.Metric" title="generic_exporters.metric.Metric"><span class="pre">Metric</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sync</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#generic_exporters.timeseries.TimeSeries" title="Link to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_TimeSeriesBase</span></code></p>
+<dd><p>Bases: <a class="reference internal" href="#generic_exporters.timeseries._TimeSeriesBase" title="generic_exporters.timeseries._TimeSeriesBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">_TimeSeriesBase</span></code></a></p>
 <p>An object representing the infinite series of values for a particular <cite>Metric</cite> across the time axis.
 NOTE: Imagine a line chart with a single line that has yet to be drawn.</p>
 <p>You can slice a <cite>TimeSeries</cite> object to create a <cite>Dataset</cite> which can be used for exporting, plotting, and other fun things #NOTE: not yet implemented</p>
 <p>tcollection of asyncio.Tasks that each will return one datapoint for a specific timestamp for a <cite>Metric</cite> object.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="generic_exporters.timeseries.TimeSeries.__validate_other">
+<span class="sig-name descname"><span class="pre">__validate_other</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#generic_exporters.metric.Metric" title="generic_exporters.metric.Metric"><span class="pre">Metric</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#generic_exporters.timeseries.TimeSeries" title="generic_exporters.timeseries.TimeSeries"><span class="pre">TimeSeries</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#generic_exporters.timeseries.TimeSeries.__validate_other" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="generic_exporters.timeseries.TimeSeries._abc_impl">
+<span class="sig-name descname"><span class="pre">_abc_impl</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;_abc._abc_data</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#generic_exporters.timeseries.TimeSeries._abc_impl" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="py property">
 <dt class="sig sig-object py" id="generic_exporters.timeseries.TimeSeries.key">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">key</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#generic_exporters.timeseries.TimeSeries.key" title="Link to this definition">¶</a></dt>
@@ -355,9 +634,14 @@ NOTE: Imagine a line chart with a single line that has yet to be drawn.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="generic_exporters.timeseries.WideTimeSeries">
 <em class="property"><span class="pre">final</span><span class="w"> </span><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">generic_exporters.timeseries.</span></span><span class="sig-name descname"><span class="pre">WideTimeSeries</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">timeserieses</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">_T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sync</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#generic_exporters.timeseries.WideTimeSeries" title="Link to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_WideTimeSeries</span></code>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Metric</span></code>, <a class="reference internal" href="#generic_exporters.timeseries.TimeSeries" title="generic_exporters.timeseries.TimeSeries"><code class="xref py py-class docutils literal notranslate"><span class="pre">TimeSeries</span></code></a>]]</p>
+<dd><p>Bases: <a class="reference internal" href="#generic_exporters.timeseries._WideTimeSeries" title="generic_exporters.timeseries._WideTimeSeries"><code class="xref py py-class docutils literal notranslate"><span class="pre">_WideTimeSeries</span></code></a>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Metric</span></code>, <a class="reference internal" href="#generic_exporters.timeseries.TimeSeries" title="generic_exporters.timeseries.TimeSeries"><code class="xref py py-class docutils literal notranslate"><span class="pre">TimeSeries</span></code></a>]]</p>
 <p>A collection of <cite>TimeSeries</cite> objects
 NOTE: Imagine a line chart with multiple lines that have yet to be drawn</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="generic_exporters.timeseries.WideTimeSeries._abc_impl">
+<span class="sig-name descname"><span class="pre">_abc_impl</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;_abc._abc_data</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#generic_exporters.timeseries.WideTimeSeries._abc_impl" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="py attribute">
 <dt class="sig sig-object py" id="generic_exporters.timeseries.WideTimeSeries.metrics">
 <span class="sig-name descname"><span class="pre">metrics</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'Metric'</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#generic_exporters.timeseries.WideTimeSeries.metrics" title="Link to this definition">¶</a></dt>
@@ -369,6 +653,59 @@ NOTE: Imagine a line chart with multiple lines that have yet to be drawn</p>
 <dd></dd></dl>
 
 </dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="generic_exporters.timeseries._TimeSeriesBase">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">generic_exporters.timeseries.</span></span><span class="sig-name descname"><span class="pre">_TimeSeriesBase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fields</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#generic_exporters.metric.Metric" title="generic_exporters.metric.Metric"><span class="pre">Metric</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#generic_exporters.timeseries.TimeSeries" title="generic_exporters.timeseries.TimeSeries"><span class="pre">TimeSeries</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sync</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#generic_exporters.timeseries._TimeSeriesBase" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_TimeDataBase</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="generic_exporters.timeseries._TimeSeriesBase._abc_impl">
+<span class="sig-name descname"><span class="pre">_abc_impl</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;_abc._abc_data</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#generic_exporters.timeseries._TimeSeriesBase._abc_impl" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="generic_exporters.timeseries._TimeSeriesBase.metrics">
+<span class="sig-name descname"><span class="pre">metrics</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'Metric'</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#generic_exporters.timeseries._TimeSeriesBase.metrics" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="generic_exporters.timeseries._TimeSeriesBase.sync">
+<span class="sig-name descname"><span class="pre">sync</span></span><a class="headerlink" href="#generic_exporters.timeseries._TimeSeriesBase.sync" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="generic_exporters.timeseries._WideTimeSeries">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">generic_exporters.timeseries.</span></span><span class="sig-name descname"><span class="pre">_WideTimeSeries</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">timeserieses</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">_T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sync</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#generic_exporters.timeseries._WideTimeSeries" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#generic_exporters.timeseries._TimeSeriesBase" title="generic_exporters.timeseries._TimeSeriesBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">_TimeSeriesBase</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Generic</span></code>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">_T</span></code>]</p>
+<p>You can subclass this to specify input types for custom applications</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="generic_exporters.timeseries._WideTimeSeries._abc_impl">
+<span class="sig-name descname"><span class="pre">_abc_impl</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;_abc._abc_data</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#generic_exporters.timeseries._WideTimeSeries._abc_impl" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="generic_exporters.timeseries._WideTimeSeries.key">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">key</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#generic_exporters.timeseries._WideTimeSeries.key" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="generic_exporters.timeseries._WideTimeSeries.metrics">
+<span class="sig-name descname"><span class="pre">metrics</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'Metric'</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#generic_exporters.timeseries._WideTimeSeries.metrics" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="generic_exporters.timeseries._WideTimeSeries.sync">
+<span class="sig-name descname"><span class="pre">sync</span></span><a class="headerlink" href="#generic_exporters.timeseries._WideTimeSeries.sync" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="generic_exporters.timeseries._convert_metrics">
+<span class="sig-prename descclassname"><span class="pre">generic_exporters.timeseries.</span></span><span class="sig-name descname"><span class="pre">_convert_metrics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">items</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#generic_exporters.metric.Metric" title="generic_exporters.metric.Metric"><span class="pre">Metric</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#generic_exporters.timeseries.TimeSeries" title="generic_exporters.timeseries.TimeSeries"><span class="pre">TimeSeries</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#generic_exporters.timeseries.TimeSeries" title="generic_exporters.timeseries.TimeSeries"><span class="pre">TimeSeries</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#generic_exporters.timeseries._convert_metrics" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
 
 </section>
 <section id="module-generic_exporters">
