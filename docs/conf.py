@@ -31,12 +31,14 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 
 html_theme = 'alabaster'
 html_static_path = ['_static']
+
 autodoc_default_options = {
     'private-members': True,
     # sort these modules by source order, not alphabet
     'bysource': 'metric',
     # hide private methods that aren't relevant to us here
-    'exclude-members': '_abc_impl,_prune_running',
+    'exclude-members': '_abc_impl,_prune_running,_ConstantSingletonMeta__instances,_ConstantSingletonMeta__lock,_do_math,_coros',
 }
+automodule_generate_module_stub = True
 
 sys.path.insert(0, os.path.abspath('./generic_exporters'))
