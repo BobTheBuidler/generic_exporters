@@ -26,7 +26,6 @@ class _TimeDataBase(a_sync.ASyncGenericBase):
         sync (bool, optional): Specifies if operations should be executed synchronously. Defaults to True.
     """
     metrics: List["Metric"]
-    #__slots__ = 'metrics', 'sync'
     def __init__(self, fields: Iterable[_types.SingleProcessable], *, sync: bool = True) -> None:
         """Initializes a new instance of the _TimeDataBase class.
 
