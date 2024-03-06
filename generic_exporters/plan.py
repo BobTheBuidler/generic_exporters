@@ -121,7 +121,7 @@ class QueryPlan(_TimeDataBase, a_sync.ASyncIterable["TimeDataRow"], _AwaitableMi
         if run_forever is True:
             while True:
                 while not _ts_is_ready(timestamp, self.interval):
-                    await asyncio.sleep((datetime.utcnow() - self.interval - timestamp).total_seconds())
+                    await asyncio.sleep((datetime.now(tz=timezone.utc) - self.interval - timestamp).total_seconds())
                 yield timestamp
                 timestamp += self.interval
         elif run_forever is False:
