@@ -50,18 +50,18 @@
 <li class="toctree-l2"><a class="reference internal" href="generic_exporters.processors.exporters.html#submodules">Submodules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generic_exporters.processors.exporters.html#module-generic_exporters.processors.exporters.exporter">generic_exporters.processors.exporters.exporter module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="generic_exporters.processors.exporters.html#generic_exporters.processors.exporters.exporter.TimeSeriesExporter"><code class="docutils literal notranslate"><span class="pre">TimeSeriesExporter</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="generic_exporters.processors.exporters.html#generic_exporters.processors.exporters.exporter.TimeSeriesExporter.data_exists"><code class="docutils literal notranslate"><span class="pre">TimeSeriesExporter.data_exists()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="generic_exporters.processors.exporters.html#generic_exporters.processors.exporters.exporter.TimeSeriesExporter.ensure_data"><code class="docutils literal notranslate"><span class="pre">TimeSeriesExporter.ensure_data()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="generic_exporters.processors.exporters.html#generic_exporters.processors.exporters.exporter.TimeSeriesExporter.run"><code class="docutils literal notranslate"><span class="pre">TimeSeriesExporter.run()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="generic_exporters.processors.exporters.html#generic_exporters.processors.exporters.exporter.TimeSeriesExporter.data_exists"><code class="docutils literal notranslate"><span class="pre">TimeSeriesExporter.data_exists</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="generic_exporters.processors.exporters.html#generic_exporters.processors.exporters.exporter.TimeSeriesExporter.ensure_data"><code class="docutils literal notranslate"><span class="pre">TimeSeriesExporter.ensure_data</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="generic_exporters.processors.exporters.html#generic_exporters.processors.exporters.exporter.TimeSeriesExporter.run"><code class="docutils literal notranslate"><span class="pre">TimeSeriesExporter.run</span></code></a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="generic_exporters.processors.exporters.html#module-generic_exporters.processors.exporters">Module contents</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="generic_exporters.processors.exporters.html#generic_exporters.processors.exporters.TimeSeriesExporter"><code class="docutils literal notranslate"><span class="pre">TimeSeriesExporter</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="generic_exporters.processors.exporters.html#generic_exporters.processors.exporters.TimeSeriesExporter.data_exists"><code class="docutils literal notranslate"><span class="pre">TimeSeriesExporter.data_exists()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="generic_exporters.processors.exporters.html#generic_exporters.processors.exporters.TimeSeriesExporter.ensure_data"><code class="docutils literal notranslate"><span class="pre">TimeSeriesExporter.ensure_data()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="generic_exporters.processors.exporters.html#generic_exporters.processors.exporters.TimeSeriesExporter.run"><code class="docutils literal notranslate"><span class="pre">TimeSeriesExporter.run()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="generic_exporters.processors.exporters.html#generic_exporters.processors.exporters.TimeSeriesExporter.data_exists"><code class="docutils literal notranslate"><span class="pre">TimeSeriesExporter.data_exists</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="generic_exporters.processors.exporters.html#generic_exporters.processors.exporters.TimeSeriesExporter.ensure_data"><code class="docutils literal notranslate"><span class="pre">TimeSeriesExporter.ensure_data</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="generic_exporters.processors.exporters.html#generic_exporters.processors.exporters.TimeSeriesExporter.run"><code class="docutils literal notranslate"><span class="pre">TimeSeriesExporter.run</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -82,9 +82,9 @@
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_GatheringTimeSeriesProcessorBase</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>]</p>
 <p>Inherit from this class to turn any <cite>Dataset</cite> into a pandas DataFrame.</p>
 <p>You must define a start_timestamp method that will determine the start of the historical range, and a data_exists method that determines whether or not the datastore already contains data for the <cite>Metric</cite> at a particular timestamp. This class will handle the rest.</p>
-<dl class="py method">
+<dl class="py attribute">
 <dt class="sig sig-object py" id="generic_exporters.processors.framer.DataFramer.run">
-<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="headerlink" href="#generic_exporters.processors.framer.DataFramer.run" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">run</span></span><a class="headerlink" href="#generic_exporters.processors.framer.DataFramer.run" title="Link to this definition">¶</a></dt>
 <dd><p>Exports the full history for this exporter’s <cite>Metric</cite> to the datastore</p>
 </dd></dl>
 
@@ -104,14 +104,14 @@
 <em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_get_line</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xscale</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">LinearScale</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yscale</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">LinearScale</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Lines</span></span></span><a class="headerlink" href="#generic_exporters.processors.plotter.Plotter._get_line" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="py method">
+<dl class="py attribute">
 <dt class="sig sig-object py" id="generic_exporters.processors.plotter.Plotter.plot">
-<span class="sig-name descname"><span class="pre">plot</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Figure</span></span></span><a class="headerlink" href="#generic_exporters.processors.plotter.Plotter.plot" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">plot</span></span><a class="headerlink" href="#generic_exporters.processors.plotter.Plotter.plot" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="py method">
+<dl class="py attribute">
 <dt class="sig sig-object py" id="generic_exporters.processors.plotter.Plotter.run">
-<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#generic_exporters.processors.plotter.Plotter.run" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">run</span></span><a class="headerlink" href="#generic_exporters.processors.plotter.Plotter.run" title="Link to this definition">¶</a></dt>
 <dd><p>Exports the full history for this exporter’s <cite>Metric</cite> to the datastore</p>
 </dd></dl>
 

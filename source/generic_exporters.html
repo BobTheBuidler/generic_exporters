@@ -50,7 +50,7 @@
 <li class="toctree-l2"><a class="reference internal" href="generic_exporters.processors.html#submodules">Submodules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generic_exporters.processors.html#module-generic_exporters.processors.framer">generic_exporters.processors.framer module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="generic_exporters.processors.html#generic_exporters.processors.framer.DataFramer"><code class="docutils literal notranslate"><span class="pre">DataFramer</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="generic_exporters.processors.html#generic_exporters.processors.framer.DataFramer.run"><code class="docutils literal notranslate"><span class="pre">DataFramer.run()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="generic_exporters.processors.html#generic_exporters.processors.framer.DataFramer.run"><code class="docutils literal notranslate"><span class="pre">DataFramer.run</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -58,8 +58,8 @@
 <li class="toctree-l2"><a class="reference internal" href="generic_exporters.processors.html#module-generic_exporters.processors.plotter">generic_exporters.processors.plotter module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="generic_exporters.processors.html#generic_exporters.processors.plotter.Plotter"><code class="docutils literal notranslate"><span class="pre">Plotter</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="generic_exporters.processors.html#generic_exporters.processors.plotter.Plotter._get_line"><code class="docutils literal notranslate"><span class="pre">Plotter._get_line()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="generic_exporters.processors.html#generic_exporters.processors.plotter.Plotter.plot"><code class="docutils literal notranslate"><span class="pre">Plotter.plot()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="generic_exporters.processors.html#generic_exporters.processors.plotter.Plotter.run"><code class="docutils literal notranslate"><span class="pre">Plotter.run()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="generic_exporters.processors.html#generic_exporters.processors.plotter.Plotter.plot"><code class="docutils literal notranslate"><span class="pre">Plotter.plot</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="generic_exporters.processors.html#generic_exporters.processors.plotter.Plotter.run"><code class="docutils literal notranslate"><span class="pre">Plotter.run</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -97,9 +97,9 @@ or TimeDataRow.</p></li>
 </ul>
 </dd>
 </dl>
-<dl class="py method">
+<dl class="py attribute">
 <dt class="sig sig-object py" id="generic_exporters.dataset.Dataset.export">
-<span class="sig-name descname"><span class="pre">export</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">datastore</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#generic_exporters.dataset.Dataset.export" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">export</span></span><a class="headerlink" href="#generic_exporters.dataset.Dataset.export" title="Link to this definition">¶</a></dt>
 <dd><p>Exports the dataset to a specified datastore.</p>
 <p>This method is intended to provide a way to export the time series data
 contained within the Dataset to an external datastore.</p>
@@ -110,9 +110,9 @@ contained within the Dataset to an external datastore.</p>
 </dl>
 </dd></dl>
 
-<dl class="py method">
+<dl class="py attribute">
 <dt class="sig sig-object py" id="generic_exporters.dataset.Dataset.plot">
-<span class="sig-name descname"><span class="pre">plot</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Figure</span></span></span><a class="headerlink" href="#generic_exporters.dataset.Dataset.plot" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">plot</span></span><a class="headerlink" href="#generic_exporters.dataset.Dataset.plot" title="Link to this definition">¶</a></dt>
 <dd><p>Generates a plot for the dataset.</p>
 <p>This method is intended to provide a quick visualization of the time series
 data contained within the Dataset.</p>
@@ -126,9 +126,9 @@ data contained within the Dataset.</p>
 </dl>
 </dd></dl>
 
-<dl class="py method">
+<dl class="py attribute">
 <dt class="sig sig-object py" id="generic_exporters.dataset.Dataset.to_csv">
-<span class="sig-name descname"><span class="pre">to_csv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">to_csv_args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">to_csv_kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#generic_exporters.dataset.Dataset.to_csv" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">to_csv</span></span><a class="headerlink" href="#generic_exporters.dataset.Dataset.to_csv" title="Link to this definition">¶</a></dt>
 <dd><p>Exports the dataset to a CSV file.</p>
 <p>This method is intended to provide a way to export the time series data
 contained within the Dataset to a CSV file.</p>
@@ -151,11 +151,10 @@ These are used to perform math operations between a <cite>Metric</cite> object a
 <dd><p>A human-readable label for the metric being exported that will also be used as a unique key to identify this <cite>Metric</cite> in the datastore</p>
 </dd></dl>
 
-<dl class="py method">
+<dl class="py attribute">
 <dt class="sig sig-object py" id="generic_exporters.metric.Constant.produce">
-<span class="sig-name descname"><span class="pre">produce</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timestamp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Decimal</span></span></span><a class="headerlink" href="#generic_exporters.metric.Constant.produce" title="Link to this definition">¶</a></dt>
-<dd><p>Computes and returns the measurement at <cite>timestamp</cite> for this particular <cite>Metric</cite></p>
-</dd></dl>
+<span class="sig-name descname"><span class="pre">produce</span></span><a class="headerlink" href="#generic_exporters.metric.Constant.produce" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
 
 </dd></dl>
 
@@ -187,9 +186,9 @@ These are used to perform math operations between a <cite>Metric</cite> object a
 <dd><p>A human-readable label for the metric being exported that will also be used as a unique key to identify this <cite>Metric</cite> in the datastore</p>
 </dd></dl>
 
-<dl class="py method">
+<dl class="py attribute">
 <dt class="sig sig-object py" id="generic_exporters.metric.Metric.produce">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">produce</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timestamp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Decimal</span></span></span><a class="headerlink" href="#generic_exporters.metric.Metric.produce" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">produce</span></span><a class="headerlink" href="#generic_exporters.metric.Metric.produce" title="Link to this definition">¶</a></dt>
 <dd><p>Computes and returns the measurement at <cite>timestamp</cite> for this particular <cite>Metric</cite></p>
 </dd></dl>
 
@@ -246,11 +245,10 @@ These are used to perform math operations between a <cite>Metric</cite> object a
 <dd><p>A human-readable label for the metric being exported that will also be used as a unique key to identify this <cite>Metric</cite> in the datastore</p>
 </dd></dl>
 
-<dl class="py method">
+<dl class="py attribute">
 <dt class="sig sig-object py" id="generic_exporters.metric._MathResultMetricBase.produce">
-<span class="sig-name descname"><span class="pre">produce</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timestamp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Decimal</span></span></span><a class="headerlink" href="#generic_exporters.metric._MathResultMetricBase.produce" title="Link to this definition">¶</a></dt>
-<dd><p>Computes and returns the measurement at <cite>timestamp</cite> for this particular <cite>Metric</cite></p>
-</dd></dl>
+<span class="sig-name descname"><span class="pre">produce</span></span><a class="headerlink" href="#generic_exporters.metric._MathResultMetricBase.produce" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
 
 </dd></dl>
 
@@ -395,9 +393,9 @@ and provides methods for plotting and converting the data to a pandas DataFrame.
 <dd><p>Materializes the query plan, executing the necessary asynchronous operations and returning the results.</p>
 </dd></dl>
 
-<dl class="py method">
+<dl class="py attribute">
 <dt class="sig sig-object py" id="generic_exporters.plan.QueryPlan.dataframe">
-<span class="sig-name descname"><span class="pre">dataframe</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="headerlink" href="#generic_exporters.plan.QueryPlan.dataframe" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">dataframe</span></span><a class="headerlink" href="#generic_exporters.plan.QueryPlan.dataframe" title="Link to this definition">¶</a></dt>
 <dd><p>Converts the queried data to a pandas DataFrame.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -410,13 +408,8 @@ and provides methods for plotting and converting the data to a pandas DataFrame.
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="generic_exporters.plan.QueryPlan.metrics">
-<span class="sig-name descname"><span class="pre">metrics</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'Metric'</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#generic_exporters.plan.QueryPlan.metrics" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
 <dt class="sig sig-object py" id="generic_exporters.plan.QueryPlan.plot">
-<span class="sig-name descname"><span class="pre">plot</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Figure</span></span></span><a class="headerlink" href="#generic_exporters.plan.QueryPlan.plot" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">plot</span></span><a class="headerlink" href="#generic_exporters.plan.QueryPlan.plot" title="Link to this definition">¶</a></dt>
 <dd><p>Generates a plot for the queried data.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -428,16 +421,11 @@ and provides methods for plotting and converting the data to a pandas DataFrame.
 </dl>
 </dd></dl>
 
-<dl class="py method">
+<dl class="py attribute">
 <dt class="sig sig-object py" id="id0">
-<span class="sig-name descname"><span class="pre">start_timestamp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">datetime</span></span></span><a class="headerlink" href="#id0" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">start_timestamp</span></span><a class="headerlink" href="#id0" title="Link to this definition">¶</a></dt>
 <dd><p>Computes the start timestamp for the query, handling asynchronous resolution if necessary.</p>
 </dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="id3">
-<span class="sig-name descname"><span class="pre">sync</span></span><a class="headerlink" href="#id3" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
 
 </dd></dl>
 
@@ -495,16 +483,6 @@ NOTE: Imagine a line chart with a single line that has yet to be drawn.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">key</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#generic_exporters.timeseries.TimeSeries.key" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="generic_exporters.timeseries.TimeSeries.metrics">
-<span class="sig-name descname"><span class="pre">metrics</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'Metric'</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#generic_exporters.timeseries.TimeSeries.metrics" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="generic_exporters.timeseries.TimeSeries.sync">
-<span class="sig-name descname"><span class="pre">sync</span></span><a class="headerlink" href="#generic_exporters.timeseries.TimeSeries.sync" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
 </dd></dl>
 
 <dl class="py class">
@@ -513,32 +491,12 @@ NOTE: Imagine a line chart with a single line that has yet to be drawn.</p>
 <dd><p>Bases: <a class="reference internal" href="#generic_exporters.timeseries._WideTimeSeries" title="generic_exporters.timeseries._WideTimeSeries"><code class="xref py py-class docutils literal notranslate"><span class="pre">_WideTimeSeries</span></code></a>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Metric</span></code>, <a class="reference internal" href="#generic_exporters.timeseries.TimeSeries" title="generic_exporters.timeseries.TimeSeries"><code class="xref py py-class docutils literal notranslate"><span class="pre">TimeSeries</span></code></a>]]</p>
 <p>A collection of <cite>TimeSeries</cite> objects
 NOTE: Imagine a line chart with multiple lines that have yet to be drawn</p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="generic_exporters.timeseries.WideTimeSeries.metrics">
-<span class="sig-name descname"><span class="pre">metrics</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'Metric'</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#generic_exporters.timeseries.WideTimeSeries.metrics" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="generic_exporters.timeseries.WideTimeSeries.sync">
-<span class="sig-name descname"><span class="pre">sync</span></span><a class="headerlink" href="#generic_exporters.timeseries.WideTimeSeries.sync" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="generic_exporters.timeseries._TimeSeriesBase">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">generic_exporters.timeseries.</span></span><span class="sig-name descname"><span class="pre">_TimeSeriesBase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fields</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#generic_exporters.metric.Metric" title="generic_exporters.metric.Metric"><span class="pre">Metric</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#generic_exporters.timeseries.TimeSeries" title="generic_exporters.timeseries.TimeSeries"><span class="pre">TimeSeries</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sync</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#generic_exporters.timeseries._TimeSeriesBase" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_TimeDataBase</span></code></p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="generic_exporters.timeseries._TimeSeriesBase.metrics">
-<span class="sig-name descname"><span class="pre">metrics</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'Metric'</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#generic_exporters.timeseries._TimeSeriesBase.metrics" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="generic_exporters.timeseries._TimeSeriesBase.sync">
-<span class="sig-name descname"><span class="pre">sync</span></span><a class="headerlink" href="#generic_exporters.timeseries._TimeSeriesBase.sync" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
 </dd></dl>
 
 <dl class="py class">
@@ -549,16 +507,6 @@ NOTE: Imagine a line chart with multiple lines that have yet to be drawn</p>
 <dl class="py property">
 <dt class="sig sig-object py" id="generic_exporters.timeseries._WideTimeSeries.key">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">key</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#generic_exporters.timeseries._WideTimeSeries.key" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="generic_exporters.timeseries._WideTimeSeries.metrics">
-<span class="sig-name descname"><span class="pre">metrics</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'Metric'</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#generic_exporters.timeseries._WideTimeSeries.metrics" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="generic_exporters.timeseries._WideTimeSeries.sync">
-<span class="sig-name descname"><span class="pre">sync</span></span><a class="headerlink" href="#generic_exporters.timeseries._WideTimeSeries.sync" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
