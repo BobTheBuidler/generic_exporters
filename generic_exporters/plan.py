@@ -6,7 +6,7 @@ from decimal import Decimal
 from functools import cached_property
 from inspect import isawaitable
 from typing import (TYPE_CHECKING, Any, AsyncGenerator, Awaitable, Coroutine, Dict, 
-                    Iterable, Mapping, Optional, Tuple, TypeVar, Union, final)
+                    Iterable, Iterator, Mapping, Optional, Tuple, TypeVar, Union, final)
 
 import a_sync
 from bqplot import Figure
@@ -169,6 +169,9 @@ class _TimeDataRow(_TimeDataBase, _AwaitableMixin[Dict[_M, Decimal]], Mapping[st
             if key == metric.key:
                 return metric.produce(self.timestamp, sync=self.sync)
         raise KeyError(key)
+    def __iter__(self) -> Iterator[str]:
+        for metric in self.metrics:
+            yield metric.key
     def __len__(self) -> int:
         return len(self.metrics)
     @property
