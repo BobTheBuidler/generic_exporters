@@ -5,6 +5,7 @@ from datetime import datetime, timedelta
 from typing import Literal, NoReturn, Union, overload
 
 import a_sync
+from a_sync.utils.iterators import exhaust_iterator
 from generic_exporters.plan import QueryPlan
 from generic_exporters.processors.exporters._base import _TimeSeriesExporterBase
 from generic_exporters.processors.exporters.datastores.timeseries._base import TimeSeriesDataStoreBase
@@ -31,7 +32,7 @@ class TimeSeriesExporter(_TimeSeriesExporterBase):
     async def run(self, run_forever: bool = False) -> Union[None, NoReturn]:
         """Exports the full history for this exporter's `Metric` to the datastore"""
         export_fn = lambda ts: self.ensure_data(ts, sync=False)
-        await a_sync.TaskMapping(export_fn).map(self.query._aiter_timestamps(run_forever))
+        await exhaust_iterator(a_sync.TaskMapping(export_fn).map(self.query._aiter_timestamps(run_forever)))
 
     async def ensure_data(self, ts: datetime) -> None:
         if not await self.data_exists(ts, sync=False):
