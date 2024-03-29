@@ -20,7 +20,13 @@ class _ExporterBase(_ProcessorBase[None]):
 
 class _TimeSeriesExporterBase(_TimeSeriesProcessorBase, _ExporterBase):
     """I dont remember why I made this base class. Maybe I will"""
-    def __init__(self, query_plan: "QueryPlan", datastore: Optional[TimeSeriesDataStoreBase], sync: bool = True) -> None:
+    def __init__(
+        self, 
+        query_plan: "QueryPlan", 
+        datastore: Optional[TimeSeriesDataStoreBase], 
+        *, 
+        sync: bool = True,
+    ) -> None:
         super().__init__(query_plan, sync=sync)
         if isinstance(datastore, TimeSeriesDataStoreBase):
             self.datastore = datastore
