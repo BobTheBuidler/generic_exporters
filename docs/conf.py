@@ -21,12 +21,21 @@ _pony_private_members = "_access_rules_,_adict_,_all_bases_,_attrnames_cache_,_a
 extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.napoleon',
+    'sphinx.ext.intersphinx',
 ]
 
 templates_path = ['_templates']
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 
-
+intersphinx_mapping = {
+    'a_sync': ('https://bobthebuidler.github.io/ez-a-sync', None),
+    'aiohttp': ('https://docs.aiohttp.org/', None),
+    'bqplot': ('https://bqplot.github.io/bqplot/', None),
+    'msgspec': ('https://jcristharif.com/msgspec/', None),
+    'pandas': ('https://pandas.pydata.org/pandas-docs/', None),
+    'pony': ('https://docs.ponyorm.org/', None),
+    'python': ('https://docs.python.org/3', None),
+}
 
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
