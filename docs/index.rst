@@ -10,7 +10,7 @@ Welcome to generic_exporters's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-
+   source/modules.rst
 
 Indices and tables
 ==================
