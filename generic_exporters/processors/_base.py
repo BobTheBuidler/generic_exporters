@@ -2,7 +2,7 @@
 from abc import abstractmethod
 from datetime import datetime
 from decimal import Decimal
-from typing import TYPE_CHECKING, Dict, TypeVar
+from typing import TYPE_CHECKING, Dict, Optional, TypeVar
 
 import a_sync
 
@@ -32,12 +32,16 @@ class _TimeSeriesProcessorBase(_ProcessorBase[_T]):
         self, 
         query: QueryPlan, 
         *,
+        concurrency: Optional[int] = None,
         sync: bool = True,
     ) -> None:
         super().__init__(sync=sync)
         if not isinstance(query, QueryPlan):
             raise TypeError(f'`query` must be `QueryPlan`. You passed {query}')
         self.query = query
+        if concurrency is not None and not isinstance(concurrency, int):
+            raise TypeError(f'`concurrency` must be int. You passed {concurrency}')
+        self.concurrency = concurrency
 
 
 class _GatheringTimeSeriesProcessorBase(_TimeSeriesProcessorBase[_T]):

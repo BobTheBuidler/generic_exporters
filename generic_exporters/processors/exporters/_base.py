@@ -25,9 +25,10 @@ class _TimeSeriesExporterBase(_TimeSeriesProcessorBase, _ExporterBase):
         query_plan: "QueryPlan", 
         datastore: Optional[TimeSeriesDataStoreBase], 
         *, 
+        concurrency: Optional[int] = None,
         sync: bool = True,
     ) -> None:
-        super().__init__(query_plan, sync=sync)
+        super().__init__(query_plan, concurrency=concurrency, sync=sync)
         if isinstance(datastore, TimeSeriesDataStoreBase):
             self.datastore = datastore
         elif datastore is None:
