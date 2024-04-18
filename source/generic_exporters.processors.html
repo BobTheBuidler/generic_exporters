@@ -9,7 +9,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d1102ebc" />
     <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=12dfc556" />
     <script src="../_static/documentation_options.js?v=5929fcd5"></script>
-    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -52,8 +52,8 @@
 <li class="toctree-l2"><a class="reference internal" href="generic_exporters.processors.exporters.html#submodules">Submodules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generic_exporters.processors.exporters.html#module-generic_exporters.processors.exporters.exporter">generic_exporters.processors.exporters.exporter module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="generic_exporters.processors.exporters.html#generic_exporters.processors.exporters.exporter.TimeSeriesExporter"><code class="docutils literal notranslate"><span class="pre">TimeSeriesExporter</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generic_exporters.processors.exporters.html#generic_exporters.processors.exporters.exporter.TimeSeriesExporter._ensure_data"><code class="docutils literal notranslate"><span class="pre">TimeSeriesExporter._ensure_data()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="generic_exporters.processors.exporters.html#generic_exporters.processors.exporters.exporter.TimeSeriesExporter.data_exists"><code class="docutils literal notranslate"><span class="pre">TimeSeriesExporter.data_exists</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="generic_exporters.processors.exporters.html#generic_exporters.processors.exporters.exporter.TimeSeriesExporter.ensure_data"><code class="docutils literal notranslate"><span class="pre">TimeSeriesExporter.ensure_data</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="generic_exporters.processors.exporters.html#generic_exporters.processors.exporters.exporter.TimeSeriesExporter.run"><code class="docutils literal notranslate"><span class="pre">TimeSeriesExporter.run</span></code></a></li>
 </ul>
 </li>
@@ -61,8 +61,8 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="generic_exporters.processors.exporters.html#module-generic_exporters.processors.exporters">Module contents</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="generic_exporters.processors.exporters.html#generic_exporters.processors.exporters.TimeSeriesExporter"><code class="docutils literal notranslate"><span class="pre">TimeSeriesExporter</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generic_exporters.processors.exporters.html#generic_exporters.processors.exporters.TimeSeriesExporter._ensure_data"><code class="docutils literal notranslate"><span class="pre">TimeSeriesExporter._ensure_data()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="generic_exporters.processors.exporters.html#generic_exporters.processors.exporters.TimeSeriesExporter.data_exists"><code class="docutils literal notranslate"><span class="pre">TimeSeriesExporter.data_exists</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="generic_exporters.processors.exporters.html#generic_exporters.processors.exporters.TimeSeriesExporter.ensure_data"><code class="docutils literal notranslate"><span class="pre">TimeSeriesExporter.ensure_data</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="generic_exporters.processors.exporters.html#generic_exporters.processors.exporters.TimeSeriesExporter.run"><code class="docutils literal notranslate"><span class="pre">TimeSeriesExporter.run</span></code></a></li>
 </ul>
 </li>
@@ -80,7 +80,7 @@
 <span id="generic-exporters-processors-framer-module"></span><h2>generic_exporters.processors.framer module<a class="headerlink" href="#module-generic_exporters.processors.framer" title="Link to this heading">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="generic_exporters.processors.framer.DataFramer">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">generic_exporters.processors.framer.</span></span><span class="sig-name descname"><span class="pre">DataFramer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="generic_exporters.html#generic_exporters.plan.QueryPlan" title="generic_exporters.plan.QueryPlan"><span class="pre">QueryPlan</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sync</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#generic_exporters.processors.framer.DataFramer" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">generic_exporters.processors.framer.</span></span><span class="sig-name descname"><span class="pre">DataFramer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="generic_exporters.html#generic_exporters.plan.QueryPlan" title="generic_exporters.plan.QueryPlan"><span class="pre">QueryPlan</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">concurrency</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sync</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#generic_exporters.processors.framer.DataFramer" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_GatheringTimeSeriesProcessorBase</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>]</p>
 <p>Inherit from this class to turn any <cite>Dataset</cite> into a pandas DataFrame.</p>
 <p>You must define a start_timestamp method that will determine the start of the historical range, and a data_exists method that determines whether or not the datastore already contains data for the <cite>Metric</cite> at a particular timestamp. This class will handle the rest.</p>
@@ -97,7 +97,7 @@
 <span id="generic-exporters-processors-plotter-module"></span><h2>generic_exporters.processors.plotter module<a class="headerlink" href="#module-generic_exporters.processors.plotter" title="Link to this heading">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="generic_exporters.processors.plotter.Plotter">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">generic_exporters.processors.plotter.</span></span><span class="sig-name descname"><span class="pre">Plotter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="generic_exporters.html#generic_exporters.plan.QueryPlan" title="generic_exporters.plan.QueryPlan"><span class="pre">QueryPlan</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sync</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#generic_exporters.processors.plotter.Plotter" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">generic_exporters.processors.plotter.</span></span><span class="sig-name descname"><span class="pre">Plotter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="generic_exporters.html#generic_exporters.plan.QueryPlan" title="generic_exporters.plan.QueryPlan"><span class="pre">QueryPlan</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">concurrency</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sync</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#generic_exporters.processors.plotter.Plotter" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_GatheringTimeSeriesProcessorBase</span></code>[<a class="reference external" href="https://bqplot.github.io/bqplot/api/figure/#bqplot.Figure" title="(in bqplot v0.0.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Figure</span></code></a>]</p>
 <p>Inherit from this class to plot any <cite>Metric</cite> on a line chart.</p>
 <p>You must define a start_timestamp method that will determine the start of the historical range, and a data_exists method that determines whether or not the datastore already contains data for the <cite>Metric</cite> at a particular timestamp. This class will handle the rest.</p>
@@ -163,7 +163,7 @@
   </ul></li>
 </ul>
 </div>
-<div id="searchbox" style="display: none" role="search">
+<search id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
@@ -171,7 +171,7 @@
       <input type="submit" value="Go" />
     </form>
     </div>
-</div>
+</search>
 <script>document.getElementById('searchbox').style.display = "block"</script>
 
 
@@ -189,7 +189,7 @@
       &#169;2024, BobTheBuidler.
       
       |
-      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.2.6</a>
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.3.6</a>
       &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
       
       |

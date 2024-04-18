@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d1102ebc" />
     <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=12dfc556" />
     <script src="_static/documentation_options.js?v=5929fcd5"></script>
-    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="#" />
     <link rel="search" title="Search" href="search.html" />
@@ -63,6 +63,12 @@
 </li>
       <li><a href="source/generic_exporters.processors.exporters.datastores.timeseries.html#generic_exporters.processors.exporters.datastores.timeseries.sql.TimeSeriesKV._count">_count() (generic_exporters.processors.exporters.datastores.timeseries.sql.TimeSeriesKV class method)</a>
 </li>
+      <li><a href="source/generic_exporters.processors.exporters.html#generic_exporters.processors.exporters.exporter.TimeSeriesExporter._ensure_data">_ensure_data() (generic_exporters.processors.exporters.exporter.TimeSeriesExporter method)</a>
+
+      <ul>
+        <li><a href="source/generic_exporters.processors.exporters.html#generic_exporters.processors.exporters.TimeSeriesExporter._ensure_data">(generic_exporters.processors.exporters.TimeSeriesExporter method)</a>
+</li>
+      </ul></li>
       <li><a href="source/generic_exporters.processors.exporters.datastores.html#generic_exporters.processors.exporters.datastores.default._ensure_default_storage_path_exists">_ensure_default_storage_path_exists() (in module generic_exporters.processors.exporters.datastores.default)</a>
 </li>
       <li><a href="source/generic_exporters.html#generic_exporters.metric._FloorDivisionMetric">_FloorDivisionMetric (class in generic_exporters.metric)</a>
@@ -103,10 +109,10 @@
 </li>
       <li><a href="source/generic_exporters.processors.exporters.datastores.timeseries.html#generic_exporters.processors.exporters.datastores.timeseries.victoria.VictoriaMetrics._post">_post() (generic_exporters.processors.exporters.datastores.timeseries.victoria.VictoriaMetrics method)</a>
 </li>
-      <li><a href="source/generic_exporters.html#generic_exporters.metric._PowerMetric">_PowerMetric (class in generic_exporters.metric)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="source/generic_exporters.html#generic_exporters.metric._PowerMetric">_PowerMetric (class in generic_exporters.metric)</a>
+</li>
       <li><a href="source/generic_exporters.processors.exporters.datastores.timeseries.html#generic_exporters.processors.exporters.datastores.timeseries.sql.TimeSeriesKV._propagation_mixin_">_propagation_mixin_ (generic_exporters.processors.exporters.datastores.timeseries.sql.TimeSeriesKV attribute)</a>
 </li>
       <li><a href="source/generic_exporters.html#generic_exporters.plan._QueryPlan">_QueryPlan (class in generic_exporters.plan)</a>
@@ -211,12 +217,6 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="source/generic_exporters.html#generic_exporters.plan.QueryPlan.end_timestamp">end_timestamp (generic_exporters.plan.QueryPlan attribute)</a>
 </li>
-      <li><a href="source/generic_exporters.processors.exporters.html#generic_exporters.processors.exporters.exporter.TimeSeriesExporter.ensure_data">ensure_data (generic_exporters.processors.exporters.exporter.TimeSeriesExporter attribute)</a>
-
-      <ul>
-        <li><a href="source/generic_exporters.processors.exporters.html#generic_exporters.processors.exporters.TimeSeriesExporter.ensure_data">(generic_exporters.processors.exporters.TimeSeriesExporter attribute)</a>
-</li>
-      </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="source/generic_exporters.html#generic_exporters.dataset.Dataset.export">export (generic_exporters.dataset.Dataset attribute)</a>
@@ -587,7 +587,7 @@
   </ul></li>
 </ul>
 </div>
-<div id="searchbox" style="display: none" role="search">
+<search id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
@@ -595,7 +595,7 @@
       <input type="submit" value="Go" />
     </form>
     </div>
-</div>
+</search>
 <script>document.getElementById('searchbox').style.display = "block"</script>
 
 
@@ -613,7 +613,7 @@
       &#169;2024, BobTheBuidler.
       
       |
-      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.2.6</a>
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.3.6</a>
       &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
       
     </div>
