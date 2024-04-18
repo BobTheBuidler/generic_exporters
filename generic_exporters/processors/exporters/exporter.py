@@ -1,11 +1,9 @@
 
-import asyncio
 from abc import abstractmethod
 from datetime import datetime, timedelta
 from typing import Literal, NoReturn, Optional, Union, overload
 
 import a_sync
-from a_sync.utils.iterators import exhaust_iterator
 from generic_exporters.plan import QueryPlan
 from generic_exporters.processors.exporters._base import _TimeSeriesExporterBase
 from generic_exporters.processors.exporters.datastores.timeseries._base import TimeSeriesDataStoreBase
@@ -30,10 +28,6 @@ class TimeSeriesExporter(_TimeSeriesExporterBase):
         self.buffer = buffer
         self.ensure_data = a_sync.ProcessingQueue(self._ensure_data, concurrency, return_data=False)
         self._push = a_sync.ProcessingQueue(self.datastore.push, concurrency*10, return_data=False)
-    
-    @abstractmethod
-    async def data_exists(self, timestamp: datetime) -> bool:
-        """Returns True if data exists at `timestamp`, False if it does not and must be exported."""
 
     @overload
     async def run(self, run_forever: Literal[True]) -> NoReturn:...
@@ -47,6 +41,10 @@ class TimeSeriesExporter(_TimeSeriesExporterBase):
         await self.ensure_data.join()
         # wait for all data to be pushed to datastore
         await self._push.join()
+    
+    @abstractmethod
+    async def data_exists(self, timestamp: datetime) -> bool:
+        """Returns True if data exists at `timestamp`, False if it does not and must be exported."""
 
     async def _ensure_data(self, ts: datetime) -> None:
         if not await self.data_exists(ts, sync=False):
