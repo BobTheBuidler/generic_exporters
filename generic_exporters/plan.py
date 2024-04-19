@@ -103,19 +103,28 @@ class _QueryPlan(_TimeDataBase, a_sync.ASyncIterable["TimeDataRow[_M]"], _Awaita
 
     async def _aiter_timestamps(self, run_forever: bool = False) -> AsyncGenerator[datetime, None]:
         """Generates the timestamps to be queried based on the specified range and interval."""
-        timestamp: datetime = await self.__start_timestamp__
-        if run_forever is True:
-            while True:
-                while not _ts_is_ready(timestamp, self.interval):
-                    await asyncio.sleep((timestamp - datetime.now(tz=timezone.utc)).total_seconds())
-                yield timestamp
-                timestamp += self.interval
-        elif run_forever is False:
-            while _ts_is_ready(timestamp, self.interval):
-                yield timestamp
-                timestamp += self.interval
-        else:
+        if not isinstance(run_forever, bool):
             raise TypeError(f'`run_forever` must be boolean. You passed {run_forever}')
+
+        timestamp: datetime = await self.__start_timestamp__
+
+        # gather historical timestamps
+        timestamps = []
+        while _ts_is_ready(timestamp, self.interval):
+            timestamps.append(timestamp)
+            timestamp = timestamp + self.interval
+
+        # yield historical timestamps hi-to-low
+        timestamps.reverse()
+        for timestamp in timestamps:
+            yield timestamp
+        del timestamps
+
+        while run_forever:
+            while not _ts_is_ready(timestamp, self.interval):
+                await _get_waiter(timestamp - self.interval)
+            yield timestamp
+            timestamp += self.interval
 
 
 @final
@@ -191,3 +200,22 @@ class _TimeDataRow(_TimeDataBase, _AwaitableMixin[Dict[_M, Decimal]], Mapping[st
 @final
 class TimeDataRow(_TimeDataRow["Metric"]):
     """A future-like class that can be awaited to materialize results"""
+
+
+_waiters = {}
+
+async def _wait(wait_until: datetime) -> None:
+    await asyncio.sleep((wait_until - datetime.now(tz=timezone.utc)).total_seconds())
+
+def _wait_callback(t: asyncio.Task) -> None:
+    low_to_hi = sorted(_waiters)
+    for k in low_to_hi:
+        if _waiters[k] is t:
+            _waiters.pop(k)
+
+def _get_waiter(timestamp: datetime) -> "asyncio.Task[None]":
+    if timestamp not in _waiters:
+        waiter = asyncio.create_task(_wait(timestamp))
+        waiter.add_done_callback(_wait_callback)
+        _waiters[timestamp] = waiter
+    return _waiters[timestamp]
