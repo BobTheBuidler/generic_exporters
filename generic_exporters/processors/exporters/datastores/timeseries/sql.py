@@ -3,9 +3,10 @@ import asyncio
 from datetime import datetime
 from typing import Any, Dict, Optional
 
+import a_sync
 from concurrent.futures import ThreadPoolExecutor
 from msgspec.json import encode
-from pony.orm import Database, Json, PrimaryKey, Required, db_session, select
+from pony.orm import Database, PrimaryKey, Required, db_session, select
 from pony.orm.core import Query
 
 from generic_exporters.processors.exporters.datastores.timeseries._base import TimeSeriesDataStoreBase
@@ -16,11 +17,13 @@ Jsonable = Any
 db = Database()
 
 class SQLTimeSeriesKeyValueStore(TimeSeriesDataStoreBase):
+    push = None  # make abc work TODO refactor this out
     def __init__(self, **connection_params: Optional[Dict[str, Any]]) -> None:
         if not connection_params:
             from generic_exporters.processors.exporters.datastores.default import sqlite_settings as connection_params
         db.bind(**connection_params)
         db.generate_mapping(create_tables=True)
+        self.push = a_sync.ProcessingQueue(self._push, num_workers=10_000, return_data=False)
     async def data_exists(self, key: Jsonable, ts: datetime) -> bool:
         """Returns True if `key` returns results from your Postgres db at `ts`, False if not."""
         if (result_count := await TimeSeriesKV.count(key, ts)) == 0:
@@ -29,7 +32,7 @@ class SQLTimeSeriesKeyValueStore(TimeSeriesDataStoreBase):
             return True
         raise ValueError(f"`result_count` should not be > 1 but is {result_count}")
     
-    async def push(self, key: Jsonable, ts: datetime, value: Jsonable) -> None:
+    async def _push(self, key: Jsonable, ts: datetime, value: Jsonable) -> None:
         """Exports `data` to Victoria Metrics using `key` somehow. lol"""
         await TimeSeriesKV.insert(key, ts, value)
 

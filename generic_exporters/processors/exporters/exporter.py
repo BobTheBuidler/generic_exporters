@@ -27,7 +27,6 @@ class TimeSeriesExporter(_TimeSeriesExporterBase):
         super().__init__(query, datastore, concurrency=concurrency, sync=sync)
         self.buffer = buffer
         self.ensure_data = a_sync.ProcessingQueue(self._ensure_data, concurrency, return_data=False)
-        self._push = a_sync.ProcessingQueue(self.datastore.push, concurrency*10, return_data=False)
 
     @overload
     async def run(self, run_forever: Literal[True]) -> NoReturn:...
@@ -40,7 +39,7 @@ class TimeSeriesExporter(_TimeSeriesExporterBase):
         # wait for all rpc activity to complete
         await self.ensure_data.join()
         # wait for all data to be pushed to datastore
-        await self._push.join()
+        await self.datastore.push.join()
     
     @abstractmethod
     async def data_exists(self, timestamp: datetime) -> bool:
@@ -50,4 +49,4 @@ class TimeSeriesExporter(_TimeSeriesExporterBase):
         if not await self.data_exists(ts, sync=False):
             data = await self.query[ts]
             for key, value in data.items():
-                self._push(key, ts, value)
+                self.datastore.push(key, ts, value)
