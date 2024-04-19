@@ -9,8 +9,10 @@ from typing import (TYPE_CHECKING, Any, AsyncGenerator, Awaitable, Coroutine, Di
                     Iterable, Iterator, Mapping, Optional, Tuple, TypeVar, Union, final)
 
 import a_sync
+from a_sync.property import HiddenMethodDescriptor
 from bqplot import Figure
 from pandas import DataFrame
+from typing_extensions import Self
 
 from generic_exporters import _types
 from generic_exporters._awaitable import _AwaitableMixin
@@ -28,6 +30,7 @@ _T = TypeVar('_T', TimeSeries, WideTimeSeries)
 
 LooseDatetime = Union[datetime, Awaitable[datetime]]
 ReturnValue = Union[Decimal, Exception]
+
 
 logger = logging.getLogger(__name__)
 
@@ -90,19 +93,21 @@ class _QueryPlan(_TimeDataBase, a_sync.ASyncIterable["TimeDataRow[_M]"], _Awaita
     async def _materialize(self) -> Dataset:
         """Materializes the query plan, executing the necessary asynchronous operations and returning the results."""
         return Dataset(await a_sync.map(self.__getitem__, self._aiter_timestamps()))
-
+    
+    @a_sync.cached_property
     async def start_timestamp(self) -> datetime:
         """Computes the start timestamp for the query, handling asynchronous resolution if necessary."""
-        return await self._start_timestamp if isawaitable(self._start_timestamp) else self._start_timestamp
+        timestamp = await self._start_timestamp if isawaitable(self._start_timestamp) else self._start_timestamp
+        return timestamp.astimezone(tz=timezone.utc)
+    __start_timestamp__: HiddenMethodDescriptor[Self, datetime]
 
     async def _aiter_timestamps(self, run_forever: bool = False) -> AsyncGenerator[datetime, None]:
         """Generates the timestamps to be queried based on the specified range and interval."""
-        timestamp: datetime = await self.start_timestamp(sync=False)
-        timestamp = timestamp.astimezone(tz=timezone.utc)
+        timestamp: datetime = await self.__start_timestamp__
         if run_forever is True:
             while True:
                 while not _ts_is_ready(timestamp, self.interval):
-                    await asyncio.sleep((datetime.now(tz=timezone.utc) - self.interval - timestamp).total_seconds())
+                    await asyncio.sleep((timestamp - datetime.now(tz=timezone.utc)).total_seconds())
                 yield timestamp
                 timestamp += self.interval
         elif run_forever is False:

@@ -28,6 +28,7 @@ class SQLTimeSeriesKeyValueStore(TimeSeriesDataStoreBase):
         elif result_count == 1:
             return True
         raise ValueError(f"`result_count` should not be > 1 but is {result_count}")
+    
     async def push(self, key: Jsonable, ts: datetime, value: Jsonable) -> None:
         """Exports `data` to Victoria Metrics using `key` somehow. lol"""
         await TimeSeriesKV.insert(key, ts, value)
