@@ -36,6 +36,7 @@ intersphinx_mapping = {
     'pandas': ('https://pandas.pydata.org/pandas-docs/', None),
     'pony': ('https://docs.ponyorm.org/', None),
     'python': ('https://docs.python.org/3', None),
+    'typing_extensions': ('https://typing-extensions.readthedocs.io/en/latest/', None),
 }
 
 # -- Options for HTML output -------------------------------------------------
