@@ -9,7 +9,7 @@ from typing import (TYPE_CHECKING, Any, AsyncGenerator, Awaitable, Coroutine, Di
                     Iterable, Iterator, Mapping, Optional, Tuple, TypeVar, Union, final)
 
 import a_sync
-from a_sync.property import HiddenMethodDescriptor
+from a_sync.a_sync.property import HiddenMethodDescriptor
 from bqplot import Figure
 from pandas import DataFrame
 from typing_extensions import Self
