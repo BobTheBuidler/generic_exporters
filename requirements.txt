@@ -1,6 +1,6 @@
 aiohttp
 bqplot
-ez-a-sync>=0.19.4,<0.22
+ez-a-sync>=0.19.4,<0.24
 inflection>=0.3.0
 msgspec
 pandas
