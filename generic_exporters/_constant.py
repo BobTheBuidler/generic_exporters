@@ -2,7 +2,7 @@ import threading
 from collections import defaultdict
 from typing import TYPE_CHECKING, Any, DefaultDict, Dict, Tuple, TypeVar
 
-from a_sync._meta import ASyncMeta
+from a_sync.a_sync._meta import ASyncMeta
 
 if TYPE_CHECKING:
     from generic_exporters import Constant
