@@ -1,6 +1,7 @@
 # TODO
 import asyncio
 from datetime import datetime
+from decimal import Decimal
 from typing import Any, Dict, Optional
 
 import a_sync
@@ -34,7 +35,10 @@ class SQLTimeSeriesKeyValueStore(TimeSeriesDataStoreBase):
     
     async def _push(self, key: Jsonable, ts: datetime, value: Jsonable) -> None:
         """Exports `data` to Victoria Metrics using `key` somehow. lol"""
-        await TimeSeriesKV.insert(key, ts, value)
+        if isinstance(value, (int, float, Decimal)) and value >= 10 ** 20:  # max value in Decimal(38,18)
+            logger.warning("%s at %s: %s exceeds the max size for Decimal(38,18)", key, ts, value)
+        else:
+            await TimeSeriesKV.insert(key, ts, value)
 
 
 db_thread = ThreadPoolExecutor(1)
