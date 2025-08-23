@@ -17,13 +17,13 @@ generic\_exporters.processors.exporters.datastores.default module
 
 .. automodule:: generic_exporters.processors.exporters.datastores.default
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 Module contents
 ---------------
 
 .. automodule:: generic_exporters.processors.exporters.datastores
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:

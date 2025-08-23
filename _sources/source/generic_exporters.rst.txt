@@ -17,37 +17,37 @@ generic\_exporters.dataset module
 
 .. automodule:: generic_exporters.dataset
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 generic\_exporters.metric module
 --------------------------------
 
 .. automodule:: generic_exporters.metric
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 generic\_exporters.plan module
 ------------------------------
 
 .. automodule:: generic_exporters.plan
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 generic\_exporters.timeseries module
 ------------------------------------
 
 .. automodule:: generic_exporters.timeseries
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 Module contents
 ---------------
 
 .. automodule:: generic_exporters
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:

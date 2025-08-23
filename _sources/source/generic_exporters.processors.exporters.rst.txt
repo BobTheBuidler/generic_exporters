@@ -17,13 +17,13 @@ generic\_exporters.processors.exporters.exporter module
 
 .. automodule:: generic_exporters.processors.exporters.exporter
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 Module contents
 ---------------
 
 .. automodule:: generic_exporters.processors.exporters
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
