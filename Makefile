@@ -1,8 +1,7 @@
-
 .PHONY: docs
 
 test:
-	pytest tests --cov generic_exporters --cov-report term-missing -s
+	pytest
 
 docs:
 	rm -r ./docs/source -f
